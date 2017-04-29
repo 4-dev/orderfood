@@ -1,4 +1,4 @@
-package br.com.4dev.orderfood;
+package br.com.fourdev.orderfood;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
