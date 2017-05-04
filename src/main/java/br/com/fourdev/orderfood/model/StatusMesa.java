@@ -1,8 +1,8 @@
 package br.com.fourdev.orderfood.model;
 
 public enum StatusMesa {
-	DISPONIVEL("Unidade"),
-	OCUPADA("Litro");
+	DISPONIVEL("Disponivel"),
+	OCUPADA("Ocupada");
 	
 	private String descricao;
 
