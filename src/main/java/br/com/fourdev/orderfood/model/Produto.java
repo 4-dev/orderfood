@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Produto {
 
-	private Long id;
+	private long id;
 	
 	private String nome;
 	
@@ -12,19 +12,19 @@ public class Produto {
 	
 	private String urlFoto;
 	
-	private Integer volume;
+	private int volume;
 	
 	private BigDecimal valor;
 	
-	private Integer quantidadeEstoque;
+	private int quantidadeEstoque;
 	
 	private Categoria categoria;
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -52,11 +52,11 @@ public class Produto {
 		this.urlFoto = urlFoto;
 	}
 
-	public Integer getVolume() {
+	public int getVolume() {
 		return volume;
 	}
 
-	public void setVolume(Integer volume) {
+	public void setVolume(int volume) {
 		this.volume = volume;
 	}
 
@@ -68,11 +68,11 @@ public class Produto {
 		this.valor = valor;
 	}
 
-	public Integer getQuantidadeEstoque() {
+	public int getQuantidadeEstoque() {
 		return quantidadeEstoque;
 	}
 
-	public void setQuantidadeEstoque(Integer quantidadeEstoque) {
+	public void setQuantidadeEstoque(int quantidadeEstoque) {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
 
@@ -88,8 +88,14 @@ public class Produto {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + quantidadeEstoque;
+		result = prime * result + ((urlFoto == null) ? 0 : urlFoto.hashCode());
+		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+		result = prime * result + volume;
 		return result;
 	}
 
@@ -102,19 +108,37 @@ public class Produto {
 		if (getClass() != obj.getClass())
 			return false;
 		Produto other = (Produto) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (categoria == null) {
+			if (other.categoria != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!categoria.equals(other.categoria))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (id != other.id)
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (quantidadeEstoque != other.quantidadeEstoque)
+			return false;
+		if (urlFoto == null) {
+			if (other.urlFoto != null)
+				return false;
+		} else if (!urlFoto.equals(other.urlFoto))
+			return false;
+		if (valor == null) {
+			if (other.valor != null)
+				return false;
+		} else if (!valor.equals(other.valor))
+			return false;
+		if (volume != other.volume)
+			return false;
 		return true;
-	}
-	
-	
-	
+	}	
 }
