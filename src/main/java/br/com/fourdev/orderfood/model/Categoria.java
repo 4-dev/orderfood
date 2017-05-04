@@ -2,15 +2,15 @@ package br.com.fourdev.orderfood.model;
 
 public class Categoria {
 	
-	private Long id;
+	private long id;
 	
 	private String descricao;
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
