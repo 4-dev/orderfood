@@ -2,12 +2,13 @@ package br.com.fourdev.orderfood.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Mesa {
 
 	private int id;
 	private String descricao;
-	private int numped; // lista pedidos
+	private List<Pedido> pedidos; // lista pedidos
 	private LocalDate horaAberta;
 	private LocalDate horaFechada;
 	private StatusMesa status;
@@ -27,14 +28,6 @@ public class Mesa {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public int getNumped() {
-		return numped;
-	}
-
-	public void setNumped(int numped) {
-		this.numped = numped;
 	}
 
 	public LocalDate getHoraAberta() {
@@ -69,6 +62,14 @@ public class Mesa {
 		this.total = total;
 	}
 
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,7 +78,7 @@ public class Mesa {
 		result = prime * result + ((horaAberta == null) ? 0 : horaAberta.hashCode());
 		result = prime * result + ((horaFechada == null) ? 0 : horaFechada.hashCode());
 		result = prime * result + id;
-		result = prime * result + numped;
+		result = prime * result + ((pedidos == null) ? 0 : pedidos.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((total == null) ? 0 : total.hashCode());
 		return result;
@@ -109,7 +110,10 @@ public class Mesa {
 			return false;
 		if (id != other.id)
 			return false;
-		if (numped != other.numped)
+		if (pedidos == null) {
+			if (other.pedidos != null)
+				return false;
+		} else if (!pedidos.equals(other.pedidos))
 			return false;
 		if (status != other.status)
 			return false;
