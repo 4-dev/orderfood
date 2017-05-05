@@ -11,4 +11,8 @@ public enum StatusMesa {
 
 	}
 	
+	public String getDescricao() {
+		return descricao;
+	}
+	
 }

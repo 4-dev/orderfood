@@ -15,6 +15,8 @@ public enum Unidade {
 
 	}
 	
-	
+	public String getDescricao() {
+		return descricao;
+	}
 
 }
