@@ -1,5 +1,9 @@
 package br.com.fourdev.orderfood.service;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,56 +13,29 @@ import br.com.fourdev.orderfood.repository.Produto.ProdutoRepository;
 @Service
 public class ProdutoService {
 
-  /**
-   * Quantidade máxima de produtos em estoque.
-   */
-  public static final int QTDE_MAX_PROD_PERECIVEL_ESTOQUE = 30;
-  public static final String MSG_FALHA_QTDE_MAX_PROD_PERECIVEL_ESTOQUE = "A quanticade máxima de produtos perecíveis em estoque foi excedida.";
+	final static Logger logger = LoggerFactory.getLogger(ProdutoService.class);
 
-  /**
-   * Quantidade grande de produtos em estoque.
-   */
+	@Autowired
+	private ProdutoRepository produtoRepository;
 
-  public static final int QTDE_GRANDE_PROD_ESTOQUE = 40;
-  /**
-   * Quantidade de dias considerados "recentes".
-   */
-  public static final int QTDE_DIAS_RECENTES = 7;
+	public List<Produto> selectProdutoList() {
+		return produtoRepository.selectProdutoList();
+	}
 
-  @Autowired
-  private ProdutoRepository produtoRepository;
+	public Produto selectProdutoById(String id) {
+		return produtoRepository.selectProdutoPorId(id);
+	}
 
-//  private void validarProduto(Produto produto) {
-//    if (produto.getTipo().equals(Produto.PERECIVEL) && produto.getQuantidade() > QTDE_MAX_PROD_PERECIVEL_ESTOQUE) {
-//      throw new RuntimeException(MSG_FALHA_QTDE_MAX_PROD_PERECIVEL_ESTOQUE);
-//    }
-//  }
+	public void insertProduto(Produto produto) {
+		produtoRepository.insertProduto(produto);
+	}
 
-//  public Produto registrarProduto(Produto produto) {
-//    validarProduto(produto);
-//    produto.setData(new Date());
-//    return produtoRepository.save(produto);
-//  }
+	public void updateProduto(String id, Produto produto) {
+		produtoRepository.updateProduto(id, produto);
+	}
 
-//  public Iterable<Produto> obterProdutosRecentes() {
-//    Calendar agora = Calendar.getInstance();
-//    agora.add(Calendar.DATE, - QTDE_DIAS_RECENTES);
-//    return produtoRepository.findByDataGreaterThan(agora.getTime());
-//  }
-//
-//  public Iterable<Produto> obterProdutosEstoqueGrande() {
-//    return produtoRepository.findByQuantidadeGreaterThan(QTDE_GRANDE_PROD_ESTOQUE);
-//  }
-//
-//  public Produto obterProduto(Integer codigo) {
-//    return produtoRepository.findOneByCodigo(codigo);
-//  }
+	public void deleteProduto(String id) {
+		produtoRepository.deleteProduto(id);
+	}
 
-  public Iterable<Produto> obterTodos() {
-    return produtoRepository.todos(); //findAll();
-  }
-  
-//  public void delete(Long long1) {
-//		produtoRepository.delete(long1);
-//  }
 }
