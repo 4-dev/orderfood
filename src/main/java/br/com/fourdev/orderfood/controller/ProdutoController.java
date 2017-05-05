@@ -23,17 +23,17 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoService produtoService;
 
-	@RequestMapping(value = "/produtos", method = RequestMethod.GET)
+	@RequestMapping(value = "/listarProdutos", method = RequestMethod.GET)
 	public List<Produto> selectProdutoList() {
 		return produtoService.selectProdutoList();
 	}
 
-	@RequestMapping(value = "/produtos/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscarProdutoPorCodigo/{id}", method = RequestMethod.GET)
 	public Produto selectProdutoById(@PathVariable("id") String id) {
 		return produtoService.selectProdutoById(id);
 	}
 
-	@RequestMapping(value = "/produtos", method = RequestMethod.POST)
+	@RequestMapping(value = "/savarProduto", method = RequestMethod.POST)
 	public void insertProduto(@RequestBody Produto produto) {
 
 		logger.debug("id=" + produto.getId());
@@ -43,13 +43,13 @@ public class ProdutoController {
 		produtoService.insertProduto(produto);
 	}
 
-	@RequestMapping(value = "/produtos/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/atualizarProduto/{id}", method = RequestMethod.PUT)
 	public void updateProduto(@RequestBody Produto produto, @PathVariable("id") String id) {
 		logger.debug("id=" + id);
 		produtoService.updateProduto(id, produto);
 	}
 
-	@RequestMapping(value = "/produtos/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/deletarProduto/{id}", method = RequestMethod.DELETE)
 	public void deleteProduto(@PathVariable("id") String id) {
 		produtoService.deleteProduto(id);
 	}
