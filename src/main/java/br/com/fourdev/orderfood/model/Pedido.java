@@ -11,7 +11,7 @@ public class Pedido {
 	private List<ItemPedido> itens; 
 	private LocalDateTime dataCriacao; 
 	private BigDecimal valorDesconto; //id
-	private BigDecimal valorTotal; //id
+	private BigDecimal valorTotal; //id		
 	private String observacao; //id
 	private LocalDateTime dataEntrega;
 	private StatusPedido status;

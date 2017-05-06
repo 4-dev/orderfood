@@ -21,10 +21,12 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	public List<Pedido> selectPedidoList() {
 
 		try {
-			
-			String query = "select * from cabpedido cab, itempedido item where  cab INNER JOIN item ON (cab.numped = item.numped); ";
+
+			String query = "select * from cabpedido cab, "
+						   			 + " itempedido item "
+						   	     + "where cab INNER JOIN item ON (cab.numped = item.numped)";
 			return jdbcTemplate.query(query, new BeanPropertyRowMapper(Pedido.class));
-			
+
 		} catch (InvalidResultSetAccessException e) {
 			throw new RuntimeException(e);
 		} catch (DataAccessException e) {
