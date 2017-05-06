@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fourdev.orderfood.model.Produto;
-import br.com.fourdev.orderfood.repository.Produto.ProdutoRepository;
+import br.com.fourdev.orderfood.repository.produto.ProdutoRepository;
 
 @Service
 public class ProdutoService {
