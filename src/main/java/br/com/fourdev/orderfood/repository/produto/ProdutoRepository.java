@@ -1,4 +1,4 @@
-package br.com.fourdev.orderfood.repository.Produto;
+package br.com.fourdev.orderfood.repository.produto;
 
 import java.util.List;
 

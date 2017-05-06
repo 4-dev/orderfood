@@ -1,5 +1,6 @@
-package br.com.fourdev.orderfood.repository.Produto;
+package br.com.fourdev.orderfood.repository.produto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import br.com.fourdev.orderfood.model.Categoria;
 import br.com.fourdev.orderfood.model.Produto;
 
 @Repository("produtoRepository")
@@ -34,13 +36,21 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 	}
 
 	public void insertProduto(Produto produto) {
-		String query = "insert into produto(id, nome, descricao) values (?,?,?) ";
-		jdbcTemplate.update(query, new Object[] { produto.getId(), produto.getNome(), produto.getDescricao() });
+
+		String query = "insert into produto(id, nome, descricao, urlFoto, volume, valor, quantidadeEstoque, categoria) "
+				+ " values (?,?,?,?,?,?,?,?) ";
+		jdbcTemplate.update(query,
+				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getUrlFoto(),
+						produto.getVolume(), produto.getValor(), produto.getQuantidadeEstoque(),
+						produto.getCategoria().getId() });
 	}
 
 	public void updateProduto(String id, Produto produto) {
 		String query = "update produto set nome=?, descricao=? where id=? ";
-		jdbcTemplate.update(query, new Object[] { produto.getNome(), produto.getDescricao(), id });
+		jdbcTemplate.update(query,
+				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getUrlFoto(),
+						produto.getVolume(), produto.getValor(), produto.getQuantidadeEstoque(),
+						produto.getCategoria().getId() });
 	}
 
 	public void deleteProduto(String id) {
