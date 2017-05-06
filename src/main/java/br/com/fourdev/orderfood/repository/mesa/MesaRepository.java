@@ -2,18 +2,18 @@ package br.com.fourdev.orderfood.repository.mesa;
 
 import java.util.List;
 
-import br.com.fourdev.orderfood.model.Produto;
+import br.com.fourdev.orderfood.model.Mesa;
 
 public interface MesaRepository {
 
-	public List<Produto> selectProdutoList();
+	public List<Mesa> selectMesaList();
 
-	public Produto selectProdutoPorId(String id);
+	public Mesa selectMesaPorId(String id);
 
-	public void insertProduto(Produto produto);
+	public void insertMesa(Mesa mesa);
 
-	public void updateProduto(String id, Produto produto);
+	public void updateMesa(String id, Mesa mesa);
 
-	public void deleteProduto(String id);
+	public void deleteMesa(String id);
 
 }
