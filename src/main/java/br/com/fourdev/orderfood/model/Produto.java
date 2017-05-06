@@ -5,19 +5,19 @@ import java.math.BigDecimal;
 public class Produto {
 
 	private long id;
-	
+
 	private String nome;
-	
+
 	private String descricao;
-	
+
 	private String urlFoto;
-	
+
 	private int volume;
-	
+
 	private BigDecimal valor;
-	
+
 	private int quantidadeEstoque;
-	
+
 	private Categoria categoria;
 
 	public long getId() {
@@ -140,5 +140,5 @@ public class Produto {
 		if (volume != other.volume)
 			return false;
 		return true;
-	}	
+	}
 }
