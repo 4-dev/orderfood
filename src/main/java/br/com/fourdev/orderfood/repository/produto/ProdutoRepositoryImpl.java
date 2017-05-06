@@ -42,7 +42,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 		jdbcTemplate.update(query,
 				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getUrlFoto(),
 						produto.getVolume(), produto.getValor(), produto.getQuantidadeEstoque(),
-						produto.getCategoria().getId() });
+						produto.getCategoria().getDescricao()});
 	}
 
 	public void updateProduto(String id, Produto produto) {
@@ -50,7 +50,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 		jdbcTemplate.update(query,
 				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getUrlFoto(),
 						produto.getVolume(), produto.getValor(), produto.getQuantidadeEstoque(),
-						produto.getCategoria().getId() });
+						produto.getCategoria().getDescricao()});
 	}
 
 	public void deleteProduto(String id) {
