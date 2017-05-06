@@ -1,6 +1,4 @@
 package br.com.fourdev.orderfood.repository.mesa;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +6,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import br.com.fourdev.orderfood.model.Categoria;
 import br.com.fourdev.orderfood.model.Mesa;
 
 @Repository("mesaRepository")
