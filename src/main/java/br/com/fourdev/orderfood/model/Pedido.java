@@ -2,17 +2,18 @@ package br.com.fourdev.orderfood.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Pedido {
 	
 	private long numped; //id
 	private List<ItemPedido> itens; 
-	private LocalDate dataCriacao; 
+	private LocalDateTime dataCriacao; 
 	private BigDecimal valorDesconto; //id
 	private BigDecimal valorTotal; //id
 	private String observacao; //id
-	private LocalDate dataEntrega;
+	private LocalDateTime dataEntrega;
 	private StatusPedido status;
 	public long getNumped() {
 		return numped;
@@ -26,10 +27,10 @@ public class Pedido {
 	public void setItens(List<ItemPedido> itens) {
 		this.itens = itens;
 	}
-	public LocalDate getDataCriacao() {
+	public LocalDateTime getDataCriacao() {
 		return dataCriacao;
 	}
-	public void setDataCriacao(LocalDate dataCriacao) {
+	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 	public BigDecimal getValorDesconto() {
@@ -50,10 +51,10 @@ public class Pedido {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-	public LocalDate getDataEntrega() {
+	public LocalDateTime getDataEntrega() {
 		return dataEntrega;
 	}
-	public void setDataEntrega(LocalDate dataEntrega) {
+	public void setDataEntrega(LocalDateTime dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
 	public StatusPedido getStatus() {
