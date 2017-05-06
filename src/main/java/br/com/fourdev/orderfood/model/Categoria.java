@@ -15,5 +15,4 @@ public enum Categoria {
 	public String getDescricao() {
 		return descricao;
 	}
-
 }
