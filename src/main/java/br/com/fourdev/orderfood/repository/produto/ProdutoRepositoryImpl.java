@@ -1,14 +1,14 @@
 package br.com.fourdev.orderfood.repository.produto;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.InvalidResultSetAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import br.com.fourdev.orderfood.model.Categoria;
 import br.com.fourdev.orderfood.model.Produto;
 
 @Repository("produtoRepository")
@@ -25,8 +25,16 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 	// codprod = ?";
 
 	public List<Produto> selectProdutoList() {
-		String query = "select * from produto";
-		return jdbcTemplate.query(query, new BeanPropertyRowMapper(Produto.class));
+
+		try {
+			String query = "select * from produto";
+			return jdbcTemplate.query(query, new BeanPropertyRowMapper(Produto.class));
+		} catch (InvalidResultSetAccessException e) {
+			throw new RuntimeException(e);
+		} catch (DataAccessException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 
 	public Produto selectProdutoPorId(String id) {
@@ -42,7 +50,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 		jdbcTemplate.update(query,
 				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getUrlFoto(),
 						produto.getVolume(), produto.getValor(), produto.getQuantidadeEstoque(),
-						produto.getCategoria().getId() });
+						produto.getCategoria().getDescricao() });
 	}
 
 	public void updateProduto(String id, Produto produto) {
@@ -50,7 +58,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 		jdbcTemplate.update(query,
 				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getUrlFoto(),
 						produto.getVolume(), produto.getValor(), produto.getQuantidadeEstoque(),
-						produto.getCategoria().getId() });
+						produto.getCategoria().getDescricao() });
 	}
 
 	public void deleteProduto(String id) {
