@@ -6,5 +6,144 @@
 <head>
     <title>Cadastro de Produto</title>
 </head>
+	<section id="content" layout:fragment="conteudo">
+        
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+          <div class="container">
+            <div class="row">
+              <div class="col s12 m12 l12">
+                <h5 class="breadcrumbs-title">Cadastro de Produto</h5>
+                <ol class="breadcrumbs">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Cadastros</a></li>
+                    <li class="active">Produto</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--breadcrumbs end-->
+        
+
+        <!--start container-->
+        <div class="container">
+          <div class="section">
+            <div class="divider"></div>
+		              
+		           <div class="row">
+		              <div class="col s12 m12 l12">
+		                <div class="card-panel hoverable">
+		                  <h4 class="header2">Produto</h4>
+		                    <form>
+			                  <div class="row">
+		                    	
+		                    	<div class="col l8">
+		                    	
+				                      <div class="row">
+				                        <div class="input-field col s12">
+				                          <input id="nome" type="text">
+				                          <label for="nome">Nome</label>
+				                        </div>
+				                      </div>
+				                      
+				                       <div class="row" style="margin-top: 15px">
+					                       
+					                        <div class="input-field col s6">
+												<select id="categoria">
+						                          <option value="" disabled selected>Selecione uma Categoria</option>
+						                          <option value="1">Bebida</option>
+						                          <option value="2">Bebida</option>
+						                          <option value="3">Bebida</option>
+						                        </select>
+						                        <label for="Categoria">Categoria</label>
+					                      	</div>
+					                        <div class="input-field col s6">
+												<select id="subCategoria">
+						                          <option value="" disabled selected>Selecione uma SubCategoria</option>
+						                          <option value="1">Refrigerante</option>
+						                          <option value="2">Cerveja</option>
+						                          <option value="3">Suco</option>
+						                        </select>
+						                        <label for="subCategoria">SubCategoria</label>
+					                      </div>
+					                        
+									    </div>
+				                      
+				                      
+				                       <div class="row" style="margin-top: 15px">
+					                      <div class="input-field col s4">
+					                        <input id="volume" type="text" placeholder="0.0"/>
+					                        <label for="volume">Volume</label>
+					                      </div>
+					                    
+					                       <div class="input-field col s4">
+												<select id="unidade">
+						                          <option value="" disabled selected>Selecione uma Unidade</option>
+						                          <option value="1">UN</option>
+						                          <option value="2">KG</option>
+						                          <option value="3">LT</option>
+						                        </select>
+						                        <label for="unidade">Unidade</label>
+					                      </div>
+					                       <div class="input-field col s4">
+					                          <input id="valor" type="text" placeholder="R$ 0,00">
+					                          <label for="valor">Valor</label>
+					                        </div>
+					                    </div>
+					                   
+									    <div class="row" style="margin-top: 15px">
+					                      <div class="input-field col s4">
+					                        <input id="quantidade" type="text" placeholder="0">
+					                        <label for="quantidade">Quantidade</label>
+					                      </div>
+					                      <div class="input-field col s4">
+					                        <label></label>
+					                      </div>
+					                      <div class="input-field col s4">
+							                  <div class="switch right-align">
+							                    <label>
+							                      desativado
+							                      <input type="checkbox" id="situacao">
+							                      <span class="lever"></span> Ativado
+							                    </label>
+							                  </div>	                      
+					        			  </div>              
+					                     </div>
+						                     <div class="row">
+					                        <div class="input-field col s12">
+					                          <textarea id="descricao" class="materialize-textarea" length="120"></textarea>
+					                          <label for="descricao">Descricão</label>
+					                        </div>
+					                      </div>
+					                      <div class="row" style="margin-top: 10px">
+					                          <div class="input-field col s12">
+					                            <button class="btn cyan waves-effect waves-light left" type="submit" name="action">Salvar
+					                              <i class="mdi-content-send right"></i>
+					                            </button>
+					                          </div>
+					                        </div>
+												    
+		                     	</div>
+		                     	<div class="col s12 m12 l4">
+		                 		  <div class="row">
+						          		<div id="file-upload" class="section">
+							            	  <div class="input-field col l12">
+							                	  	<input type="file" data-default-file="images/mockup.jpg" id="input-file-now-custom-2" class="dropify" data-height="500" />
+							              	  		<label for="input-file-now-custom-2">Imagem do Produto</label>
+							              	  </div>
+							            </div>
+          						  </div>
+          						</div>
+			                    </div>  
+		                    </form>
+		                </div>
+		              </div>   
+            	  </div>
+            	
+           </div>
+        </div>
+        <!--end container-->
+      </section>
 
 <body>

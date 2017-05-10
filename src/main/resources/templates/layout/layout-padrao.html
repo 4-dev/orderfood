@@ -32,6 +32,8 @@
 		  <link th:href="@{js/plugins/prism/prism.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 		  <link th:href="@{js/plugins/perfect-scrollbar/perfect-scrollbar.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 		  <link th:href="@{js/plugins/chartist-js/chartist.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+		  
+		  <link th:href="@{js/plugins/dropify/css/dropify.min.css}" type="text/css" rel="stylesheet" media="screen,projection">
 	</head>
 	<body>
 		 <!-- Start Page Loading -->
@@ -50,6 +52,9 @@
 			    <div class="wrapper">
 			    
 			    	<div th:replace="layout/fragments/sidebar :: layout-sidebar"></div>
+			    	
+			    	<!-- Conteúdo Principal -->
+					<section class="aw-layout-content  js-content" layout:fragment="conteudo"></section>
 			
 				</div>
 			  </div>
@@ -67,10 +72,42 @@
 	    <!-- chartist -->
 	    <script type="text/javascript" th:src="@{js/plugins/chartist-js/chartist.min.js}"></script>   
 	    
+	    <!-- dropify -->
+    	<script type="text/javascript" th:src="@{js/plugins/dropify/js/dropify.min.js}"></script>
+	    
 	    <!--plugins.js-->
 	    <script type="text/javascript" th:src="@{js/plugins.min.js}"></script>
 	    <!--custom-script.js-->
 	    <script type="text/javascript" th:src="@{js/custom-script.js}"></script>
+	    
+	    <script type="text/javascript">
+	        $(document).ready(function(){
+	            // Basic
+	            $('.dropify').dropify({
+	                messages:{
+	                	'default': 'Arraste e solte a imagem aqui ou clique!',
+	                	'replace': 'Arraste e Solte ou clique para substituir!',
+	                    'remove':  'Remover'
+	                    }
+	                });
+	
+	            // Used events
+	            var drEvent = $('.dropify-event').dropify();
+	
+	            drEvent.on('dropify.beforeClear', function(event, element){
+	                return confirm("Deseja realmente remover o arquivo \"" + element.filename + "\" ?");
+	            });
+	
+	            drEvent.on('dropify.afterClear', function(event, element){
+	                alert('Arquivo removido!');
+	            });
+	        });
+
+	        $('#valor').formatter({
+	            'pattern': 'R$ {{999}}.{{999}},{{99}}',
+	            'persistent': true
+	          });
+	    </script>
 			  
 
 	</body>
