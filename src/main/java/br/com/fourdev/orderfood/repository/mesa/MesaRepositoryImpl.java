@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import br.com.fourdev.orderfood.model.Mesa;
+import br.com.fourdev.orderfood.model.StatusPedido;
 
 @Repository("mesaRepository")
 public class MesaRepositoryImpl implements MesaRepository {
@@ -48,6 +49,15 @@ public class MesaRepositoryImpl implements MesaRepository {
 	public void deleteMesa(String id) {
 		String query = "delete from mesa where id=?";
 		jdbcTemplate.update(query, new Object[] { id });
+	}
+
+	@Override
+	public StatusPedido reservarMesa( Mesa mesa) {
+		
+		
+		String query = "update mesa set status = ? where id = ?";
+		jdbcTemplate.update(query, new Object[] { mesa.getStatus(), mesa.getId()});
+		return null;
 	}
 
 }
