@@ -35,27 +35,28 @@
 				<div class="col s12 m12 l12">
 					<div class="card-panel hoverable">
 						<h4 class="header2">Produto</h4>
-						<form>
+						<form method="POST" th:object="${produto}">
 							<div class="row">
 
 								<div class="col l8">
+									<input type="hidden" th:field="*{id}"/>
 
 									<div class="row">
 										<div class="input-field col s12">
-											<input id="nome" type="text"> <label for="nome">Nome</label>
+											<input id="nome" type="text" th:field="*{nome}"/> 
+											<label for="nome">Nome</label>
 										</div>
 									</div>
 
 									<div class="row" style="margin-top: 15px">
 
 										<div class="input-field col s6">
-											<select id="categoria">
+											<select id="categoria" th:field="*{categoria}">
 												<option value="" disabled selected>Selecione uma Categoria</option>
-												<option value="1">Bebida</option>
-												<option value="2">Bebida</option>
-												<option value="3">Bebida</option>
+												<option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria.descricao}"></option>
 											</select> <label for="Categoria">Categoria</label>
 										</div>
+										
 										<div class="input-field col s6">
 											<select id="subCategoria">
 												<option value="" disabled selected>Selecione uma SubCategoria</option>
@@ -75,24 +76,24 @@
 										</div>
 
 										<div class="input-field col s4">
-											<select id="unidade">
-												<option value="" disabled selected>Selecione uma
-													Unidade</option>
-												<option value="1">UN</option>
-												<option value="2">KG</option>
-												<option value="3">LT</option>
-											</select> <label for="unidade">Unidade</label>
+											<div class="input-field col s6">
+											<select id="unidade" th:field="*{unidade}">
+												<option value="" disabled selected>Selecione uma Unidade</option>
+												<option th:each="unidade : ${unidades}" th:value="${unidade}" th:text="${unidade.descricao}"></option>
+											</select> 
+											<label for="unidade">Unidade</label>
+										</div>
 										</div>
 										<div class="input-field col s4">
-											<input id="valor" type="text" placeholder="R$ 0,00">
+											<input id="valor" type="text" placeholder="R$ 0,00" th:field="*{valor}">
 											<label for="valor">Valor</label>
 										</div>
 									</div>
 
 									<div class="row" style="margin-top: 15px">
 										<div class="input-field col s4">
-											<input id="quantidade" type="text" placeholder="0"> <label
-												for="quantidade">Quantidade</label>
+											<input id="quantidade" type="text" placeholder="0" th:field="*{qtestoque}"> 
+											<label for="quantidade">Quantidade</label>
 										</div>
 										<div class="input-field col s4">
 											<label></label>
@@ -107,8 +108,7 @@
 									</div>
 									<div class="row">
 										<div class="input-field col s12">
-											<textarea id="descricao" class="materialize-textarea"
-												length="120"></textarea>
+											<textarea id="descricao" class="materialize-textarea" length="120" th:field="*{descricao}"></textarea>
 											<label for="descricao">Descricão</label>
 										</div>
 									</div>
@@ -128,8 +128,7 @@
 											<div class="input-field col l12">
 												<input type="file" data-default-file="images/mockup.jpg"
 													id="input-file-now-custom-2" class="dropify"
-													data-height="500" /> <label for="input-file-now-custom-2">Imagem
-													do Produto</label>
+													data-height="500" /> <label for="input-file-now-custom-2">Imagem do Produto</label>
 											</div>
 										</div>
 									</div>

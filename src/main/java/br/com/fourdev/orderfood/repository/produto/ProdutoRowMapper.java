@@ -16,7 +16,7 @@ final class ProdutoRowMapper implements RowMapper<Produto> {
     produto.setNome(rs.getString("nome"));
     produto.setDescricao(rs.getString("descricao"));
 //    produto.setCategoria(rs.getString("nome"));
-    produto.setQuantidadeEstoque(rs.getInt("quantidadeEstoque"));    
+    produto.setQtestoque(rs.getInt("qtestoque"));    
     produto.setUrlFoto(rs.getString("urlFoto"));
     produto.setValor(rs.getBigDecimal("valor"));    
     return produto;

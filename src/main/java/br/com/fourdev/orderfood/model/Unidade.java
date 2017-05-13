@@ -2,7 +2,7 @@ package br.com.fourdev.orderfood.model;
 
 public enum Unidade {
 	
-	UN("Unidade"),
+	UN("Unitário"),
 	LT("Litro"),
 	PC("Pacote"),
 	KG("Kilo");

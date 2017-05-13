@@ -2,6 +2,8 @@ package br.com.fourdev.orderfood.model;
 
 import java.math.BigDecimal;
 
+
+
 public class Produto {
 
 	private long id;
@@ -9,6 +11,8 @@ public class Produto {
 	private String nome;
 
 	private String descricao;
+	
+	private Unidade unidade;
 
 	private String urlFoto;
 
@@ -16,7 +20,8 @@ public class Produto {
 
 	private BigDecimal valor;
 
-	private int quantidadeEstoque;
+	
+	private int qtestoque;
 
 	private Categoria categoria;
 
@@ -43,6 +48,14 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public Unidade getUnidade() {
+		return unidade;
+	}
+	
+	public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
+	}
 
 	public String getUrlFoto() {
 		return urlFoto;
@@ -59,6 +72,7 @@ public class Produto {
 	public void setVolume(int volume) {
 		this.volume = volume;
 	}
+	
 
 	public BigDecimal getValor() {
 		return valor;
@@ -68,13 +82,14 @@ public class Produto {
 		this.valor = valor;
 	}
 
-	public int getQuantidadeEstoque() {
-		return quantidadeEstoque;
+	public int getQtestoque() {
+		return qtestoque;
 	}
-
-	public void setQuantidadeEstoque(int quantidadeEstoque) {
-		this.quantidadeEstoque = quantidadeEstoque;
+	
+	public void setQtestoque(int qtestoque) {
+		this.qtestoque = qtestoque;
 	}
+	
 
 	public Categoria getCategoria() {
 		return categoria;
@@ -92,7 +107,8 @@ public class Produto {
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + quantidadeEstoque;
+		result = prime * result + qtestoque;
+		result = prime * result + ((unidade == null) ? 0 : unidade.hashCode());
 		result = prime * result + ((urlFoto == null) ? 0 : urlFoto.hashCode());
 		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		result = prime * result + volume;
@@ -108,10 +124,7 @@ public class Produto {
 		if (getClass() != obj.getClass())
 			return false;
 		Produto other = (Produto) obj;
-		if (categoria == null) {
-			if (other.categoria != null)
-				return false;
-		} else if (!categoria.equals(other.categoria))
+		if (categoria != other.categoria)
 			return false;
 		if (descricao == null) {
 			if (other.descricao != null)
@@ -125,7 +138,9 @@ public class Produto {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (quantidadeEstoque != other.quantidadeEstoque)
+		if (qtestoque != other.qtestoque)
+			return false;
+		if (unidade != other.unidade)
 			return false;
 		if (urlFoto == null) {
 			if (other.urlFoto != null)
@@ -141,4 +156,9 @@ public class Produto {
 			return false;
 		return true;
 	}
+
+	
+	
+	
+	
 }
