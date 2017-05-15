@@ -46,7 +46,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 	public void insertProduto(Produto produto) {
 
 		String query = "insert into produto(id, nome, descricao, urlFoto, volume, valor, qtestoque, categoria) "
-				+ " values (?,?,?,?,?,?,?,?) ";
+				+ " values (/, ?,?,?,?,?,?,?) ";
 		jdbcTemplate.update(query,
 				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getUrlFoto(),
 						produto.getVolume(), produto.getValor(), produto.getQtestoque(),

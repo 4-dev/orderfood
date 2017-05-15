@@ -52,17 +52,15 @@
 
 										<div class="input-field col s6">
 											<select id="categoria" th:field="*{categoria}">
-												<option value="" disabled selected>Selecione uma Categoria</option>
+												<option value="">Selecione uma Categoria</option>
 												<option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria.descricao}"></option>
 											</select> <label for="Categoria">Categoria</label>
 										</div>
 										
 										<div class="input-field col s6">
 											<select id="subCategoria">
-												<option value="" disabled selected>Selecione uma SubCategoria</option>
+												<option value="">Selecione uma SubCategoria</option>
 												<option value="1">Refrigerante</option>
-												<option value="2">Cerveja</option>
-												<option value="3">Suco</option>
 											</select> <label for="subCategoria">SubCategoria</label>
 										</div>
 
@@ -71,30 +69,30 @@
 
 									<div class="row" style="margin-top: 15px">
 										<div class="input-field col s4">
-											<input id="volume" type="text" placeholder="0.0" /> <label
-												for="volume">Volume</label>
+											<input id="volume" type="text" placeholder="0,00" th:field="*{volume}" /> 
+											<label for="volume">Volume</label>
 										</div>
 
 										<div class="input-field col s4">
-											<div class="input-field col s6">
 											<select id="unidade" th:field="*{unidade}">
-												<option value="" disabled selected>Selecione uma Unidade</option>
+												<option value="">Selecione uma Unidade</option>
 												<option th:each="unidade : ${unidades}" th:value="${unidade}" th:text="${unidade.descricao}"></option>
 											</select> 
 											<label for="unidade">Unidade</label>
 										</div>
-										</div>
+										
 										<div class="input-field col s4">
-											<input id="valor" type="text" placeholder="R$ 0,00" th:field="*{valor}">
+											<input id="valor" type="text" placeholder="R$ 0,00" th:field="*{valor}"/>
 											<label for="valor">Valor</label>
 										</div>
 									</div>
 
 									<div class="row" style="margin-top: 15px">
 										<div class="input-field col s4">
-											<input id="quantidade" type="text" placeholder="0" th:field="*{qtestoque}"> 
+											<input id="quantidade" type="text" placeholder=" 0" th:field="*{qtestoque}"/> 
 											<label for="quantidade">Quantidade</label>
 										</div>
+										
 										<div class="input-field col s4">
 											<label></label>
 										</div>
@@ -108,7 +106,7 @@
 									</div>
 									<div class="row">
 										<div class="input-field col s12">
-											<textarea id="descricao" class="materialize-textarea" length="120" th:field="*{descricao}"></textarea>
+											<textarea id="descricao" class="materialize-textarea" length="80" th:field="*{descricao}"></textarea>
 											<label for="descricao">Descricão</label>
 										</div>
 									</div>
