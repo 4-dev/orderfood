@@ -70,7 +70,7 @@
 									<div class="row">
 										<div class="input-field col s12">
 											<input id="nome" type="text" th:field="*{nome}"/> 
-											<label for="nome">Nome</label>
+											<label for="nome"  th:classappend="${#fields.hasErrors('nome')} ? materialize-red-text">Nome</label>
 										</div>
 									</div>
 
@@ -80,7 +80,9 @@
 											<select id="categoria" th:field="*{categoria}">
 												<option value=""></option>
 												<option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria.descricao}"></option>
-											</select> <label for="Categoria">Categoria</label>
+											</select> 
+											<label  th:classappend="${#fields.hasErrors('categoria')} ? materialize-red-text"
+											 for="Categoria">Categoria</label>
 										</div>
 										
 										<div class="input-field col s4">
@@ -88,12 +90,12 @@
 												<option value=""></option>
 												<option th:each="unidade : ${unidades}" th:value="${unidade}" th:text="${unidade.descricao}"></option>
 											</select> 
-											<label for="unidade">Unidade</label>
+											<label for="unidade"  th:classappend="${#fields.hasErrors('unidade')} ? materialize-red-text">Unidade</label>
 										</div>
 										
 										<div class="input-field col s4">
-											<input id="volume" type="text" placeholder="0,00" th:field="*{volume}" /> 
-											<label for="volume">Volume</label>
+											<input id="volume" type="text" placeholder="0,00" th:field="*{volume}" class="js-double" /> 
+											<label for="volume"  th:classappend="${#fields.hasErrors('volume')} ? materialize-red-text">Volume</label>
 										</div>
 										
 									</div>
@@ -102,21 +104,21 @@
 									<div class="row" style="margin-top: 15px">
 										
 										<div class="input-field col s4">
-											<input id="quantidade" type="text" placeholder=" 0" th:field="*{qtestoque}"/> 
-											<label for="quantidade">Quantidade</label>
+											<input id="quantidade" type="text" placeholder=" 0" th:field="*{qtestoque}" class="js-plain"/> 
+											<label for="quantidade"  th:classappend="${#fields.hasErrors('qtestoque')} ? materialize-red-text">Quantidade</label>
 										</div>
 										
 										
 										<div class="input-field col s4">
-											<input id="valor" type="text" placeholder="R$ 0,00" th:field="*{valor}"/>
-											<label for="valor">Valor</label>
+											<input id="valor" type="text" placeholder="R$ 0,00"  th:field="*{valor}" class="js-decimal"/>
+											<label for="valor"  th:classappend="${#fields.hasErrors('valor')} ? materialize-red-text">Valor</label>
 										</div>
 										
 										<div class="input-field col s4">
 											<label class="control-label">Status</label>
 											<div>
 												<input type="checkbox" class="js-status" data-size="small" data-off-color="danger" 
-													data-on-text="Ativo" data-off-text="Inativo"/>
+													data-on-text="Ativo" data-off-text="Inativo" th:field="*{ativo}"/>
 											</div>
 			
 										</div>
@@ -126,7 +128,7 @@
 									<div class="row">
 										<div class="input-field col s12">
 											<textarea id="descricao" class="materialize-textarea" length="80" th:field="*{descricao}"></textarea>
-											<label for="descricao">Descricão</label>
+											<label for="descricao"  th:classappend="${#fields.hasErrors('descricao')} ? materialize-red-text">Descricão</label>
 										</div>
 									</div>
 									
