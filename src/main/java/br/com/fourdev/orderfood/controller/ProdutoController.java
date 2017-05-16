@@ -7,23 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fourdev.orderfood.model.Categoria;
 import br.com.fourdev.orderfood.model.Produto;
 import br.com.fourdev.orderfood.model.Unidade;
-import br.com.fourdev.orderfood.repository.produto.Produtos;
 import br.com.fourdev.orderfood.service.ProdutoService;
 
 @Controller
+@RequestMapping("produto")
 public class ProdutoController {
 	
-	//@Autowired
-	//private ProdutoService produtoService;
-	
 	@Autowired
-	private Produtos produtos;
+	private ProdutoService produtoService;
 	
 	@GetMapping("/novo")
 	public ModelAndView novo(Produto produto){
@@ -42,11 +40,10 @@ public class ProdutoController {
 			return novo(produto);
 		}
 		
-		//produtoService.insertProduto(produto);
+		produtoService.salvar(produto);
 		
-		produtos.save(produto);
 		
-		attributes.addAttribute("mensagem", "Produto Salvo com Sucesso!");
+		attributes.addFlashAttribute("mensagem", "Produto Salvo com Sucesso!");
 		
 		return new ModelAndView("redirect:novo");
 		

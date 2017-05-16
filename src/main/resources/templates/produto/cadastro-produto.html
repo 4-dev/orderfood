@@ -4,7 +4,8 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/layout-padrao">
 <head>
-<title>Cadastro de Produto</title>
+	<title>Cadastro de Produto</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-switch.min.css}"/>
 </head>
 <section id="content" layout:fragment="conteudo">
 
@@ -33,9 +34,34 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
+					<div id="card-alert" class="card green lighten-5" th:if="${not #strings.isEmpty(mensagem)}">
+                      <div class="card-content green-text">
+                        <p><i class="mdi-navigation-check"></i> <span th:text="${mensagem}"></span></p>
+                      </div>
+                      <button type="button" class="close green-text" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+				
 					<div class="card-panel hoverable">
 						<h4 class="header2">Produto</h4>
 						<form method="POST" th:object="${produto}">
+						
+								<div id="card-alert" class="card red lighten-5" th:if="${#fields.hasAnyErrors()}">
+			                      <div class="card-content red-text">
+			                        <th:block th:each="erro : ${#fields.detailedErrors()}">
+										<div>
+											<i class="mdi-alert-error"></i> 
+											<span th:text="${erro.message}"></span>
+										</div>
+									</th:block>
+			                        
+			                      </div>
+			                      <button type="button" class="close red-text" data-dismiss="alert" aria-label="Close">
+			                        <span aria-hidden="true">×</span>
+			                      </button>
+			                    </div>
+						
 							<div class="row">
 
 								<div class="col l8">
@@ -50,67 +76,61 @@
 
 									<div class="row" style="margin-top: 15px">
 
-										<div class="input-field col s6">
+										<div class="input-field col s4">
 											<select id="categoria" th:field="*{categoria}">
-												<option value="">Selecione uma Categoria</option>
+												<option value=""></option>
 												<option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria.descricao}"></option>
 											</select> <label for="Categoria">Categoria</label>
 										</div>
 										
-										<div class="input-field col s6">
-											<select id="subCategoria">
-												<option value="">Selecione uma SubCategoria</option>
-												<option value="1">Refrigerante</option>
-											</select> <label for="subCategoria">SubCategoria</label>
-										</div>
-
-									</div>
-
-
-									<div class="row" style="margin-top: 15px">
-										<div class="input-field col s4">
-											<input id="volume" type="text" placeholder="0,00" th:field="*{volume}" /> 
-											<label for="volume">Volume</label>
-										</div>
-
 										<div class="input-field col s4">
 											<select id="unidade" th:field="*{unidade}">
-												<option value="">Selecione uma Unidade</option>
+												<option value=""></option>
 												<option th:each="unidade : ${unidades}" th:value="${unidade}" th:text="${unidade.descricao}"></option>
 											</select> 
 											<label for="unidade">Unidade</label>
 										</div>
 										
 										<div class="input-field col s4">
-											<input id="valor" type="text" placeholder="R$ 0,00" th:field="*{valor}"/>
-											<label for="valor">Valor</label>
+											<input id="volume" type="text" placeholder="0,00" th:field="*{volume}" /> 
+											<label for="volume">Volume</label>
 										</div>
+										
 									</div>
 
+
 									<div class="row" style="margin-top: 15px">
+										
 										<div class="input-field col s4">
 											<input id="quantidade" type="text" placeholder=" 0" th:field="*{qtestoque}"/> 
 											<label for="quantidade">Quantidade</label>
 										</div>
 										
+										
 										<div class="input-field col s4">
-											<label></label>
+											<input id="valor" type="text" placeholder="R$ 0,00" th:field="*{valor}"/>
+											<label for="valor">Valor</label>
 										</div>
+										
 										<div class="input-field col s4">
-											<div class="switch right-align">
-												<label> desativado <input type="checkbox"
-													id="situacao"> <span class="lever"></span> Ativado
-												</label>
+											<label class="control-label">Status</label>
+											<div>
+												<input type="checkbox" class="js-status" data-size="small" data-off-color="danger" 
+													data-on-text="Ativo" data-off-text="Inativo"/>
 											</div>
+			
 										</div>
 									</div>
+
+									
 									<div class="row">
 										<div class="input-field col s12">
 											<textarea id="descricao" class="materialize-textarea" length="80" th:field="*{descricao}"></textarea>
 											<label for="descricao">Descricão</label>
 										</div>
 									</div>
-									<div class="row" style="margin-top: 10px">
+									
+									<div class="row">
 										<div class="input-field col s12">
 											<button class="btn cyan waves-effect waves-light left"
 												type="submit" name="action">
@@ -121,15 +141,22 @@
 
 								</div>
 								<div class="col s12 m12 l4">
-									<div class="row">
-										<div id="file-upload" class="section">
-											<div class="input-field col l12">
-												<input type="file" data-default-file="images/mockup.jpg"
-													id="input-file-now-custom-2" class="dropify"
-													data-height="500" /> <label for="input-file-now-custom-2">Imagem do Produto</label>
+									<div class="row" >
+									
+										<img th:src="${produto.url}" th:if="${produto.temFoto()}" class="responsive-img" style="margin: auto"/>
+			
+										<div id="upload-drop" class="wn-upload" th:attr="data-codigo=${produto.id}"
+												th:if="${not produto.temFoto()}">
+											<img class="responsive-img" th:src="@{/images/mockup.jpg}"/>
+										
+											<div class="input-field">
+												<span>Arraste a foto aqui ou </span>
+												<a class="wn-upload-form-file"> selecione 
+												<input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/> </a>
 											</div>
 										</div>
 									</div>
+							
 								</div>
 							</div>
 						</form>

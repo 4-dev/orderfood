@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.util.StringUtils;
 
 @Entity
 public class Produto {
@@ -41,7 +43,7 @@ public class Produto {
 	@NotNull(message="O volume é obrigatório!")
 	private Double volume;
 	
-	//status
+	private Boolean ativo;
 
 	@NotNull(message="O valor é obrigatório!")
 	@DecimalMin(value="0.01")
@@ -55,6 +57,9 @@ public class Produto {
 	@NotNull(message="A Categoria é obrigatória!")
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
+	
+	@Transient
+	private String url;
 
 	public long getId() {
 		return id;
@@ -104,6 +109,13 @@ public class Produto {
 		this.volume = volume;
 	}
 	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+	
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 
 	public BigDecimal getValor() {
 		return valor;
@@ -128,6 +140,18 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+	
+	public String getUrl() {
+		return url;
+	}
+	
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	public boolean temFoto() {
+		return !StringUtils.isEmpty(urlFoto);
 	}
 
 	@Override
