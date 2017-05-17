@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fourdev.orderfood.model.Mesa;
+import br.com.fourdev.orderfood.model.StatusPedido;
 import br.com.fourdev.orderfood.repository.mesa.MesaRepository;
+import br.com.fourdev.orderfood.repository.pedido.PedidoRepository;
 
 @Service
 public class MesaService {
@@ -37,5 +39,9 @@ public class MesaService {
 	public void deleteMesa(String id) {
 		mesaRepository.deleteMesa(id);
 	}
-	
+
+	public StatusPedido reservarMesa(Mesa mesa) {
+		return mesaRepository.reservarMesa(mesa);
+	}
+
 }
