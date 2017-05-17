@@ -6,6 +6,7 @@
 <head>
 	<title>Cadastro de Produto</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-switch.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/upload.min.css}"/>
 </head>
 <section id="content" layout:fragment="conteudo">
 
@@ -34,7 +35,7 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<div id="card-alert" class="card green lighten-5" th:if="${not #strings.isEmpty(mensagem)}">
+					<div id="card-alert" class="card green lighten-5 alert-dismissible" th:if="${not #strings.isEmpty(mensagem)}" >
                       <div class="card-content green-text">
                         <p><i class="mdi-navigation-check"></i> <span th:text="${mensagem}"></span></p>
                       </div>
@@ -47,7 +48,7 @@
 						<h4 class="header2">Produto</h4>
 						<form method="POST" th:object="${produto}">
 						
-								<div id="card-alert" class="card red lighten-5" th:if="${#fields.hasAnyErrors()}">
+								<div id="card-alert" class="card red lighten-5 alert-dismissible" th:if="${#fields.hasAnyErrors()}">
 			                      <div class="card-content red-text">
 			                        <th:block th:each="erro : ${#fields.detailedErrors()}">
 										<div>
@@ -157,9 +158,11 @@
 											<img class="responsive-img" th:src="@{/images/mockup.jpg}"/>
 										
 											<div class="input-field">
+												<i class="mdi-action-backup"></i>
 												<span>Arraste a foto aqui ou </span>
 												<a class="wn-upload-form-file"> selecione 
-												<input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/> </a>
+													<input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/>
+												</a>
 											</div>
 										</div>
 									</div>
