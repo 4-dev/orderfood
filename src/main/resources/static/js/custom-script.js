@@ -23,7 +23,8 @@ $(function() {
 	var settings = {
 			type: 'json',
 			filelimit: 1,
-			allow: '*.(jpg|jpeg|png)'
+			allow: '*.(jpg|jpeg|png)',
+			action: '/foto/'
 	};
 	
 	UIkit.uploadSelect($('#upload-select'), settings);
