@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.util.StringUtils;
 
 @Entity
@@ -41,6 +42,7 @@ public class Produto {
 	private String urlFoto;
 
 	@NotNull(message="O volume é obrigatório!")
+	@NumberFormat(pattern="0.0##")
 	private Double volume;
 	
 	private Boolean ativo;
@@ -48,10 +50,12 @@ public class Produto {
 	@NotNull(message="O valor é obrigatório!")
 	@DecimalMin(value="0.01")
 	@DecimalMax(value="9999.99", message="O valor não pode ultrapassar R$9.999,99 !")
+	@NumberFormat(pattern="#,##0.00")
 	private BigDecimal valor;
 
 	@NotNull(message="A quantidade é obrigatória!")
 	@Max(value = 9999, message="A quantidade em estoque deve ser menor que 9.999 !")
+	@NumberFormat(pattern="#,##0")
 	private Integer qtestoque;
 
 	@NotNull(message="A Categoria é obrigatória!")
