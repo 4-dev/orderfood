@@ -1,9 +1,7 @@
 ﻿$(function() {
-//	var decimal = $('.js-decimal');
-//	decimal.maskMoney({ prefix:'R$ ', allowNegative: true, decimal: ',', thousands: '.', affixesStay: false });
 	
 	var decimal = $('.js-decimal');
-   decimal.maskMoney({decimal: ',', thousands: '.'});
+	decimal.maskMoney({ prefix:'R$ ', decimal: ',', thousands: '.', affixesStay: false });
 	
 	var plain = $('.js-plain');
 	plain.maskMoney({ precision: 0, thousands: '.' });

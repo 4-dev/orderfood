@@ -115,13 +115,18 @@
 										</div>
 										
 										<div class="input-field col s4">
-											<label class="control-label">Status</label>
-											<div>
-												<input type="checkbox" class="js-status" data-size="small" data-off-color="danger" 
-													data-on-text="Ativo" data-off-text="Inativo" th:field="*{ativo}"/>
+											<div class="input-field col s4">
 											</div>
-			
-										</div>
+											
+											<div class="input-field col s8" style="margin-top: 15px">
+												<div>
+													<input id="ativo" type="checkbox" class="js-status" data-size="mini" 
+													data-on-color="primary" data-off-color="danger" data-on-text="Ativo" 
+														data-off-text="Inativo" data-label-text="Status" th:field="*{ativo}"/>
+												</div>
+				
+											</div>
+										</div>	
 									</div>
 
 									
