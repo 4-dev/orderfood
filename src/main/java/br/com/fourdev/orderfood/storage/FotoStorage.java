@@ -4,8 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FotoStorage {
 
-	public String salvar(MultipartFile foto);
+	public void salvarTemporiariamente(MultipartFile[] files);
 	
-	public String getUrl(String nomeFoto);
 	
 }

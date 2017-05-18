@@ -56,14 +56,14 @@ public class ProdutoService {
 	}
 	
 	
-	public String salvarFoto(Long id, MultipartFile foto) {
-		String nomeFoto = fotoStorage.salvar(foto);
-		
-		Produto produto = produtos.findOne(id);
-		produto.setFoto(nomeFoto);
-		produtos.save(produto);
-		
-		return fotoStorage.getUrl(nomeFoto);
-	}
+//	public String salvarFoto(Long id, MultipartFile foto) {
+//		String nomeFoto = fotoStorage.salvar(foto);
+//		
+//		Produto produto = produtos.findOne(id);
+//		produto.setFoto(nomeFoto);
+//		produtos.save(produto);
+//		
+//		return fotoStorage.getUrl(nomeFoto);
+//	}
 	
 }
