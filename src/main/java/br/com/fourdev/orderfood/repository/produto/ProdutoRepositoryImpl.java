@@ -48,7 +48,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 		String query = "insert into produto(id, nome, descricao, urlFoto, volume, valor, qtestoque, categoria) "
 				+ " values (/, ?,?,?,?,?,?,?) ";
 		jdbcTemplate.update(query,
-				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getUrlFoto(),
+				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getFoto(),
 						produto.getVolume(), produto.getValor(), produto.getQtestoque(),
 						produto.getCategoria().getDescricao() });
 	}
@@ -56,7 +56,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 	public void updateProduto(String id, Produto produto) {
 		String query = "update produto set nome=?, descricao=? where id=? ";
 		jdbcTemplate.update(query,
-				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getUrlFoto(),
+				new Object[] { produto.getId(), produto.getNome(), produto.getDescricao(), produto.getFoto(),
 						produto.getVolume(), produto.getValor(), produto.getQtestoque(),
 						produto.getCategoria().getDescricao() });
 	}

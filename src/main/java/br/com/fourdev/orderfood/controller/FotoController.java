@@ -1,19 +1,13 @@
 package br.com.fourdev.orderfood.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.DeferredResultMethodReturnValueHandler;
 
 import br.com.fourdev.orderfood.dto.FotoDTO;
-import br.com.fourdev.orderfood.service.ProdutoService;
-import br.com.fourdev.orderfood.storage.FotoReader;
 import br.com.fourdev.orderfood.storage.FotoStorageRunnable;
 
 @RestController
@@ -21,9 +15,9 @@ import br.com.fourdev.orderfood.storage.FotoStorageRunnable;
 public class FotoController {
 	
 	@PostMapping
-	public DeferredResult<String> upload(@RequestParam("files[]") MultipartFile[] files){
+	public DeferredResult<FotoDTO> upload(@RequestParam("files[]") MultipartFile[] files){
 		
-		DeferredResult<String> resultado = new DeferredResult<>();
+		DeferredResult<FotoDTO> resultado = new DeferredResult<>();
 		
 		Thread thread = new Thread(new FotoStorageRunnable(files, resultado));
 		thread.start();

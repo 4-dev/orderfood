@@ -150,10 +150,13 @@
 								</div>
 								<div class="col s12 m12 l4">
 									<div class="row" >
-									
+										
+										<input type="hidden" th:field="*{foto}"/>
+										<input type="hidden" th:field="*{contentType}"/>
+										
 										<img th:src="${produto.url}" th:if="${produto.temFoto()}" class="responsive-img" style="margin: auto"/>
 			
-										<div id="upload-drop" class="wn-upload" th:attr="data-codigo=${produto.id}"
+										<div id="upload-drop" class="wn-upload"
 												th:if="${not produto.temFoto()}">
 											<img class="responsive-img" th:src="@{/images/mockup.jpg}"/>
 										

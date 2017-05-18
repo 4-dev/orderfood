@@ -38,8 +38,10 @@ public class Produto {
 	@Enumerated(EnumType.STRING)
 	private Unidade unidade;
 
-	@Column(name="urlfoto")
-	private String urlFoto;
+	private String foto;
+	
+	@Column(name="contenttype")
+	private String contentType;
 
 	@NotNull(message="O volume é obrigatório!")
 	@NumberFormat(pattern="0.0##")
@@ -97,12 +99,20 @@ public class Produto {
 		this.unidade = unidade;
 	}
 
-	public String getUrlFoto() {
-		return urlFoto;
+	public String getFoto() {
+		return foto;
 	}
-
-	public void setUrlFoto(String urlFoto) {
-		this.urlFoto = urlFoto;
+	
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
+	public String getContentType() {
+		return contentType;
+	}
+	
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 	public Double getVolume() {
@@ -155,7 +165,7 @@ public class Produto {
 	}
 	
 	public boolean temFoto() {
-		return !StringUtils.isEmpty(urlFoto);
+		return !StringUtils.isEmpty(foto);
 	}
 
 	@Override

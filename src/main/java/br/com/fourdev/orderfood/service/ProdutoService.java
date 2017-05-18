@@ -60,7 +60,7 @@ public class ProdutoService {
 		String nomeFoto = fotoStorage.salvar(foto);
 		
 		Produto produto = produtos.findOne(id);
-		produto.setUrlFoto(nomeFoto);
+		produto.setFoto(nomeFoto);
 		produtos.save(produto);
 		
 		return fotoStorage.getUrl(nomeFoto);
