@@ -6,12 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.com.fourdev.orderfood.model.Produto;
 import br.com.fourdev.orderfood.repository.produto.ProdutoRepository;
 import br.com.fourdev.orderfood.repository.produto.Produtos;
-import br.com.fourdev.orderfood.storage.FotoStorage;
 
 @Service
 public class ProdutoService {
@@ -21,9 +19,6 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
-	@Autowired
-	private FotoStorage fotoStorage;
-
 	public List<Produto> selectProdutoList() {
 		return produtoRepository.selectProdutoList();
 	}
@@ -56,14 +51,5 @@ public class ProdutoService {
 	}
 	
 	
-//	public String salvarFoto(Long id, MultipartFile foto) {
-//		String nomeFoto = fotoStorage.salvar(foto);
-//		
-//		Produto produto = produtos.findOne(id);
-//		produto.setFoto(nomeFoto);
-//		produtos.save(produto);
-//		
-//		return fotoStorage.getUrl(nomeFoto);
-//	}
 	
 }

@@ -26,8 +26,39 @@ $(function() {
 			allow: '*.(jpg|jpeg|png)',
 			action: '/foto',
 			complete: function(resposta) {
-				$('input[name=foto]').val(resposta.nome);
-				$('input[name=contentType]').val(resposta.contentType);
+				var inputNomeFoto = $('input[name=foto]');
+				var inputContentType = $('input[name=contentType]');
+				var oculta = $('.js-hide');
+				var containerFoto = $('.js-container-foto');
+				var uploadSelect = $('#upload-select');
+				var uploadDrop = $('#upload-drop');
+				var fotoTemporaria = $('#foto-temporaria');
+				inputNomeFoto.val(resposta.nome);
+				inputContentType.val(resposta.contentType);
+				
+				fotoTemporaria.remove();
+				oculta.addClass('hide');
+				containerFoto.removeClass('hide');
+				containerFoto.prepend('<img src=/foto/temp/' + resposta.nome + ' class="responsive-img" id="foto-temporaria"/>');
+				
+				$('.js-remove-foto').on('click', function() {
+					$.ajax({
+						url: '/foto/temp/' + resposta.nome,
+						method: 'DELETE'
+					});
+					
+					
+					containerFoto.addClass('hide');
+					oculta.removeClass('hide');
+					inputNomeFoto.val('');
+					inputContentType.val('');
+					uploadSelect.val('');
+					uploadDrop.val('');
+				});
+
+				
+				
+				
 			}
 	};
 	

@@ -1,6 +1,9 @@
 package br.com.fourdev.orderfood.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,27 +31,20 @@ public class FotoController {
 		thread.start();
 		
 		
-		
 		return resultado;
 	}
 	
-//	@Autowired
-//	private ProdutoService produtoService;
-//
-//	@Autowired(required = false)
-//	private FotoReader fotoReader;
-//	
-//	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-//	public Foto upload(@PathVariable Long id
-//			, @RequestParam("files[]") MultipartFile[] files) {
-//		
-//		String url = produtoService.salvarFoto(id, files[0]);
-//		return new Foto(url);
-//	}
-//	
-//	@RequestMapping("/{nome:.*}")
-//	public byte[] recuperar(@PathVariable String nome) {
-//		return fotoReader.recuperar(nome);
-//	}
-//	
+	@GetMapping("/temp/{nome:.*}")
+	public byte[] recuperarFotoTemporaria(@PathVariable String nome) {
+		
+		byte[] recuperaFotoTemporaria = fotoStorage.recuperaFotoTemporaria(nome);
+		
+		return recuperaFotoTemporaria;
+	}
+	
+	@DeleteMapping("/temp/{nome:.*}")
+	public void apagarFotoTemporaria(@PathVariable("nome") String nomeFoto){
+		fotoStorage.apagarFotoTemporaria(nomeFoto);
+	}
+	
 }

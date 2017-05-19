@@ -153,14 +153,17 @@
 										
 										<input type="hidden" th:field="*{foto}"/>
 										<input type="hidden" th:field="*{contentType}"/>
-										
-										<img th:src="${produto.url}" th:if="${produto.temFoto()}" class="responsive-img" style="margin: auto"/>
 			
-										<div id="upload-drop" class="wn-upload"
-												th:if="${not produto.temFoto()}">
-											<img class="responsive-img" th:src="@{/images/mockup.jpg}"/>
+										<div id="upload-drop" class="wn-upload">
+											<div class="js-hide">
+	 											<img class="responsive-img" th:src="@{/images/mockup.jpg}" id="foto-mockup"/>
+											</div>
+											
+											<div class="js-container-foto hide">
+	 											<a class="btn-floating waves-effect waves-light red js-remove-foto right"><i class="mdi-content-clear"></i></a>
+											</div>
 										
-											<div class="input-field">
+											<div class="input-field js-hide">
 												<i class="mdi-action-backup"></i>
 												<span>Arraste a foto aqui ou </span>
 												<a class="wn-upload-form-file"> selecione 
