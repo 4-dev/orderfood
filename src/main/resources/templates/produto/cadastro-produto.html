@@ -77,7 +77,7 @@
 
 									<div class="row" style="margin-top: 15px">
 
-										<div class="input-field col s4">
+										<div class="input-field col s12 m6 l4">
 											<select id="categoria" th:field="*{categoria}">
 												<option value=""></option>
 												<option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria.descricao}"></option>
@@ -86,7 +86,7 @@
 											 for="Categoria">Categoria</label>
 										</div>
 										
-										<div class="input-field col s4">
+										<div class="input-field col s12 m6 l4">
 											<select id="unidade" th:field="*{unidade}">
 												<option value=""></option>
 												<option th:each="unidade : ${unidades}" th:value="${unidade}" th:text="${unidade.descricao}"></option>
@@ -94,7 +94,7 @@
 											<label for="unidade"  th:classappend="${#fields.hasErrors('unidade')} ? materialize-red-text">Unidade</label>
 										</div>
 										
-										<div class="input-field col s4">
+										<div class="input-field col col s12 m6 l4">
 											<input id="volume" type="text" placeholder="0,000" th:field="*{volume}" class="js-double" /> 
 											<label for="volume"  th:classappend="${#fields.hasErrors('volume')} ? materialize-red-text">Volume</label>
 										</div>
@@ -104,18 +104,18 @@
 
 									<div class="row" style="margin-top: 15px">
 										
-										<div class="input-field col s4">
+										<div class="input-field col s12 m6 l4">
 											<input id="quantidade" type="text" placeholder=" 0" th:field="*{qtestoque}" class="js-plain"/> 
 											<label for="quantidade"  th:classappend="${#fields.hasErrors('qtestoque')} ? materialize-red-text">Quantidade</label>
 										</div>
 										
 										
-										<div class="input-field col s4">
+										<div class="input-field col s12 m6 l4">
 											<input id="valor" type="text" placeholder="R$ 0,00"  th:field="*{valor}" class="js-decimal"/>
 											<label for="valor"  th:classappend="${#fields.hasErrors('valor')} ? materialize-red-text">Valor</label>
 										</div>
 										
-										<div class="input-field col s4">
+										<div class="input-field col s12 m6 l4">
 											<div class="input-field col s4">
 											</div>
 											
@@ -184,5 +184,20 @@
 	</div>
 	<!--end container-->
 </section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/js/uikit.min.js}"></script>
+	<script th:src="@{/js/upload.min.js}"></script>
+	<script th:src="@{/js/bootstrap-switch.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
+	
+	<script>
+		$('.js-status').bootstrapSwitch();
+
+		//fechar alertas automatico
+		$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){});
+	</script>
+		
+</th:block>
 
 <body>

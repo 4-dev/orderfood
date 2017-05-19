@@ -69,26 +69,16 @@
 	    <!-- chartist -->
 	    <script type="text/javascript" th:src="@{/js/plugins/chartist-js/chartist.min.js}"></script>   
 	    
-	    <!-- dropify -->
-    	<script type="text/javascript" th:src="@{/js/plugins/dropify/js/dropify.min.js}"></script>
-	    
 	    <!--plugins.js-->
 	    <script type="text/javascript" th:src="@{/js/plugins.min.js}"></script>
 	    
-	    
-	    <script th:src="@{/js/uikit.min.js}"></script>
-		<script th:src="@{/js/upload.min.js}"></script>
-		<script th:src="@{/js/bootstrap-switch.min.js}"></script>
 		<script th:src="@{/js/jquery.maskMoney.min.js}"></script>
 		
 		<!--custom-script.js-->
 	    <script type="text/javascript" th:src="@{/js/custom-script.js}"></script>
-	    <script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
 		
-	<script>
-		$('.js-status').bootstrapSwitch();
-	</script>
-		
+		<th:block layout:fragment="javascript-extra"></th:block>
+	
 		
 
 	</body>
