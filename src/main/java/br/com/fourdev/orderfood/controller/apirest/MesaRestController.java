@@ -6,15 +6,20 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.stomp.StompSession;
+import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fourdev.orderfood.config.ClientWebSocketConfig;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.service.MesaService;
 
+//@ImportResource("classpath:org/springframework/integration/samples/chat/stomp/server/stomp-server.xml")
 @RestController
 @RequestMapping("/mesa")
 public class MesaRestController {
@@ -22,6 +27,7 @@ public class MesaRestController {
 	final static Logger logger = LoggerFactory.getLogger(MesaRestController.class);
 	@Autowired
 	private MesaService mesaService;
+	// private SimpMessagingTemplate template;
 
 	@RequestMapping(value = "/listarMesas", method = RequestMethod.GET)
 	public List<Mesa> selectMesaList() {
@@ -52,6 +58,11 @@ public class MesaRestController {
 	@RequestMapping(value = "/deletarMesa/{id}", method = RequestMethod.DELETE)
 	public void deleteMesa(@PathVariable("id") String id) {
 		mesaService.deleteMesa(id);
+	}
+
+	@RequestMapping(value = "/mesaliberada/{id}", method = RequestMethod.GET)
+	public boolean mesaLiberada(@PathVariable("id") int idmesa) throws Exception {
+		return mesaService.mesaLiberada(idmesa);
 	}
 
 }

@@ -1,4 +1,5 @@
 package br.com.fourdev.orderfood.repository.mesa;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import br.com.fourdev.orderfood.model.Mesa;
+import br.com.fourdev.orderfood.model.StatusMesa;
 import br.com.fourdev.orderfood.model.StatusPedido;
 
 @Repository("mesaRepository")
@@ -41,9 +43,18 @@ public class MesaRepositoryImpl implements MesaRepository {
 	}
 
 	public void updateMesa(String id, Mesa mesa) {
-		String query = "update mesa set id = ?, descricao = ?, pedidos = ?, horaAberta = ?, horaFechada = ?, status = ?, total = ?";
-		jdbcTemplate.update(query, new Object[] { mesa.getId(), mesa.getDescricao(), mesa.getPedidos(),
-				mesa.getHoraAberta(), mesa.getHoraAberta(), mesa.getStatus(), mesa.getTotal() });
+		if (mesa != null) {
+			String query = "update mesa set ";
+			query += " descricao = ?, ";
+			query += " horaAberta = ?,";
+			query += " horaFechada = ?,";
+			query += " status = ?";
+			query += " where id = ?";
+			// + "pedidos = ?, "
+			// + "total = ?";
+			jdbcTemplate.update(query, new Object[] { mesa.getId(), mesa.getDescricao(), mesa.getPedidos(),
+					mesa.getHoraAberta(), mesa.getHoraAberta(), mesa.getStatus(), mesa.getTotal() });
+		}
 	}
 
 	public void deleteMesa(String id) {
@@ -52,12 +63,10 @@ public class MesaRepositoryImpl implements MesaRepository {
 	}
 
 	@Override
-	public StatusPedido reservarMesa( Mesa mesa) {
-		
-		
-		String query = "update mesa set status = ? where id = ?";
-		jdbcTemplate.update(query, new Object[] { mesa.getStatus(), mesa.getId()});
-		return null;
+	public StatusMesa reservarMesa(Mesa mesa) {
+		StatusMesa statusmesa = StatusMesa.DISPONIVEL;
+		updateMesa("0",mesa);
+		return statusmesa;
 	}
 
 }

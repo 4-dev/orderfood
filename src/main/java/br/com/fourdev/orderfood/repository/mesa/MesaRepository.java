@@ -3,6 +3,7 @@ package br.com.fourdev.orderfood.repository.mesa;
 import java.util.List;
 
 import br.com.fourdev.orderfood.model.Mesa;
+import br.com.fourdev.orderfood.model.StatusMesa;
 import br.com.fourdev.orderfood.model.StatusPedido;
 
 public interface MesaRepository {
@@ -17,5 +18,5 @@ public interface MesaRepository {
 
 	public void deleteMesa(String id);
 	
-	public StatusPedido reservarMesa(Mesa mesa);
+	public StatusMesa reservarMesa(Mesa mesa);
 }
