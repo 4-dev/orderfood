@@ -24,62 +24,79 @@ import java.util.concurrent.ExecutionException;
  */
 public class ClientWebSocketConfig {
 
-    private static Logger logger = Logger.getLogger(ClientWebSocketConfig.class);
+	private static Logger logger = Logger.getLogger(ClientWebSocketConfig.class);
 
-    private final static WebSocketHttpHeaders headers = new WebSocketHttpHeaders();
+	private final static WebSocketHttpHeaders headers = new WebSocketHttpHeaders();
 
-    public ListenableFuture<StompSession> connect() {
+	public static StompSession stompSession;
+	public static ClientWebSocketConfig helloClient;
 
-        Transport webSocketTransport = new WebSocketTransport(new StandardWebSocketClient());
-        List<Transport> transports = Collections.singletonList(webSocketTransport);
+	public ListenableFuture<StompSession> connect() {
 
-        SockJsClient sockJsClient = new SockJsClient(transports);
-        sockJsClient.setMessageCodec(new Jackson2SockJsMessageCodec());
+		Transport webSocketTransport = new WebSocketTransport(new StandardWebSocketClient());
+		List<Transport> transports = Collections.singletonList(webSocketTransport);
 
-        WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
+		SockJsClient sockJsClient = new SockJsClient(transports);
+		sockJsClient.setMessageCodec(new Jackson2SockJsMessageCodec());
 
-        String url = "ws://{host}:{port}/gs-guide-websocket";
-        return stompClient.connect(url, headers, new MyHandler(), "localhost", 9090);
-        
-    }
+		WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
 
-    public void subscribeGreetings(StompSession stompSession) throws ExecutionException, InterruptedException {
-        stompSession.subscribe("/topic/greetings", new StompFrameHandler() {
+		String url = "ws://{host}:{port}/gs-guide-websocket";
+		return stompClient.connect(url, headers, new MyHandler(), "localhost", 9090);
 
-            public Type getPayloadType(StompHeaders stompHeaders) {
-                return byte[].class;
-            }
+	}
 
-            public void handleFrame(StompHeaders stompHeaders, Object o) {
-                logger.info("Received greeting " + new String((byte[]) o));
-            }
-        });
-    }
+	public void subscribeGreetings(StompSession stompSession) throws ExecutionException, InterruptedException {
+		stompSession.subscribe("/topic/greetings", new StompFrameHandler() {
 
-    public void sendHello(StompSession stompSession,String mensagem) {
-//        String jsonHello = "{ \"name\" : \"Nick\" }";
-    	String jsonHello = "{ \"name\" : \""+mensagem+ "\" }";
-        stompSession.send("/app/hello", jsonHello.getBytes());
-    }
+			public Type getPayloadType(StompHeaders stompHeaders) {
+				return byte[].class;
+			}
 
-    private class MyHandler extends StompSessionHandlerAdapter {
-        public void afterConnected(StompSession stompSession, StompHeaders stompHeaders) {
-            logger.info("Now connected");
-        }
-    }
-    
-    public static void main(String[] args) throws Exception {
-        ClientWebSocketConfig helloClient = new ClientWebSocketConfig();
+			public void handleFrame(StompHeaders stompHeaders, Object o) {
+				logger.info("Received greeting " + new String((byte[]) o));
+			}
+		});
+	}
 
-        ListenableFuture<StompSession> f = helloClient.connect();
-        StompSession stompSession = f.get();
+	public void sendHello(StompSession stompSession, String mensagem) {
+		// String jsonHello = "{ \"name\" : \"Nick\" }";
+		String jsonHello = "{ \"name\" : \"" + mensagem + "\" }";
+		stompSession.send("/app/hello", jsonHello.getBytes());
+	}
 
-        logger.info("Subscribing to greeting topic using session " + stompSession);
-        helloClient.subscribeGreetings(stompSession);
+	private class MyHandler extends StompSessionHandlerAdapter {
+		public void afterConnected(StompSession stompSession, StompHeaders stompHeaders) {
+			logger.info("Now connected");
+		}
+	}
 
-        logger.info("Sending hello message" + stompSession);
-        helloClient.sendHello(stompSession, "Deyvid "+stompSession.getSessionId());
-        Thread.sleep(60000);
-    }
-    
+	public static StompSession conectaOuRetornaWebSocket() throws InterruptedException, ExecutionException {
+		if (stompSession == null) {
+			helloClient = new ClientWebSocketConfig();
+			ListenableFuture<StompSession> f = helloClient.connect();
+			stompSession = f.get();
+		}
+		return stompSession;
+	}
+
+	public static void desconectarWebSocket() {
+		stompSession.disconnect();
+	}
+
+	public static void main(String[] args) throws Exception {
+		ClientWebSocketConfig helloClient = new ClientWebSocketConfig();
+
+		ListenableFuture<StompSession> f = helloClient.connect();
+		StompSession stompSession = f.get();
+
+		logger.info("Subscribing to greeting topic using session " + stompSession);
+		helloClient.subscribeGreetings(stompSession);
+
+		logger.info("Sending hello message" + stompSession);
+		helloClient.sendHello(stompSession, "Deyvid " + stompSession.getSessionId());
+		Thread.sleep(60000);
+
+	}
+
 }
