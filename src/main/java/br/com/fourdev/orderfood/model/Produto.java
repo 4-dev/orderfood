@@ -9,7 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
@@ -63,9 +62,6 @@ public class Produto {
 	@NotNull(message="A Categoria é obrigatória!")
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
-	
-	@Transient
-	private String url;
 
 	public long getId() {
 		return id;
@@ -156,14 +152,6 @@ public class Produto {
 		this.categoria = categoria;
 	}
 	
-	public String getUrl() {
-		return url;
-	}
-	
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
 	public boolean temFoto() {
 		return !StringUtils.isEmpty(foto);
 	}
@@ -195,7 +183,5 @@ public class Produto {
 			return false;
 		return true;
 	}
-
-	
 	
 }

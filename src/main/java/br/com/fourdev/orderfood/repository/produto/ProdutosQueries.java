@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.fourdev.orderfood.model.Produto;
 
-public interface ProdutoRepository {
+public interface ProdutosQueries {
 
 	public List<Produto> selectProdutoList();
 

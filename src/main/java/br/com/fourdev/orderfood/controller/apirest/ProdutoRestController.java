@@ -17,24 +17,25 @@ import br.com.fourdev.orderfood.model.Produto;
 import br.com.fourdev.orderfood.service.ProdutoService;
 
 @RestController
+@RequestMapping("/api")
 public class ProdutoRestController {
 
 	final static Logger logger = LoggerFactory.getLogger(ProdutoRestController.class);
 	@Autowired
 	private ProdutoService produtoService;
 
-	@RequestMapping(value = "api/listarProdutos", method = RequestMethod.GET)
+	@RequestMapping(value = "/produto/listarProdutos", method = RequestMethod.GET)
 	public List<Produto> selectProdutoList() {
 		return produtoService.selectProdutoList();
 	}
 
-	@RequestMapping(value = "api/buscarProdutoPorCodigo/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/produto/buscarProdutoPorCodigo/{id}", method = RequestMethod.GET)
 	public Produto selectProdutoById(@PathVariable("id") String id) {
 		return produtoService.selectProdutoById(id);
 	}
 	
 	
-	@PostMapping("api/salvarProduto")
+	@PostMapping("/produto/salvarProduto")
 	public void insertProduto(@RequestBody Produto produto) {
 
 		logger.debug("id=" + produto.getId());
@@ -44,13 +45,13 @@ public class ProdutoRestController {
 		produtoService.insertProduto(produto);
 	}
 
-	@RequestMapping(value = "api/atualizarProduto/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/produto/atualizarProduto/{id}", method = RequestMethod.PUT)
 	public void updateProduto(@RequestBody Produto produto, @PathVariable("id") String id) {
 		logger.debug("id=" + id);
 		produtoService.updateProduto(id, produto);
 	}
 
-	@RequestMapping(value = "api/deletarProduto/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/produto/deletarProduto/{id}", method = RequestMethod.DELETE)
 	public void deleteProduto(@PathVariable("id") String id) {
 		produtoService.deleteProduto(id);
 	}

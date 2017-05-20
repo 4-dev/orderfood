@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fourdev.orderfood.model.Produto;
-import br.com.fourdev.orderfood.repository.produto.ProdutoRepository;
 import br.com.fourdev.orderfood.repository.produto.Produtos;
 
 @Service
@@ -17,38 +16,37 @@ public class ProdutoService {
 	final static Logger logger = LoggerFactory.getLogger(ProdutoService.class);
 
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private Produtos produtos;
 	
 	public List<Produto> selectProdutoList() {
-		return produtoRepository.selectProdutoList();
+		return produtos.selectProdutoList();
 	}
 
 	public Produto selectProdutoById(String id) {
-		return produtoRepository.selectProdutoPorId(id);
+		return produtos.selectProdutoPorId(id);
 	}
 
 	public void insertProduto(Produto produto) {
-		produtoRepository.insertProduto(produto);
+		produtos.insertProduto(produto);
 	}
 
 	public void updateProduto(String id, Produto produto) {
-		produtoRepository.updateProduto(id, produto);
+		produtos.updateProduto(id, produto);
 	}
 
 	public void deleteProduto(String id) {
-		produtoRepository.deleteProduto(id);
+		produtos.deleteProduto(id);
 	}
 	
 	
 	//Implementaçoes para o tymeleaf 
-	
-	@Autowired
-	private Produtos produtos;
-	 
-	
 	public void salvar(Produto produto){
 		produtos.save(produto);
 	}
+	
+	
+	 
+	
 	
 	
 	

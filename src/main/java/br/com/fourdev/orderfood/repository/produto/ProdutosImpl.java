@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import br.com.fourdev.orderfood.model.Produto;
 
 @Repository("produtoRepository")
-public class ProdutoRepositoryImpl implements ProdutoRepository {
+public class ProdutosImpl implements ProdutosQueries {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -28,7 +28,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 
 		try {
 			String query = "select * from produto";
-			return jdbcTemplate.query(query, new BeanPropertyRowMapper(Produto.class));
+			return jdbcTemplate.query(query, new BeanPropertyRowMapper<Produto>(Produto.class));
 		} catch (InvalidResultSetAccessException e) {
 			throw new RuntimeException(e);
 		} catch (DataAccessException e) {
@@ -39,8 +39,8 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
 
 	public Produto selectProdutoPorId(String id) {
 		String query = "select * from produto where id=? ";
-		return (Produto) jdbcTemplate.queryForObject(query, new Object[] { id },
-				new BeanPropertyRowMapper(Produto.class));
+		return jdbcTemplate.queryForObject(query, new Object[] { id },
+				new BeanPropertyRowMapper<Produto>(Produto.class));
 	}
 
 	public void insertProduto(Produto produto) {
