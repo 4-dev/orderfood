@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFuture;
 
 import br.com.fourdev.orderfood.config.ClientWebSocketConfig;
 import br.com.fourdev.orderfood.model.Mesa;
@@ -64,7 +63,7 @@ public class MesaService {
 			cws.helloClient.subscribeGreetings(cws.stompSession);
 
 			logger.info("Enviando mensagem" + cws.stompSession);
-			cws.helloClient.sendHello(cws.stompSession, "yellow");
+			cws.helloClient.sendHello(cws.stompSession, "deep-orange");
 			Thread.sleep(1000);
 			vbliberouMesa = true;			
 

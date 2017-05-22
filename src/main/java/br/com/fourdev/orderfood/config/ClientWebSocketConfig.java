@@ -62,7 +62,6 @@ public class ClientWebSocketConfig {
 	public void sendHello(StompSession stompSession, String mensagem) {
 		// String jsonHello = "{ \"name\" : \"Nick\" }";
 		String jsonHello = "{ \"name\" : \"" + mensagem + "\" }";
-//		stompSession.send("/app/hello", jsonHello.getBytes());
 		stompSession.send("/app/hello", jsonHello.getBytes());
 	}
 
@@ -101,3 +100,31 @@ public class ClientWebSocketConfig {
 	}
 
 }
+
+
+
+
+
+
+//
+//@Component
+//public class SocketHandler extends TextWebSocketHandler {
+//
+//    List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
+//
+//    @Override
+//    public void handleTextMessage(WebSocketSession session, TextMessage message)
+//            throws InterruptedException, IOException {
+//        for(WebSocketSession webSocketSession : sessions) {
+//            Map<String, String> value = new Gson().fromJson(message.getPayload(), Map.class);
+//            webSocketSession.sendMessage(new TextMessage("Hello " + value.get("name") + " !"));
+//        }
+//    }
+//
+//    @Override
+//    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+//        //the messages will be broadcasted to all users.
+//        sessions.add(session);
+//    }
+//
+//}

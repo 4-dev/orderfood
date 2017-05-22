@@ -25,6 +25,7 @@ public class MesaController {
 	public ModelAndView status(Mesa mesa){
 		ModelAndView modelAndView = new ModelAndView("mesa/status-mesa");
 		modelAndView.addObject(mesa);
+		modelAndView.addObject(mesaService);
 		
 		return modelAndView ;
 	}
