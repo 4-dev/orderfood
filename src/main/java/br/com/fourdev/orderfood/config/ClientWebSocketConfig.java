@@ -62,6 +62,7 @@ public class ClientWebSocketConfig {
 	public void sendHello(StompSession stompSession, String mensagem) {
 		// String jsonHello = "{ \"name\" : \"Nick\" }";
 		String jsonHello = "{ \"name\" : \"" + mensagem + "\" }";
+//		stompSession.send("/app/hello", jsonHello.getBytes());
 		stompSession.send("/app/hello", jsonHello.getBytes());
 	}
 

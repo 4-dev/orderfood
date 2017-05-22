@@ -6,16 +6,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.stomp.StompSession;
-import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fourdev.orderfood.config.ClientWebSocketConfig;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.service.MesaService;
 
@@ -35,7 +31,7 @@ public class MesaRestController {
 	}
 
 	@RequestMapping(value = "/buscarMesaPorCodigo/{id}", method = RequestMethod.GET)
-	public Mesa selectMesaById(@PathVariable("id") String id) {
+	public Mesa selectMesaById(@PathVariable("id") int id) {
 		return mesaService.selectMesaById(id);
 	}
 
@@ -60,9 +56,9 @@ public class MesaRestController {
 		mesaService.deleteMesa(id);
 	}
 
-	@RequestMapping(value = "/mesaliberada/{id}", method = RequestMethod.GET)
-	public boolean mesaLiberada(@PathVariable("id") int idmesa) throws Exception {
-		return mesaService.mesaLiberada(idmesa);
+	@RequestMapping(value = "/verificarmesa/{id}", method = RequestMethod.GET)
+	public boolean verificarStatusMesa(@PathVariable("id") int idmesa) throws Exception {
+		return mesaService.verificarStatusMesa(idmesa);
 	}
 
 }

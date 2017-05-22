@@ -33,6 +33,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addRedirectViewController("/", "/produto/novo");
+		registry.addRedirectViewController("/", "/mesa/status");
 	}
 	
 	

@@ -10,13 +10,16 @@ public interface MesaRepository {
 
 	public List<Mesa> selectMesaList();
 
-	public Mesa selectMesaPorId(String id);
+	public Mesa selectMesaPorId(int id);
 
 	public void insertMesa(Mesa mesa);
 
 	public void updateMesa(String id, Mesa mesa);
 
 	public void deleteMesa(String id);
-	
+
 	public StatusMesa reservarMesa(Mesa mesa);
+
+	public int contaMesas();
+	
 }

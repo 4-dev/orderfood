@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.StatusMesa;
-import br.com.fourdev.orderfood.model.StatusPedido;
 
 @Repository("mesaRepository")
 public class MesaRepositoryImpl implements MesaRepository {
@@ -29,9 +28,9 @@ public class MesaRepositoryImpl implements MesaRepository {
 		return jdbcTemplate.query(query, new BeanPropertyRowMapper(Mesa.class));
 	}
 
-	public Mesa selectMesaPorId(String id) {
+	public Mesa selectMesaPorId(int idmesa) {
 		String query = "select * from mesa where id=? ";
-		return (Mesa) jdbcTemplate.queryForObject(query, new Object[] { id }, new BeanPropertyRowMapper(Mesa.class));
+		return (Mesa) jdbcTemplate.queryForObject(query, new Object[] { idmesa }, new BeanPropertyRowMapper(Mesa.class));
 	}
 
 	public void insertMesa(Mesa mesa) {
@@ -65,8 +64,16 @@ public class MesaRepositoryImpl implements MesaRepository {
 	@Override
 	public StatusMesa reservarMesa(Mesa mesa) {
 		StatusMesa statusmesa = StatusMesa.DISPONIVEL;
-		updateMesa("0",mesa);
+		updateMesa("0", mesa);
 		return statusmesa;
 	}
+
+
+	public int contaMesas() {
+		String query = "select count(1) from mesa";
+		int contaMesas = (Integer) this.jdbcTemplate.queryForObject(query, Integer.class);
+		return contaMesas;
+	}
+
 
 }

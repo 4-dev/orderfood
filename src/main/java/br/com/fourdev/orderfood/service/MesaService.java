@@ -31,7 +31,7 @@ public class MesaService {
 		return mesaRepository.selectMesaList();
 	}
 
-	public Mesa selectMesaById(String id) {
+	public Mesa selectMesaById(int id) {
 		return mesaRepository.selectMesaPorId(id);
 	}
 
@@ -47,24 +47,36 @@ public class MesaService {
 		mesaRepository.deleteMesa(id);
 	}
 
-	public boolean mesaLiberada(int idmesa) throws InterruptedException, ExecutionException {
+	public int contaMesas() {
+		return mesaRepository.contaMesas();
+	}
+
+	public boolean verificarStatusMesa(int idmesa) throws InterruptedException, ExecutionException {
 		boolean vbliberouMesa = false;
-		ClientWebSocketConfig.conectaOuRetornaWebSocket();
+		
+		Mesa mesa = mesaRepository.selectMesaPorId(idmesa);
+		
+		if ("LIBERADA".equalsIgnoreCase(mesa.getStatus().toString())) {
+			ClientWebSocketConfig cws = null;
+			cws.conectaOuRetornaWebSocket();
 
-		logger.info("Inscrever-se no tópico usando a sessão " + stompSession);
-		ClientWebSocketConfig.helloClient.subscribeGreetings(stompSession);
+			logger.info("Inscrever-se no tópico usando a sessão " + cws.stompSession.getSessionId());
+			cws.helloClient.subscribeGreetings(cws.stompSession);
 
-		logger.info("Enviando mensagem" + stompSession);
-		ClientWebSocketConfig.helloClient.sendHello(stompSession, "Deyvid - mesa: " + idmesa);
-		Thread.sleep(1000);
+			logger.info("Enviando mensagem" + cws.stompSession);
+			cws.helloClient.sendHello(cws.stompSession, "yellow");
+			Thread.sleep(1000);
+			vbliberouMesa = true;			
 
+			
+		}
 		return vbliberouMesa;
 	}
 
 	public StatusMesa reservarMesa(int idmesa) {
 		Mesa mesa = new Mesa();
 		StatusMesa statusMesa = null;
-		mesa.setStatus(statusMesa.OCUPADA);
+		mesa.setStatus(statusMesa.OCUPADA.getDescricao());
 		mesa.setId(idmesa);
 		mesa.setHoraAberta(LocalDate.now());
 		mesa.setHoraFechada(LocalDate.now());

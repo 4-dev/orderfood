@@ -16,5 +16,14 @@ public class GreetingController {
         Thread.sleep(180); // simulated delay
         return new Greeting("Hello, " + message.getName() + "!");
     }
+//
+//
+//    @MessageMapping("/status")
+//    @SendTo("/topic/greetings")
+//    public Greeting greetings(HelloMessage message) throws Exception {
+//        Thread.sleep(180); // simulated delay
+//        return new Greeting(message.getName());
+//    }
+
 
 }

@@ -36,12 +36,17 @@ function disconnect() {
 
 function sendName() {
     stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    $("#cardStatus").attr("class", "card yellow darken-1");
+    alert("Hello! I am an alert box!!");
 }
 
 function showGreeting(message) {
     $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    $("#greetings").attr("class", "card yellow darken-1");
+    alert("Hello! I am an alert box!!");
 }
 
+ 
 $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();

@@ -11,7 +11,8 @@ public class Mesa {
 	private List<Pedido> pedidos; // lista pedidos
 	private LocalDate horaAberta;
 	private LocalDate horaFechada;
-	private StatusMesa status;
+//	private StatusMesa status;
+	private String status;
 	private BigDecimal total;
 
 	public int getId() {
@@ -46,11 +47,11 @@ public class Mesa {
 		this.horaFechada = horaFechada;
 	}
 
-	public StatusMesa getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusMesa status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -125,4 +126,6 @@ public class Mesa {
 		return true;
 	}
 
+
+	
 }
