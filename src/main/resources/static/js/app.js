@@ -25,12 +25,14 @@ function connect() {
         stompClient.subscribe('/topic/greetings', function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
             
-//            alert('aqui stompClient.connect');
-            if(JSON.parse(greeting.body).content = 'YELLOW') {
+            var msg = JSON.parse(greeting.body).content;
+            var idDiv = "#mesaStatus"+msg;
+//            alert('aqui stompClient.connect '+idDiv);
+            if(JSON.parse(greeting.body).content = '') {
 //            	$("#cardStatus").attr("class", "card yellow darken-1");
-            	$("#cardStatus").attr("class", "card deep-orange darken-1");
+            	$(idDiv).attr("class", "card blue-grey darken-1");            	
             } else {
-            	$("#cardStatus").attr("class", "card blue-grey darken-1");
+            	$(idDiv).attr("class", "card deep-orange darken-1");
             }
         });
     });

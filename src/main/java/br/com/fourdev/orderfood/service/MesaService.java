@@ -63,7 +63,7 @@ public class MesaService {
 			cws.helloClient.subscribeGreetings(cws.stompSession);
 
 			logger.info("Enviando mensagem" + cws.stompSession);
-			cws.helloClient.sendHello(cws.stompSession, "deep-orange");
+			cws.helloClient.sendHello(cws.stompSession, String.valueOf(mesa.getId()));
 			Thread.sleep(1000);
 			vbliberouMesa = true;			
 
