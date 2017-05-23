@@ -4,5 +4,32 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:th="http://www.thymeleaf.org">
 	
+	<head>
+		  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+		  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		  <meta name="msapplication-tap-highlight" content="no"/>
+		  <meta name="description" content="OrderFood, sistema para gerenciamento de pedidos para seu estabelecimento."/>
+		  <meta name="keywords" content="orderfood, pedidos, lanchonete, restaurante, cardápio,"/>
+		  <title>Order Food</title>
+		  
+		  <!-- Favicons-->
+		  <link rel="icon" th:href="@{/images/favicon/favicon-32x32.png}" sizes="32x32"/>
+		  <!-- Favicons-->
+		  <link rel="apple-touch-icon-precomposed" th:href="@{/images/favicon/apple-touch-icon-152x152.png}"/>
+		  <!-- For iPhone -->
+		  
+		  <link th:href="@{/css/materialize.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+		  <link th:href="@{/css/layouts/page-center.css}" type="text/css" rel="stylesheet" media="screen,projection">
+	</head>
+	
+	
+		<section  layout:fragment="conteudo"> </section>
+	
+	
+		<!-- jQuery Library -->
+	    <script type="text/javascript" th:src="@{/js/plugins/jquery-1.11.2.min.js}"></script>    
+	    <!--materialize js-->
+	    <script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
 	
 </html>
