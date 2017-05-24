@@ -21,12 +21,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
-		.antMatchers("/**");
+		.antMatchers("/css/**")
+		.antMatchers("/images/**")
+		.antMatchers("/font/**")
+		.antMatchers("/js/**");
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+				.antMatchers("/**").permitAll()
 				.anyRequest()
 				.authenticated()
 			.and()

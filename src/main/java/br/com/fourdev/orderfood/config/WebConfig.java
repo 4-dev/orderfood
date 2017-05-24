@@ -16,7 +16,7 @@ import org.springframework.web.servlet.i18n.FixedLocaleResolver;
 
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
-
+	
 	@Bean
 	public EmbeddedServletContainerCustomizer containerCustomizer() {
 		return (container ->
@@ -29,13 +29,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 			FormattingConversionService conversionService) {
 		return new DomainClassConverter<FormattingConversionService>(conversionService);
 	}
-	
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addRedirectViewController("/", "/produto/novo");
-		registry.addRedirectViewController("/", "/mesa/status");
-	}
-	
 	
 	@Bean
 	public LocaleResolver localeResolver(){
