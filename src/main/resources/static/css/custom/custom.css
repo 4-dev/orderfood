@@ -39,7 +39,11 @@ body {
    flex: 1 0 auto;
  }
  
-
+.of-checkbox {
+  display: inline-block;	
+  margin-top: 30px;
+  padding-left: 35px;
+}
   
 
 
