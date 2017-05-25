@@ -19,8 +19,12 @@
 		  <link rel="apple-touch-icon-precomposed" th:href="@{/images/favicon/apple-touch-icon-152x152.png}"/>
 		  <!-- For iPhone -->
 		  
-		  <link th:href="@{/css/materialize.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+		  <link th:href="@{/css/materialize.min.css}" type="text/css" rel="stylesheet" media="screen,projection">
+		  <link th:href="@{/css/style.min.css}" type="text/css" rel="stylesheet" media="screen,projection">
 		  <link th:href="@{/css/layouts/page-center.css}" type="text/css" rel="stylesheet" media="screen,projection">
+		  <link th:href="@{/css/custom/custom.min.css}" type="text/css" rel="stylesheet" media="screen,projection">
+		
+		  
 	</head>
 	
 	<body>
@@ -31,6 +35,8 @@
 	    <script type="text/javascript" th:src="@{/js/plugins/jquery-1.11.2.min.js}"></script>    
 	    <!--materialize js-->
 	    <script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+	    
+	    <th:block layout:fragment="javascript-extra"></th:block>
 	
 	</body>
 </html>
