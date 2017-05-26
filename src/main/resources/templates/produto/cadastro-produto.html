@@ -46,7 +46,7 @@
 				
 					<div class="card-panel hoverable">
 						<h4 class="header2">Produto</h4>
-						<form method="POST" th:object="${produto}">
+						<form method="POST" th:object="${produto}" class="formValidate" id="formValidate">
 						
 								<div id="card-alert" class="card red lighten-5 alert-dismissible" th:if="${#fields.hasAnyErrors()}">
 			                      <div class="card-content red-text">

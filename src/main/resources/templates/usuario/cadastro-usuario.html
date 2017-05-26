@@ -79,8 +79,8 @@
 									<div class="row" style="margin-top: 15px">
 				                        <div class="input-field col l8">
 				                          <i class="mdi-communication-email prefix"></i>
-				                          <input id="e-mail" type="email" th:field="*{email}"/>
-				                          <label for="e-mail" th:classappend="${#fields.hasErrors('email')} ? materialize-red-text">Email</label>
+				                          <input id="email" type="email" th:field="*{email}"/>
+				                          <label for="email" th:classappend="${#fields.hasErrors('email')} ? materialize-red-text">Email</label>
 				                        </div>
 				                        
 				                        <div class="input-field col l4">
@@ -164,8 +164,7 @@
 	<script th:src="@{/js/uikit.min.js}"></script>
 	<script th:src="@{/js/upload.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
-	<script type="text/javascript" th:src="@{/js/plugins/jquery-validation/jquery.validate.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/plugins/jquery-validation/additional-methods.min.js}"></script>
+	
 	
 	<script>
 
@@ -175,44 +174,6 @@
 		
 	</script>
   
-    <script type="text/javascript">
-    $("#formValidate").validate({
-        rules: {
-            
-            password: {
-				required: false,
-				minlength: 6
-			},
-			cpassword: {
-				required: false,
-				equalTo: "#password"
-			},
-			
-            cgender:"required",
-			cagree:"required",
-        },
-        //For custom messages
-        messages: {
-           
-            password:{
-                minlength:"A senha deve ter no mínimo 6 caracteres!"
-            },
-            cpassword:{
-            	equalTo: "Senhas não Conferem!"
-            }
-        },
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
-        }
-     });
-    </script>
-		
 </th:block>
 
 <body>

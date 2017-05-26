@@ -34,7 +34,47 @@ $.extend($.fn.pickadate.defaults, {
 
 
 //confirmar senha
-
+$("#formValidate").validate({
+    rules: {
+        
+        password: {
+			required: false,
+			minlength: 6
+		},
+		cpassword: {
+			required: false,
+			equalTo: "#password"
+		},
+		email: {
+            required: false,
+            email:false
+        },
+		
+        cgender:"required",
+		cagree:"required",
+    },
+    //For custom messages
+    messages: {
+       
+    	 
+        password:{
+            minlength:"A senha deve ter no mínimo 6 caracteres!"
+        },
+        cpassword:{
+        	equalTo: "Senhas não Conferem!"
+        },
+        
+    },
+    errorElement : 'div',
+    errorPlacement: function(error, element) {
+      var placement = $(element).data('error');
+      if (placement) {
+        $(placement).append(error)
+      } else {
+        error.insertAfter(element);
+      }
+    }
+ });
 
 
 

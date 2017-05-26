@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -28,8 +27,7 @@ public class Usuario implements Serializable {
 	@Email
 	@NotBlank(message="O email é Obrigatório.")
 	private String email;
-	
-	@Min(value=6, message="A Senha deve ter no mínimo seis Caracteres!")
+
 	@Column(name = "senha")
 	private String password;
 	

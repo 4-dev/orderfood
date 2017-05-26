@@ -84,8 +84,27 @@ body {
       right:70px;
   }
 
+/***************
+customização do switch checkbox para funcionar com thymelea
+***************/
 
-  
+.switch label input[type=checkbox]:checked + input + .lever {
+  background-color: #f7c7d8;
+}
+
+.switch label input[type=checkbox]:checked + input + .lever:after {
+  background-color: #ff4081;
+}
+
+
+.switch label input[type=checkbox]:checked + input + .lever:after {
+  left: 24px;
+}
+
+.switch input[type=checkbox][disabled] + input + .lever {
+  cursor: default;
+}
+
   
   
   
