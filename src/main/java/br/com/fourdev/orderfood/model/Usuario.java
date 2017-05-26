@@ -1,20 +1,50 @@
 package br.com.fourdev.orderfood.model;
+import java.io.Serializable;
+import java.util.Calendar;
 
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 
-public class Usuario {
-	private long id;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+@Entity
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	@NotBlank(message="O nome é Obrigatório.")
 	private String nome;
+	
+	@Email
+	@NotBlank(message="O email é Obrigatório.")
 	private String email;
-	private String senha;
-	private LocalDate dataNascimento;
+	
+	@Min(value=6, message="A Senha deve ter no mínimo seis Caracteres!")
+	@Column(name = "senha")
+	private String password;
+	
+	@Column(name = "data_nascimento")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Calendar dataNascimento;
+	
 	private boolean ativo;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-
-	public void setId(long id) {
+	
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -34,19 +64,21 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	
+	
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public LocalDate getDataNascimento() {
+	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -62,12 +94,7 @@ public class Usuario {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (ativo ? 1231 : 1237);
-		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -80,31 +107,14 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (ativo != other.ativo)
-			return false;
-		if (dataNascimento == null) {
-			if (other.dataNascimento != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!dataNascimento.equals(other.dataNascimento))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (id != other.id)
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+
+	
 
 }
