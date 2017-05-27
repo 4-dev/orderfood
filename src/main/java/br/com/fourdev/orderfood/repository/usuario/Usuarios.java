@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 import br.com.fourdev.orderfood.model.Usuario;
 
 @Repository
-public interface Usuarios extends JpaRepository<Usuario, Long> {
+public interface Usuarios extends JpaRepository<Usuario, Long>, UsuariosQueries {
 
-	Optional<Usuario> findByEmail(String email);
+	public Optional<Usuario> findByEmail(String email);
+	
+	
 
 }

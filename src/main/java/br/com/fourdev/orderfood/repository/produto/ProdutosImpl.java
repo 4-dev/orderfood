@@ -41,6 +41,7 @@ public class ProdutosImpl implements ProdutosQueries {
 		String query = "select * from produto where id=? ";
 		return jdbcTemplate.queryForObject(query, new Object[] { id },
 				new BeanPropertyRowMapper<Produto>(Produto.class));
+	
 	}
 
 	public void insertProduto(Produto produto) {
