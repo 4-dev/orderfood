@@ -95,7 +95,7 @@
 				                        <div class="input-field col l4">
 				                           <i class="mdi-action-lock-outline prefix"></i>
                                        		 <input id="password" type="password" data-error=".errorTxt3"  th:field="*{password}"/>
-                                       		 <label for="password"th:classappend="${#fields.hasErrors('password')} ? materialize-red-text">Senha</label>
+                                       		 <label for="password" th:classappend="${#fields.hasErrors('password')} ? materialize-red-text">Senha</label>
                                        		 <div class="errorTxt3"></div>
 				                         </div>
 				                         
@@ -119,11 +119,12 @@
 			                        <div class="row" style="margin-top: 15px">
 				                        <div class="input-field col l12">
 				            				<i class="mdi-social-group prefix"></i>
-				                        	<label class="">Grupos</label> 
+				                        	<label th:classappend="${#fields.hasErrors('grupos')} ? materialize-red-text">Grupos</label> 
 				                        	<th:block th:each="grupo : ${grupos}">
 				                     			<div class="of-checkbox">
-				                     				<input type="checkbox" th:value="${grupo.id}" checked="checked" th:field="*{grupos}"/>
-	      											<label th:for="${#ids.prev('grupos')}" th:text="${grupo.nome}"></label>
+				                     				<input type="checkbox" th:value="${grupo.id}" checked="checked" th:field="*{grupos}" />
+	      											<label th:for="${#ids.prev('grupos')}" th:text="${grupo.nome}"
+	      											th:classappend="${#fields.hasErrors('grupos')} ? materialize-red-text"></label>
 				                     			</div>
 				                        	</th:block>
 				                        </div>

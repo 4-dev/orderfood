@@ -5,7 +5,6 @@
 	layout:decorator="layout/layout-padrao">
 <head>
 	<title>Cadastro de Produto</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-switch.min.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/upload.min.css}"/>
 </head>
 <section id="content" layout:fragment="conteudo">
@@ -115,18 +114,34 @@
 											<label for="valor"  th:classappend="${#fields.hasErrors('valor')} ? materialize-red-text">Valor</label>
 										</div>
 										
-										<div class="input-field col s12 m6 l4">
-											<div class="input-field col s4">
-											</div>
+										<div class="input-field col l2 offset-l1">
+										
+											<div class="switch">
+							                    <label>
+							                      Inativo
+							                      <input type="checkbox" th:field="*{ativo}"/>
+							                      <span class="lever"></span> Ativo
+							                    </label>
+							                  </div>
+										
+										
+										
+										
+										
+										
+										
+										
+<!-- 											<div class="input-field col s4"> -->
+<!-- 											</div> -->
 											
-											<div class="input-field col s8" style="margin-top: 15px">
-												<div>
-													<input id="ativo" type="checkbox" class="js-status" data-size="mini" 
-													data-on-color="primary" data-off-color="danger" data-on-text="Ativo" 
-														data-off-text="Inativo" data-label-text="Status" th:field="*{ativo}"/>
-												</div>
+<!-- 											<div class="input-field col s8" style="margin-top: 15px"> -->
+<!-- 												<div> -->
+<!-- 													<input id="ativo" type="checkbox" class="js-status" data-size="mini"  -->
+<!-- 													data-on-color="primary" data-off-color="danger" data-on-text="Ativo"  -->
+<!-- 														data-off-text="Inativo" data-label-text="Status" th:field="*{ativo}"/> -->
+<!-- 												</div> -->
 				
-											</div>
+<!-- 											</div> -->
 										</div>	
 									</div>
 
@@ -188,11 +203,10 @@
 <th:block layout:fragment="javascript-extra">
 	<script th:src="@{/js/uikit.min.js}"></script>
 	<script th:src="@{/js/upload.min.js}"></script>
-	<script th:src="@{/js/bootstrap-switch.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
 	
 	<script>
-		$('.js-status').bootstrapSwitch();
+		
 
 		//fechar alertas automatico
 		$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){});
