@@ -1,14 +1,19 @@
 package br.com.fourdev.orderfood.model;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -37,6 +42,12 @@ public class Usuario implements Serializable {
 	private Calendar dataNascimento;
 	
 	private boolean ativo;
+	
+	@Size(min=1, message="Selecione Pelo menos um Grupo.")
+	@ManyToMany
+	@JoinTable(name="usuario_grupo", joinColumns = @JoinColumn(name="id_usuario"),
+	inverseJoinColumns=@JoinColumn(name="id_grupo"))
+	private List<Grupo> grupos;
 
 	public Long getId() {
 		return id;
@@ -88,6 +99,14 @@ public class Usuario implements Serializable {
 		this.ativo = ativo;
 	}
 
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+	
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -111,6 +130,10 @@ public class Usuario implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public boolean isNovo() {
+		return this.id == null;
 	}
 
 	

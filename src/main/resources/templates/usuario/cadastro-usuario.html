@@ -118,23 +118,15 @@
 			                       
 			                        <div class="row" style="margin-top: 15px">
 				                        <div class="input-field col l12">
-				                        
 				            				<i class="mdi-social-group prefix"></i>
 				                        	<label class="">Grupos</label> 
-			                     			<div class="of-checkbox">
-			                     				<input type="checkbox" id="grupos" checked="checked"/>
-      											<label for="grupos">Administrador</label>
-			                     			</div>
-			                     			<div class="of-checkbox">
-			                     				<input type="checkbox" id="grupos"/>
-      											<label for="grupos">Atendente</label>
-			                     			</div>
-			                     			<div class="of-checkbox">
-			                     				<input type="checkbox" id="grupos"/>
-      											<label for="grupos">Cozinheiro</label>
-			                     			</div>
-				                      
-				                         </div>
+				                        	<th:block th:each="grupo : ${grupos}">
+				                     			<div class="of-checkbox">
+				                     				<input type="checkbox" th:value="${grupo.id}" checked="checked" th:field="*{grupos}"/>
+	      											<label th:for="${#ids.prev('grupos')}" th:text="${grupo.nome}"></label>
+				                     			</div>
+				                        	</th:block>
+				                        </div>
 				                       
 			                       </div>
 			                       
