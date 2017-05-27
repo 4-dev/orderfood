@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"> 
 <body>
 	<aside id="left-sidebar-nav" th:fragment="layout-sidebar">
 		<ul id="slide-out" class="side-nav fixed leftside-navigation">
@@ -49,12 +49,12 @@
 				<ul class="collapsible collapsible-accordion">
 					<li class="bold"><a
 						class="collapsible-header waves-effect waves-cyan"><i
-							class="mdi-av-queue"></i> Cadastro</a>
+							class="mdi-av-queue"></i> Cadastro </a>
 						<div class="collapsible-body">
 							<ul>
 								<li><a th:href="@{/produto/novo}">Produto</a></li>
 								<li><a th:href="@{/usuario/novo}">Usuário</a></li>
-								<li><a href="css-animations.html">Mesa</a></li>
+								<li><a th:href="@{/mesa/novo}">Mesa</a></li>
 							</ul>
 						</div>
 					</li>
