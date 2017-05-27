@@ -15,11 +15,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<h5 class="breadcrumbs-title">Cadastro de Produto</h5>
+					<h5 class="breadcrumbs-title">Lista de Pedidos Abertos</h5>
 					<ol class="breadcrumbs">
 						<li><a href="index.html">Home</a></li>
-						<li><a href="#">Cadastros</a></li>
-						<li class="active">Produto</li>
+						<li><a href="#">Pedidos</a></li>
+						<li class="active">Pedidos Abertos</li>
 					</ol>
 				</div>
 			</div>
@@ -45,137 +45,8 @@
                     </div>
 				
 					<div class="card-panel hoverable">
-						<h4 class="header2">Produto</h4>
-						<form method="POST" th:object="${produto}" class="formValidate" id="formValidate">
-						
-								<div id="card-alert" class="card red lighten-5 alert-dismissible" th:if="${#fields.hasAnyErrors()}">
-			                      <div class="card-content red-text">
-			                        <th:block th:each="erro : ${#fields.detailedErrors()}">
-										<div>
-											<i class="mdi-alert-error"></i> 
-											<span th:text="${erro.message}"></span>
-										</div>
-									</th:block>
-			                        
-			                      </div>
-			                      <button type="button" class="close red-text" data-dismiss="alert" aria-label="Close">
-			                        <span aria-hidden="true">×</span>
-			                      </button>
-			                    </div>
-						
-							<div class="row">
-
-								<div class="col l8">
-									<input type="hidden" th:field="*{id}"/>
-
-									<div class="row">
-										<div class="input-field col s12">
-											<input id="nome" type="text" th:field="*{nome}"/> 
-											<label for="nome"  th:classappend="${#fields.hasErrors('nome')} ? materialize-red-text">Nome</label>
-										</div>
-									</div>
-
-									<div class="row" style="margin-top: 15px">
-
-										<div class="input-field col s12 m6 l4">
-											<select id="categoria" th:field="*{categoria}">
-												<option value=""></option>
-												<option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria.descricao}"></option>
-											</select> 
-											<label  th:classappend="${#fields.hasErrors('categoria')} ? materialize-red-text"
-											 for="Categoria">Categoria</label>
-										</div>
-										
-										<div class="input-field col s12 m6 l4">
-											<select id="unidade" th:field="*{unidade}">
-												<option value=""></option>
-												<option th:each="unidade : ${unidades}" th:value="${unidade}" th:text="${unidade.descricao}"></option>
-											</select> 
-											<label for="unidade"  th:classappend="${#fields.hasErrors('unidade')} ? materialize-red-text">Unidade</label>
-										</div>
-										
-										<div class="input-field col col s12 m6 l4">
-											<input id="volume" type="text" placeholder="0,000" th:field="*{volume}" class="js-double" /> 
-											<label for="volume"  th:classappend="${#fields.hasErrors('volume')} ? materialize-red-text">Volume</label>
-										</div>
-										
-									</div>
-
-
-									<div class="row" style="margin-top: 15px">
-										
-										<div class="input-field col s12 m6 l4">
-											<input id="quantidade" type="text" placeholder=" 0" th:field="*{qtestoque}" class="js-plain"/> 
-											<label for="quantidade"  th:classappend="${#fields.hasErrors('qtestoque')} ? materialize-red-text">Quantidade</label>
-										</div>
-										
-										
-										<div class="input-field col s12 m6 l4">
-											<input id="valor" type="text" placeholder="R$ 0,00"  th:field="*{valor}" class="js-decimal"/>
-											<label for="valor"  th:classappend="${#fields.hasErrors('valor')} ? materialize-red-text">Valor</label>
-										</div>
-										
-										<div class="input-field col s12 m6 l4">
-											<div class="input-field col s4">
-											</div>
-											
-											<div class="input-field col s8" style="margin-top: 15px">
-												<div>
-													<input id="ativo" type="checkbox" class="js-status" data-size="mini" 
-													data-on-color="primary" data-off-color="danger" data-on-text="Ativo" 
-														data-off-text="Inativo" data-label-text="Status" th:field="*{ativo}"/>
-												</div>
-				
-											</div>
-										</div>	
-									</div>
-
-									
-									<div class="row">
-										<div class="input-field col s12">
-											<textarea id="descricao" class="materialize-textarea" length="80" th:field="*{descricao}"></textarea>
-											<label for="descricao"  th:classappend="${#fields.hasErrors('descricao')} ? materialize-red-text">Descricão</label>
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="input-field col s12">
-											<button class="btn cyan waves-effect waves-light left"
-												type="submit" name="action">
-												Salvar <i class="mdi-content-send right"></i>
-											</button>
-										</div>
-									</div>
-
-								</div>
-								<div class="col s12 m12 l4">
-									<div class="row" >
-										
-										<input type="hidden" th:field="*{foto}"/>
-										<input type="hidden" th:field="*{contentType}"/>
-			
-										<div id="upload-drop" class="wn-upload">
-											<div class="js-hide">
-	 											<img class="responsive-img" th:src="@{/images/mockup.jpg}" id="foto-mockup"/>
-											</div>
-											
-											<div class="js-container-foto hide">
-	 											<a class="btn-floating waves-effect waves-light red js-remove-foto right"><i class="mdi-content-clear"></i></a>
-											</div>
-										
-											<div class="input-field js-hide">
-												<i class="mdi-action-backup"></i>
-												<span>Arraste a foto aqui ou </span>
-												<a class="wn-upload-form-file"> selecione 
-													<input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/>
-												</a>
-											</div>
-										</div>
-									</div>
-							
-								</div>
-							</div>
-						</form>
+						<h4 class="header2">Pedido</h4>
+						 
 					</div>
 				</div>
 			</div>
