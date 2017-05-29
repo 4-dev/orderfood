@@ -51,11 +51,11 @@ CREATE TRIGGER "TRG_MESA_PEDIDO"
   
   
 -- insert produto
-INSERT INTO orderfood.produto (  id,  nome,  descricao,  foto,  contenttype,  volume,  valor,  unidade,  ativo,  qtestoque,  categoria)
-VALUES (  1,  'PRODUTO 1',  ' ESTE É O PRODUTO UM 1',  '',  '',  23,  232,  'UN',  NULL,  29,  'BEBIDAS');
+INSERT INTO orderfood.produto ( nome,  descricao,  foto,  contenttype,  volume,  valor,  unidade,  ativo,  qtestoque,  categoria)
+VALUES ( 'PRODUTO 1',  ' ESTE É O PRODUTO UM 1',  '',  '',  23,  232,  'UN',  NULL,  29,  'BEBIDAS');
 
-INSERT INTO orderfood.produto (  id,  nome,  descricao,  foto,  contenttype,  volume,  valor,  unidade,  ativo,  qtestoque,  categoria)
-VALUES (  2,  'PRODUTO 2',  ' ESTE É O PRODUTO UM 2',  '',  '',  23,  232,  'UN',  NULL,  29,  'BEBIDAS');
+INSERT INTO orderfood.produto (   nome,  descricao,  foto,  contenttype,  volume,  valor,  unidade,  ativo,  qtestoque,  categoria)
+VALUES (  'PRODUTO 2',  ' ESTE É O PRODUTO UM 2',  '',  '',  23,  232,  'UN',  NULL,  29,  'BEBIDAS');
 
 -- insert Mesa
 INSERT INTO MESA (idmesa, descricao, status) values (1,'mesa 1', 'OCUPADA');
