@@ -1,5 +1,6 @@
 package br.com.fourdev.orderfood.repository.usuario;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -23,4 +24,15 @@ public class UsuariosImpl implements UsuariosQueries {
 					.setParameter("email", email).getResultList()
 						.stream().findFirst();
 	}
+	
+	
+	//jpql
+	@Override
+	public List<String> permissoes(Usuario usuario) {
+		return manager.createQuery(
+				"select distinct p.nome from Usuario u inner join u.grupos g inner join g.permissoes p where u = :usuario", String.class)
+				.setParameter("usuario", usuario)
+				.getResultList();
+	}
+
 }

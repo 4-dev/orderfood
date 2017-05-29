@@ -34,6 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+				.antMatchers("/produto/novo").hasAnyAuthority("CADASTRAR_PRODUTO")
+				.antMatchers("/usuario/novo").hasAnyAuthority("CADASTRAR_USUARIO")
+				.antMatchers("/mesa/novo").hasAnyAuthority("CADASTRAR_MESA")
+				.antMatchers("/mesa/status").hasAnyAuthority("LISTAR_MESA")
+				.antMatchers("/pedido/abertos").hasAnyAuthority("LISTAR_PEDIDO")
+				.antMatchers("/").hasAnyAuthority("ACESSO_GERAL")
 				.anyRequest()
 				.authenticated()
 			.and()
