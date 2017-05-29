@@ -95,10 +95,9 @@
 													<td th:text="${i.numped}"></td>
 													<td th:text="${i.observacao}"></td>
 													<td th:text="${#numbers.formatDecimal(i.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
-<!-- 													<td th:text="${#temporals.format(i.dataCriacao, 'dd/MMM/yyyy HH:mm')}"></td> -->
-													<td th:text="${i.numped}"></td>
-													<td th:text="${i.numped}"></td>
-													<td th:text="${i.numped}"></td>
+													<td th:text="${i.getDataCriacao().toString()}"></td>
+													<td th:text="${i.cliente}"></td>
+													<td th:text="${i.mesa}"></td>
 												</tr>		
 
 											</tbody>
