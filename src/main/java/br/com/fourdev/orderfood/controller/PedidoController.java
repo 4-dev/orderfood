@@ -26,6 +26,7 @@ public class PedidoController {
 	public ModelAndView status(Pedido pedido){
 		ModelAndView modelAndView = new ModelAndView("pedido/lista-pedido-abertos");
 		modelAndView.addObject(pedido);
+		modelAndView.addObject(pedidoService);
 		
 		return modelAndView ;
 	}

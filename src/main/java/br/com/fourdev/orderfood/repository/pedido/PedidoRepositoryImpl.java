@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Pedido;
+import br.com.fourdev.orderfood.model.StatusPedido;
 
 @Repository("PedidoRepository")
 public class PedidoRepositoryImpl implements PedidoRepository {
@@ -22,10 +23,23 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 
 		try {
 
-			String query = "select * from cabpedido cab, "
-						   			 + " itempedido item "
-						   	     + "where cab INNER JOIN item ON (cab.numped = item.numped)";
+			String query = "select * from cabpedido cab " + "INNER JOIN  itempedido item ON (cab.numped = item.numped)";
 			return jdbcTemplate.query(query, new BeanPropertyRowMapper(Pedido.class));
+
+		} catch (InvalidResultSetAccessException e) {
+			throw new RuntimeException(e);
+		} catch (DataAccessException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	public List<Pedido> retornaStatusPedido(StatusPedido statusPedido) {
+
+		try {
+
+			String query = "select * from cabpedido cab where status = ?";
+			return jdbcTemplate.query(query, new Object[] { statusPedido.getDescricao() }, new BeanPropertyRowMapper(Pedido.class));
 
 		} catch (InvalidResultSetAccessException e) {
 			throw new RuntimeException(e);

@@ -3,6 +3,7 @@ package br.com.fourdev.orderfood.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 public class Pedido {

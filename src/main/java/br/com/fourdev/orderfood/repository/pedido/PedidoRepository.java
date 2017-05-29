@@ -3,6 +3,7 @@ package br.com.fourdev.orderfood.repository.pedido;
 import java.util.List;
 
 import br.com.fourdev.orderfood.model.Pedido;
+import br.com.fourdev.orderfood.model.StatusPedido;
 
 public interface PedidoRepository {
 
@@ -15,5 +16,7 @@ public interface PedidoRepository {
 	public void updatePedido(String id, Pedido pedido);
 
 	public void deletePedido(String id);
+	
+	public List<Pedido> retornaStatusPedido(StatusPedido statusPedido);
 
 }
