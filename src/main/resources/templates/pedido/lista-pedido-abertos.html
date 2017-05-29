@@ -62,7 +62,7 @@
 							<h4 class="header2">Pedido</h4>
 
 							<div id="row-grouping" class="section">
-								<h4 class="header">DataTables Row grouping</h4>
+								<h4 class="header">Pedidos Abertos</h4>
 								<div class="row">
 									<div class="col s12 m12 l12">
 										<table id="data-table-simple" class="responsive-table display"  
@@ -95,7 +95,7 @@
 													<td th:text="${i.numped}"></td>
 													<td th:text="${i.observacao}"></td>
 													<td th:text="${#numbers.formatDecimal(i.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
-													<td th:text="${i.getDataCriacao().toString()}"></td>
+													<td th:text="${i.dataCriacao}"></td>
 													<td th:text="${i.cliente}"></td>
 													<td th:text="${i.mesa}"></td>
 												</tr>		
