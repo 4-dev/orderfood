@@ -20,12 +20,12 @@ public class PedidoRowMapper implements RowMapper<Pedido> {
 		Pedido pedido = new Pedido();
 
 		pedido.setNumped(rs.getInt("NUMPED"));
-		pedido.setDataCriacao(LocalDateTime.parse(rs.getString("datacriacao"), DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+		pedido.setDataCriacao(LocalDateTime.now());
 		pedido.setValorDesconto(rs.getBigDecimal("valordesconto"));
 		pedido.setValorTotal(rs.getBigDecimal("valortotal"));
 		pedido.setObservacao(rs.getString("observacao"));
-		pedido.setDataEntrega(LocalDateTime.parse(rs.getString("dataentrega"), DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-		pedido.setDataCancel(LocalDateTime.parse(rs.getString("datacancel"), DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+//		pedido.setDataEntrega(LocalDateTime.parse(rs.getString("dataentrega"), DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+//		pedido.setDataCancel(LocalDateTime.parse(rs.getString("datacancel"), DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 		// pedido.setStatus();
 		Cliente cliente = new Cliente();
 		cliente.setIdcliente(rs.getInt("idcliente"));

@@ -96,8 +96,8 @@
 													<td th:text="${i.observacao}"></td>
 													<td th:text="${#numbers.formatDecimal(i.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
 													<td th:text="${i.dataCriacao}"></td>
-													<td th:text="${i.cliente}"></td>
-													<td th:text="${i.mesa}"></td>
+													<td th:text="${i.cliente.idcliente}"></td>
+													<td th:text="${i.mesa.idmesa}"></td>
 												</tr>		
 
 											</tbody>

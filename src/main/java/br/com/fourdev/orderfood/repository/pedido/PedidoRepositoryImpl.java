@@ -42,7 +42,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		try {
 
 			String query = "select * from cabpedido cab where status = ?";
-			return jdbcTemplate.query(query, new Object[] { statusPedido.getDescricao() }, new BeanPropertyRowMapper(Pedido.class));
+			return jdbcTemplate.query(query, new Object[] { statusPedido.getDescricao() }, new PedidoRowMapper());
 
 		} catch (InvalidResultSetAccessException e) {
 			throw new RuntimeException(e);
