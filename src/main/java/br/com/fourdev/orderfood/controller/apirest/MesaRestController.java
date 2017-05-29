@@ -38,7 +38,7 @@ public class MesaRestController {
 	@RequestMapping(value = "/savarMesa", method = RequestMethod.POST)
 	public void insertMesa(@RequestBody Mesa mesa) {
 
-		logger.debug("id=" + mesa.getId());
+		logger.debug("id=" + mesa.getIdmesa());
 		logger.debug("Name=" + mesa.getDescricao());
 		logger.debug("age=" + mesa.getDescricao());
 

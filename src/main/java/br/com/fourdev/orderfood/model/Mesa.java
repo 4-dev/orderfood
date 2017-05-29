@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Mesa {
 
-	private int id;
+	private int idmesa;
 	private String descricao;
 	private List<Pedido> pedidos; // lista pedidos
 	private LocalDate horaAberta;
@@ -15,12 +15,12 @@ public class Mesa {
 	private String status;
 	private BigDecimal total;
 
-	public int getId() {
-		return id;
+	public int getIdmesa() {
+		return idmesa;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdmesa(int idmesa) {
+		this.idmesa = idmesa;
 	}
 
 	public String getDescricao() {
@@ -78,7 +78,7 @@ public class Mesa {
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((horaAberta == null) ? 0 : horaAberta.hashCode());
 		result = prime * result + ((horaFechada == null) ? 0 : horaFechada.hashCode());
-		result = prime * result + id;
+		result = prime * result + idmesa;
 		result = prime * result + ((pedidos == null) ? 0 : pedidos.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((total == null) ? 0 : total.hashCode());
@@ -109,7 +109,7 @@ public class Mesa {
 				return false;
 		} else if (!horaFechada.equals(other.horaFechada))
 			return false;
-		if (id != other.id)
+		if (idmesa != other.idmesa)
 			return false;
 		if (pedidos == null) {
 			if (other.pedidos != null)

@@ -13,6 +13,7 @@ public class Pedido {
 	private BigDecimal valorTotal; // id
 	private String observacao; // id
 	private LocalDateTime dataEntrega;
+	private LocalDateTime dataCancel;
 	private StatusPedido status;
 	private Cliente cliente;
 	private Mesa mesa;
@@ -105,12 +106,21 @@ public class Pedido {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	public LocalDateTime getDataCancel() {
+		return dataCancel;
+	}
+
+	public void setDataCancel(LocalDateTime dataCancel) {
+		this.dataCancel = dataCancel;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
+		result = prime * result + ((dataCancel == null) ? 0 : dataCancel.hashCode());
 		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataEntrega == null) ? 0 : dataEntrega.hashCode());
 		result = prime * result + ((itens == null) ? 0 : itens.hashCode());
@@ -137,6 +147,11 @@ public class Pedido {
 			if (other.cliente != null)
 				return false;
 		} else if (!cliente.equals(other.cliente))
+			return false;
+		if (dataCancel == null) {
+			if (other.dataCancel != null)
+				return false;
+		} else if (!dataCancel.equals(other.dataCancel))
 			return false;
 		if (dataCriacao == null) {
 			if (other.dataCriacao != null)
@@ -184,5 +199,6 @@ public class Pedido {
 			return false;
 		return true;
 	}
+
 
 }

@@ -9,9 +9,11 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import br.com.fourdev.orderfood.model.Cliente;
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusPedido;
+import ch.qos.logback.core.net.server.Client;
 
 @Repository("PedidoRepository")
 public class PedidoRepositoryImpl implements PedidoRepository {
@@ -24,8 +26,9 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		try {
 
 			String query = "select * from cabpedido cab " + "INNER JOIN  itempedido item ON (cab.numped = item.numped)";
-			return jdbcTemplate.query(query, new BeanPropertyRowMapper(Pedido.class));
+			List<Pedido> listaPedidos = jdbcTemplate.query(query, new PedidoRowMapper());
 
+			return listaPedidos;
 		} catch (InvalidResultSetAccessException e) {
 			throw new RuntimeException(e);
 		} catch (DataAccessException e) {

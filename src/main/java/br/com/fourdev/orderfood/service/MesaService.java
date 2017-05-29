@@ -63,7 +63,7 @@ public class MesaService {
 			cws.helloClient.subscribeGreetings(cws.stompSession);
 
 			logger.info("Enviando mensagem" + cws.stompSession);
-			cws.helloClient.sendHello(cws.stompSession, String.valueOf(mesa.getId()));
+			cws.helloClient.sendHello(cws.stompSession, String.valueOf(mesa.getIdmesa()));
 			Thread.sleep(1000);
 			vbliberouMesa = true;			
 
@@ -76,11 +76,11 @@ public class MesaService {
 		Mesa mesa = new Mesa();
 		StatusMesa statusMesa = null;
 		mesa.setStatus(statusMesa.OCUPADA.getDescricao());
-		mesa.setId(idmesa);
+		mesa.setIdmesa(idmesa);
 		mesa.setHoraAberta(LocalDate.now());
 		mesa.setHoraFechada(LocalDate.now());
 		mesa.setTotal(BigDecimal.ONE);
-		mesa.setId(idmesa);
+		mesa.setIdmesa(idmesa);
 		return mesaRepository.reservarMesa(mesa);
 	}
 

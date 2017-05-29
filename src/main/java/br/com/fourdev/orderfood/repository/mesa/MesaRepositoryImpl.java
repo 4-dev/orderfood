@@ -37,7 +37,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 
 		String query = "insert into mesa(id, descricao, pedidos, horaAberta, horaFechada, status, total) "
 				+ " values (?,?,?,?,?,?) ";
-		jdbcTemplate.update(query, new Object[] { mesa.getId(), mesa.getDescricao(), mesa.getPedidos(),
+		jdbcTemplate.update(query, new Object[] { mesa.getIdmesa(), mesa.getDescricao(), mesa.getPedidos(),
 				mesa.getHoraAberta(), mesa.getHoraAberta(), mesa.getStatus(), mesa.getTotal() });
 	}
 
@@ -51,7 +51,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 			query += " where id = ?";
 			// + "pedidos = ?, "
 			// + "total = ?";
-			jdbcTemplate.update(query, new Object[] { mesa.getId(), mesa.getDescricao(), mesa.getPedidos(),
+			jdbcTemplate.update(query, new Object[] { mesa.getIdmesa(), mesa.getDescricao(), mesa.getPedidos(),
 					mesa.getHoraAberta(), mesa.getHoraAberta(), mesa.getStatus(), mesa.getTotal() });
 		}
 	}
