@@ -26,6 +26,7 @@ public class MesaController {
 		ModelAndView modelAndView = new ModelAndView("mesa/status-mesa");
 		modelAndView.addObject(mesa);
 		modelAndView.addObject(mesaService);
+	
 		
 		return modelAndView ;
 	}
@@ -34,7 +35,8 @@ public class MesaController {
 	public ModelAndView novo(Mesa mesa){
 		ModelAndView modelAndView = new ModelAndView("mesa/cadastro-mesa");
 		modelAndView.addObject(mesa);
-		
+		modelAndView.addObject("mesas", mesaService.selectMesaList());
+		modelAndView.addObject("qtdMesas", mesaService.contaMesas() + 1);
 		return modelAndView ;
 	}
 	

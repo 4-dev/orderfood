@@ -58,8 +58,8 @@ INSERT INTO orderfood.produto (   nome,  descricao,  foto,  contenttype,  volume
 VALUES (  'PRODUTO 2',  ' ESTE É O PRODUTO UM 2',  '',  '',  23,  232,  'UN',  NULL,  29,  'BEBIDAS');
 
 -- insert Mesa
-INSERT INTO MESA (idmesa, descricao, status) values (1,'mesa 1', 'OCUPADA');
-INSERT INTO MESA (idmesa, descricao, status) values (2,'mesa 2', 'LIBERADA');
+INSERT INTO MESA (idmesa, descricao, status) values (1,'MESA 1', 'OCUPADA');
+INSERT INTO MESA (idmesa, descricao, status) values (2,'MESA 2', 'LIBERADA');
 
 -- insert Cliente
 INSERT INTO cliente (idcliente, nome, sexo) values (1,'cliente 1', 'Masculino');

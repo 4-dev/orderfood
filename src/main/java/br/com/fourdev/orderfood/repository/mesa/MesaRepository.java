@@ -4,9 +4,8 @@ import java.util.List;
 
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.StatusMesa;
-import br.com.fourdev.orderfood.model.StatusPedido;
 
-public interface MesaRepository {
+public interface MesaRepository  {
 
 	public List<Mesa> selectMesaList();
 

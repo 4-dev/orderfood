@@ -4,15 +4,38 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+@Entity
 public class Mesa {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idmesa;
+	
+	@NotBlank(message="Descrição da Mesa é Obrigatória")
 	private String descricao;
+	
+	@Transient
 	private List<Pedido> pedidos; // lista pedidos
+	
+	@Transient
 	private LocalDate horaAberta;
+	
+	@Transient
 	private LocalDate horaFechada;
-//	private StatusMesa status;
-	private String status;
+
+	//	private StatusMesa status;
+	private String status = "LIBERADA";
+	
+	@Transient
 	private BigDecimal total;
 
 	public int getIdmesa() {

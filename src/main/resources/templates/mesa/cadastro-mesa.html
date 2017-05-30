@@ -36,7 +36,7 @@
 				<div class="divider"></div>
 
 				<div class="row">
-					<div class="col s12 m12 l12">
+					<div class="col s12 m8 l8 offset-l3">
 						<div id="card-alert"
 							class="card green lighten-5 alert-dismissible"
 							th:if="${not #strings.isEmpty(mensagem)}">
@@ -52,54 +52,67 @@
 							</button>
 						</div>
 
-						<div class="card-panel hoverable">
-							<h4 class="header2">Mesa</h4>
+						<div class="card-panel hoverable col l6">
+							<h4 class="header2">Cadastrar Nova Mesa</h4>
 							
-							<form method="POST" th:object="${mesa}" class="formValidate" id="formValidate">
-						
-								<div id="card-alert" class="card red lighten-5 alert-dismissible" th:if="${#fields.hasAnyErrors()}">
-			                      <div class="card-content red-text">
-			                        <th:block th:each="erro : ${#fields.detailedErrors()}">
-										<div>
-											<i class="mdi-alert-error"></i> 
-											<span th:text="${erro.message}"></span>
+							
+							<form method="POST" th:object="${mesa}" class="formValidate"
+								id="formValidate">
+									<div class="row">
+										<div class="left col l4 offset-l1">
+											<input type="hidden" th:field="*{idmesa}" />
+											<select th:field="*{descricao}">
+												<option th:value="'MESA '+${qtdMesas}" th:text="'MESA '+${qtdMesas}"></option>
+											</select>
 										</div>
-									</th:block>
-			                        
-			                      </div>
-			                      <button type="button" class="close red-text" data-dismiss="alert" aria-label="Close">
-			                        <span aria-hidden="true">×</span>
-			                      </button>
-			                    </div>
-						
-							<div class="row">
 								
-
-								<div class="col l10 offset-l1">
-									<input type="hidden" th:field="*{id}"/>
-
-									<div class="row" style="margin-top: 15px">
-										<div class="input-field col s12">
-											<i class="mdi-action-account-circle prefix"></i>
-											<input id="descricao" type="text" th:field="*{descricao}"/> 
-											<label for="Descricao">Descrição</label>
+										<div class="right col l3">
+											<button class="btn-floating btn-large primary" type="submit">
+												<i class="mdi-content-add"></i>
+											</button>
 										</div>
 									</div>
-									
- 							
-									
-			                       <div class="row" style="margin-top: 15px">
-										<div class="input-field col s12">
-											<button class="btn cyan waves-effect waves-light right"
-												type="submit" name="action">
-												Salvar <i class="mdi-content-send right"></i>
-											</button> 
-										</div>
-									</div>			                       
-								</div>
 								
-							</div>
-						</form>
+								<div id="card-alert"
+									class="card red lighten-5 alert-dismissible"
+									th:if="${#fields.hasAnyErrors()}">
+									<div class="card-content red-text">
+										<th:block th:each="erro : ${#fields.detailedErrors()}">
+											<div>
+												<i class="mdi-alert-error"></i> <span
+													th:text="${erro.message}"></span>
+											</div>
+										</th:block>
+
+									</div>
+									<button type="button" class="close red-text"
+										data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+								</div>
+								<div class="row">
+									
+									<div class="col l12">
+											<ul class="collection">
+												<th:block th:each="mesa : ${mesas}">
+													<li class="collection-item avatar">
+														<i class="mdi-maps-restaurant-menu circle green darken-2"></i> 
+														<span class="title" th:text="${mesa.descricao}"></span>
+														<p>
+															Ativa
+														</p> 
+														<a href="#" class="secondary-content">
+															<i class="mdi-content-create"></i>
+														</a>
+													</li>
+												</th:block>
+											
+											</ul>
+	
+									</div>
+
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -109,6 +122,16 @@
 		<!--end container-->
 
 	</section>
+	<th:block layout:fragment="javascript-extra">
+		<script>
+
+			//fechar alertas automatico
+			$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){});
+	
+		
+		</script>
+	
+	</th:block>
 
 </body>
 
