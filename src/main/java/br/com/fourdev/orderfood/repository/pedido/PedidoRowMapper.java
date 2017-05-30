@@ -4,24 +4,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Service;
 
 import br.com.fourdev.orderfood.model.Cliente;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.Usuario;
-import br.com.fourdev.orderfood.repository.cliente.ClienteRepository;
-import br.com.fourdev.orderfood.repository.mesa.MesaRepository;
 
-@Service
+//@Service
 public class PedidoRowMapper implements RowMapper<Pedido> {
-	@Autowired
-	ClienteRepository clienteRepository;
-
-	@Autowired
-	MesaRepository mesaRepository;
+//	@Autowired
+//	ClienteRepository clienteRepository;
+//
+//	@Autowired
+//	MesaRepository mesaRepository;
 
 	@Override
 	public Pedido mapRow(ResultSet rs, int rowNum) throws SQLException {
