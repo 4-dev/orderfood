@@ -36,109 +36,127 @@
 		<!--start container-->
 		<div class="container">
 			<div class="section">
-				<div class="divider"></div>
-
 
 
 				<div class="row">
 					<div class="col s12 m12 l12">
-						<div id="card-alert"
-							class="card green lighten-5 alert-dismissible"
-							th:if="${not #strings.isEmpty(mensagem)}">
-							<div class="card-content green-text">
-								<p>
-									<i class="mdi-navigation-check"></i> <span
-										th:text="${mensagem}"></span>
-								</p>
-							</div>
-							<button type="button" class="close green-text"
-								data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-
 
 						<div class="card-panel hoverable">
-							<h4 class="header2">Pedido</h4>
 
-							<div id="row-grouping" class="section">
-								<h4 class="header">Pedidos Abertos</h4>
+							<div id="basic-form" class="section">
 								<div class="row">
 									<div class="col s12 m12 l12">
-										<table id="data-table-simple" class="responsive-table display"  
-											cellspacing="0" width="100%">
-											<thead>
-												<tr>
-													<th>Pedido</th>
-													<th>Observacao</th>
-													<th>Vl. Total</th>
-													<th>Dt. Criação</th>
-													<th>Cliente</th>
-													<th>Mesa</th>
-												</tr>
-											</thead>
-
-											<tfoot>
-												<tr>
-													<th>Pedido</th>
-													<th>Observacao</th>
-													<th>Vl. Total</th>
-													<th>Dt. Criação</th>
-													<th>Cliente</th>
-													<th>Mesa</th>
-												</tr>
-											</tfoot>
+										<div class="row">
+											<form class="col s12">
+												<div class="left col 2">
+													<button class="btn-floating btn-large blue" type="submit">
+														<i class="mdi-content-add"></i>
+													</button>
+												</div>
+												<div class="left col 4">
+													<button class="btn-floating btn-large primary"
+														type="submit">
+														<i class="mdi-content-add"></i>
+													</button>
+												</div>
 
 
-											<tbody th:each="i: ${pedidoService.pedidosAbertos()}">
-												<tr>
-													<td th:text="${i.numped}"></td>
-													<td th:text="${i.observacao}"></td>
-													<td th:text="${#numbers.formatDecimal(i.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
-													<td th:text="${i.dataCriacao}"></td>
-													<td th:text="${i.cliente.idcliente}"></td>
-													<td th:text="${i.mesa.idmesa}"></td>
-												</tr>		
+												<div class="right col l3">
+													<input type="checkbox" id="test5" /> <label for="test5">Listar
+														pedidos abertos</label> <input type="checkbox" id="test5" /> <label
+														for="test5">Listar pedidos abertos</label>
+												</div>
 
-											</tbody>
-										</table>
+
+												<div class="right col l3">
+													<input type="checkbox" id="test5" /> <label for="test5">Listar
+														pedidos abertos</label> <input type="checkbox" id="test5" /> <label
+														for="test5">Listar pedidos abertos</label>
+												</div>
+											</form>
+										</div>
+										<br />
+										<div class="divider"></div>
+										<h4 class="header" align="center">Lista Pedidos</h4>
+										<div class="row">
+											<div class="col s12 m12 l12">
+												<table id="data-table-simple"
+													class="responsive-table display striped" cellspacing="0"
+													width="100%">
+													<thead>
+														<tr>
+															<th>Status</th>
+															<th>Pedido</th>
+															<th>Observacao</th>
+															<th>Vl. Total</th>
+															<th>Dt. Criação</th>
+															<th>Cliente</th>
+															<th>Mesa</th>
+														</tr>
+													</thead>
+													<tfoot>
+														<tr>
+															<th>Status</th>
+															<th>Pedido</th>
+															<th>Observacao</th>
+															<th>Vl. Total</th>
+															<th>Dt. Criação</th>
+															<th>Cliente</th>
+															<th>Mesa</th>
+														</tr>
+													</tfoot>
+													<tbody>
+														<tr th:each="i: ${pedidoService.pedidosAbertos()}">
+															<td th:text="${i.status}"></td>
+															<td th:text="${i.numped}"></td>
+															<td th:text="${i.observacao}"></td>
+															<td
+																th:text="${#numbers.formatDecimal(i.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
+															<td th:text="${i.dataCriacao}"></td>
+															<td th:text="${i.cliente.idcliente}"></td>
+															<td th:text="${i.mesa.idmesa}"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+
+
 									</div>
+									<!-- Floating Action Button -->
+									<div class="fixed-action-btn"
+										style="bottom: 50px; right: 19px;">
+										<a class="btn-floating btn-large"> <i
+											class="mdi-action-stars"></i>
+										</a>
+										<ul>
+											<li><a href="css-helpers.html" class="btn-floating red"><i
+													class="large mdi-communication-live-help"></i></a></li>
+											<li><a href="app-widget.html"
+												class="btn-floating yellow darken-1"><i
+													class="large mdi-device-now-widgets"></i></a></li>
+											<li><a href="app-calendar.html"
+												class="btn-floating green"><i
+													class="large mdi-editor-insert-invitation"></i></a></li>
+											<li><a href="app-email.html" class="btn-floating blue"><i
+													class="large mdi-communication-email"></i></a></li>
+										</ul>
+									</div>
+									<!-- Floating Action Button -->
 								</div>
+								<!--end container-->
+
+
+
+
+
 							</div>
-
-
-
 						</div>
-						<!-- Floating Action Button -->
-						<div class="fixed-action-btn" style="bottom: 50px; right: 19px;">
-							<a class="btn-floating btn-large"> <i
-								class="mdi-action-stars"></i>
-							</a>
-							<ul>
-								<li><a href="css-helpers.html" class="btn-floating red"><i
-										class="large mdi-communication-live-help"></i></a></li>
-								<li><a href="app-widget.html"
-									class="btn-floating yellow darken-1"><i
-										class="large mdi-device-now-widgets"></i></a></li>
-								<li><a href="app-calendar.html" class="btn-floating green"><i
-										class="large mdi-editor-insert-invitation"></i></a></li>
-								<li><a href="app-email.html" class="btn-floating blue"><i
-										class="large mdi-communication-email"></i></a></li>
-							</ul>
-						</div>
-						<!-- Floating Action Button -->
 					</div>
-					<!--end container-->
-
-
-
-
 
 				</div>
 			</div>
-		</div>
-
-		</div>
 		</div>
 		<!--end container-->
 	</section>

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import br.com.fourdev.orderfood.model.Cliente;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
+import br.com.fourdev.orderfood.model.StatusPedido;
 import br.com.fourdev.orderfood.model.Usuario;
 
 //@Service
@@ -34,6 +35,9 @@ public class PedidoRowMapper implements RowMapper<Pedido> {
 		// pedido.setDataCancel(LocalDateTime.parse(rs.getString("datacancel"),
 		// DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 		// pedido.setStatus();
+		
+		pedido.setStatus(StatusPedido.valueOf(rs.getString("status")));
+		
 		Cliente cliente = new Cliente();
 		cliente.setIdcliente(rs.getInt("idcliente"));
 //		cliente = clienteRepository.selectClientePorId(rs.getInt("idcliente"));

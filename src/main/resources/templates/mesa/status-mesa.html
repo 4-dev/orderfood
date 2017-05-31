@@ -23,8 +23,8 @@
 					<h5 class="breadcrumbs-title">Status da Mesa</h5>
 					<ol class="breadcrumbs">
 						<li><a href="index.html">Home</a></li>
-						<li><a href="#">Cadastros</a></li>
-						<li class="active">Produto</li>
+						<li><a href="#">Monitorar</a></li>
+						<li class="active">Mesa</li>
 					</ol>
 				</div>
 			</div>
@@ -101,13 +101,13 @@
 							
 							
 							<div th:id="mesaStatus+${i.idmesa}"
-								th:class="${i.status == 'LIBERADA' ? 'card deep-orange darken-1': 'card blue-grey darken-1'}">
+								th:class="${i.status == 'LIBERADA' ? 'card blue-grey darken-1' : 'card deep-orange darken-1'}">
 								<div class="card-content white-text">
 									<span class="card-title" th:text="'Mesa '+${i.idmesa}"> </span>
-									<p th:text="'Mesa '+${i.idmesa}"></p>
+									<p th:text="${i.status == 'LIBERADA' ? 'Liberada' : 'Ocupada' }"></p>
 								</div>
 								<div class="card-action">
-									<a href="#">Link 1</a> <a href="#">Link 2</a>
+									<a href="#">Detalhes</a> <a href="#">...</a>
 								</div>
 							</div>
 						</div>
