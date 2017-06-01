@@ -192,6 +192,13 @@ customização do switch checkbox para funcionar com thymelea
   border-bottom: 2px solid rgba(0, 0, 0, 0.26);
 }
 
+.js-mesa{
+	position: relative;
+	height: 500px;
+	overflow: hidden;
+	padding: 0;
+}
+
 
 
 

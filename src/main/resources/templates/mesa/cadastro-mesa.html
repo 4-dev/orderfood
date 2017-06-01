@@ -52,6 +52,8 @@
 							</button>
 						</div>
 
+				
+						
 						<div class="card-panel hoverable col l6">
 							<h4 class="header2">Cadastrar Nova Mesa</h4>
 							
@@ -90,31 +92,35 @@
 										<span aria-hidden="true">×</span>
 									</button>
 								</div>
-								<div class="row">
-									
-									<div class="col l12">
-											<ul class="collection">
-												<th:block th:each="mesa : ${mesas}">
-													<li class="collection-item avatar">
-														<i class="mdi-maps-restaurant-menu circle green darken-2"></i> 
-														<span class="title" th:text="${mesa.descricao}"></span>
-														<p>
-															Ativa
-														</p> 
-														<a href="#" class="secondary-content">
-															<i class="mdi-content-create"></i>
-														</a>
-													</li>
-												</th:block>
-											
-											</ul>
+							
+								<div class="js-mesa">
+									<div class="row">
+										
+										<div class="col l12">
+												<ul class="collection">
+													<th:block th:each="mesa : ${mesas}">
+														<li class="collection-item avatar">
+															<i class="mdi-maps-restaurant-menu circle green darken-2"></i> 
+															<span class="title" th:text="${mesa.descricao}"></span>
+															<p>
+																Ativa
+															</p> 
+															<a href="#" class="secondary-content">
+																<i class="mdi-content-create"></i>
+															</a>
+														</li>
+													</th:block>
+												
+												</ul>
+		
+										</div>
 	
 									</div>
-
 								</div>
 							</form>
 						</div>
-					</div>
+					
+				</div>
 				</div>
 
 			</div>
@@ -127,6 +133,7 @@
 
 			//fechar alertas automatico
 			$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){});
+			$('.js-mesa').perfectScrollbar(); 
 	
 		
 		</script>
