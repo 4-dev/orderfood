@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout-padrao">
+<head>
+<title>Cadastro de Produto</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap-switch.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/upload.min.css}" />
+<link th:href="@{/js/plugins/data-tables/css/jquery.dataTables.min.css}"
+	type="text/css" rel="stylesheet" media="screen,projection">
+
+
+
+
+</head>
+<body>
+	<section id="content" layout:fragment="conteudo">
+
+		<!--breadcrumbs start-->
+		<div id="breadcrumbs-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<h5 class="breadcrumbs-title">Lista de Pedidos Fechados</h5>
+						<ol class="breadcrumbs">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="#">Pedidos</a></li>
+							<li class="active">Pedidos Fechados</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--breadcrumbs end-->
+
+
+		<!--start container-->
+		<div class="container">
+			<div class="section">
+
+
+				<div class="row">
+					<div class="col s12 m12 l12">
+
+						<div class="card-panel hoverable">
+
+							<div id="basic-form" class="section">
+								<div class="row">
+									<div class="col s12 m12 l12">
+										<div class="row">
+
+
+
+											<!-- 											<form method="POST" th:object="${pedido}" class="col s12" id="formListaPedido"> -->
+											<!-- 												<div class="left col 2"> -->
+											<!-- 													Modal Trigger -->
+
+											<!-- 													<a class="btn-floating btn-large blue btn modal-trigger" -->
+											<!-- 														th:href="@{/pedido/novo}"> -->
+											<!-- 													<i class="mdi-content-add"></i>	 -->
+											<!-- 													</a> -->
+											<!-- 												</div> -->
+											<!-- 												<div class="left col 4"> -->
+
+											<!-- 													<a class="btn-floating btn-large blue btn modal-trigger" -->
+											<!-- 														href="#modal5" > -->
+											<!-- 													<i class="mdi-action-info"></i>	 -->
+											<!-- 													</a> -->
+											<!-- 												</div> -->
+
+											<!-- 												<div class="right col l3"> -->
+											<!-- 													<input type="checkbox" id="ch1" th:checked="true"  th:field="*{checkedPedidoAberto}" />  -->
+											<!-- 													<label for="ch1">Listar	pedidos abertos</label>  -->
+
+											<!-- 													<input type="checkbox" id="ch2"  th:checked="${pedido.status} == 'ABERTO'"  th:field="*{checkedPedidoEmAndamento}" />  -->
+											<!-- 													<label for="ch2">Listar pedidos em andamento </label> -->
+											<!-- 												</div> -->
+
+											<!-- 												<div class="right col l3"> -->
+											<!-- 													<input type="checkbox" id="ch3" /> <label for="ch3">Listar -->
+											<!-- 														pedidos cancelados</label> <input type="checkbox" id="ch4" /> <label -->
+											<!-- 														for="ch4">Listar pedidos fechados</label> -->
+											<!-- 												</div> -->
+											<!-- 											</form> -->
+										</div>
+										<br />
+										<div class="divider"></div>
+										<h4 class="header" align="center">Lista Pedidos</h4>
+										<div class="row">
+											<div class="col s12 m12 l12">
+												<table id="data-table-simple"
+													class="responsive-table display striped" cellspacing="0"
+													width="100%">
+													<thead>
+														<tr>
+															<th>Status</th>
+															<th>Pedido</th>
+															<th>Observacao</th>
+															<th>Vl. Total</th>
+															<th>Dt. Criação</th>
+															<th>Cliente</th>
+															<th>Mesa</th>
+														</tr>
+													</thead>
+													<tfoot>
+														<tr>
+															<th>Status</th>
+															<th>Pedido</th>
+															<th>Observacao</th>
+															<th>Vl. Total</th>
+															<th>Dt. Criação</th>
+															<th>Cliente</th>
+															<th>Mesa</th>
+														</tr>
+													</tfoot>
+													<tbody>
+														<tr th:each="i: ${pedidoService.pedidosFechados()}">
+															<td th:text="${i.status}"></td>
+															<td th:text="${i.numped}"></td>
+															<td th:text="${i.observacao}"></td>
+															<td
+																th:text="${#numbers.formatDecimal(i.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
+															<td th:text="${i.dataCriacao}"></td>
+															<td th:text="${i.cliente.idcliente}"></td>
+															<td th:text="${i.mesa.idmesa}"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+
+
+									</div>
+									<!-- Floating Action Button -->
+									<div class="fixed-action-btn"
+										style="bottom: 50px; right: 19px;">
+										<a class="btn-floating btn-large"> <i
+											class="mdi-action-stars"></i>
+										</a>
+										<ul>
+											<li><a href="css-helpers.html" class="btn-floating red"><i
+													class="large mdi-communication-live-help"></i></a></li>
+											<li><a href="app-widget.html"
+												class="btn-floating yellow darken-1"><i
+													class="large mdi-device-now-widgets"></i></a></li>
+											<li><a href="app-calendar.html"
+												class="btn-floating green"><i
+													class="large mdi-editor-insert-invitation"></i></a></li>
+											<li><a href="app-email.html" class="btn-floating blue"><i
+													class="large mdi-communication-email"></i></a></li>
+										</ul>
+									</div>
+									<!-- Floating Action Button -->
+								</div>
+								<!--end container-->
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!--end container-->
+
+
+
+
+
+		<div class="col s12 m8 l9">
+
+			<div id="modal1" class="modal bottom-sheet">
+				<div class="modal-content">
+
+					<div layout:fragment="content">
+						<!--Form Advance-->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<div class="card-panel">
+									<h4 class="header2">Form Advance</h4>
+									<div class="row">
+										<form class="col s12">
+											<div class="row">
+												<div class="input-field col s6">
+													<input id="first_name" type="text"> <label
+														for="first_name">First Name</label>
+												</div>
+
+												<div class="input-field col s6">
+													<input id="last_name" type="text"> <label
+														for="last_name">Last Name</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<input id="email5" type="email"> <label for="email">Email</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<input id="password6" type="password"> <label
+														for="password">Password</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s6">
+													<select>
+														<option value="" disabled selected>Choose your
+															profile</option>
+														<option value="1">Manager</option>
+														<option value="2">Developer</option>
+														<option value="3">Business</option>
+													</select> <label>Select Profile</label>
+												</div>
+												<div class="input-field col s6">
+													<input type="date" class="datepicker"> <label
+														for="dob">DOB</label>
+												</div>
+
+											</div>
+
+											<div class="row">
+												<div class="file-field input-field col s6">
+													<input class="file-path validate" type="text" />
+													<div class="btn">
+														<span>Age</span> <input type="file" />
+													</div>
+												</div>
+												<div class="input-field col s6">
+													<span>Image</span>
+													<p class="range-field">
+														<input type="range" id="test5" min="0" max="100" />
+													</p>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<textarea id="message5" class="materialize-textarea"
+														length="120"></textarea>
+													<label for="message">Message</label>
+												</div>
+												<div class="row">
+													<div class="input-field col s12">
+														<button class="btn cyan waves-effect waves-light right"
+															type="submit" name="action">
+															Submit <i class="mdi-content-send right"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+
+
+
+
+	<script type="text/javascript">
+		/*Show entries on click hide*/
+		$(document).ready(function() {
+			$(".dropdown-content.select-dropdown li").on("click", function() {
+				var that = this;
+				setTimeout(function() {
+					if ($(that).parent().hasClass('active')) {
+						$(that).parent().removeClass('active');
+						$(that).parent().hide();
+					}
+				}, 100);
+			});
+		});
+	</script>
+</body>
+</html>

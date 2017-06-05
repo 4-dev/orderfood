@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout-padrao">
+<head>
+<title>Cadastro de Produto</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/upload.min.css}" />
+</head>
+<section id="content" layout:fragment="conteudo">
+
+	<!--breadcrumbs start-->
+	<div id="breadcrumbs-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col s12 m12 l12">
+					<h5 class="breadcrumbs-title">Cadastro de Produto</h5>
+					<ol class="breadcrumbs">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="#">Cadastros</a></li>
+						<li class="active">Produto</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--breadcrumbs end-->
+
+
+	<!--start container-->
+	<div class="container">
+		<div class="section">
+			<div class="divider"></div>
+
+			<div class="row">
+				<div class="col s12 m12 l12">
+					<div id="card-alert" class="card green lighten-5 alert-dismissible"
+						th:if="${not #strings.isEmpty(mensagem)}">
+						<div class="card-content green-text">
+							<p>
+								<i class="mdi-navigation-check"></i> <span th:text="${mensagem}"></span>
+							</p>
+						</div>
+						<button type="button" class="close green-text"
+							data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+
+					<div class="card-panel hoverable">
+						<h4 class="header2">Pedido</h4>
+						<form method="POST" th:object="${pedido}" class="formValidate"
+							id="formValidate">
+
+							<div id="card-alert" class="card red lighten-5 alert-dismissible"
+								th:if="${#fields.hasAnyErrors()}">
+								<div class="card-content red-text">
+									<th:block th:each="erro : ${#fields.detailedErrors()}">
+										<div>
+											<i class="mdi-alert-error"></i> <span
+												th:text="${erro.message}"></span>
+										</div>
+									</th:block>
+
+								</div>
+								<button type="button" class="close red-text"
+									data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+
+							<div class="row">
+
+								<div class="col l8">
+									<input type="hidden" th:field="*{status}" />
+
+									<div class="row">
+										<div class="input-field col s12">
+											<input id="observacao" type="text" th:field="*{observacao}" />
+											<label for="observacao"
+												th:classappend="${#fields.hasErrors('observacao')} ? materialize-red-text">observacao</label>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="input-field col s12">
+											<input id="observacao" type="text" th:field="*{observacao}" />
+											<label for="observacao"
+												th:classappend="${#fields.hasErrors('observacao')} ? materialize-red-text">observacao</label>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!--end container-->
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/js/uikit.min.js}"></script>
+	<script th:src="@{/js/upload.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
+
+	<script>
+		//fechar alertas automatico
+		$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function() {
+		});
+	</script>
+
+</th:block>
+
+<body>
