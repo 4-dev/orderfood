@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout-padrao">
+<head>
+<title>Dashboard</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/upload.min.css}" />
+</head>
+<section id="content" layout:fragment="conteudo">
+
+	<!--breadcrumbs start-->
+	<div id="breadcrumbs-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col s12 m12 l12">
+					<h5 class="breadcrumbs-title">Painel</h5>
+					<ol class="breadcrumbs">
+						<li><a th:href="@{/dashboard/inicio}">Home</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--breadcrumbs end-->
+
+
+	<!--start container-->
+	<div class="container">
+		<div class="section">
+			<div class="divider"></div>
+
+			<div class="row">
+				<div class="col s12 m12 l12">
+					 
+					<div class="card-panel hoverable">
+						<h4 class="header2">Pedido</h4>
+						 
+						 
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end container-->
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/js/uikit.min.js}"></script>
+	<script th:src="@{/js/upload.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
+
+	<script>
+		//fechar alertas automatico
+		$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function() {
+		});
+	</script>
+
+</th:block>
+
+<body>
