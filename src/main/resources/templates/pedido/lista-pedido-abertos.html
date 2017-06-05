@@ -11,6 +11,9 @@
 <link th:href="@{/js/plugins/data-tables/css/jquery.dataTables.min.css}"
 	type="text/css" rel="stylesheet" media="screen,projection">
 
+
+
+
 </head>
 <body>
 	<section id="content" layout:fragment="conteudo">
@@ -47,31 +50,39 @@
 								<div class="row">
 									<div class="col s12 m12 l12">
 										<div class="row">
-											<form class="col s12">
-												<div class="left col 2">
-													<button class="btn-floating btn-large blue" type="submit">
-														<i class="mdi-content-add"></i>
-													</button>
-												</div>
-												<div class="left col 4">
-													<button class="btn-floating btn-large primary"
-														type="submit">
-														<i class="mdi-content-add"></i>
-													</button>
-												</div>
+						
 
-												<div class="right col l3">
-													<input type="checkbox" id="ch1" /> <label for="ch1">Listar
-														pedidos abertos</label> <input type="checkbox" id="ch2" /> <label
-														for="ch2">Listar pedidos em andamento</label>
-												</div>
+											<!-- 											<form method="POST" th:object="${pedido}" class="col s12" id="formListaPedido"> -->
+											<!-- 												<div class="left col 2"> -->
+											<!-- 													Modal Trigger -->
 
-												<div class="right col l3">
-													<input type="checkbox" id="ch3" /> <label for="ch3">Listar
-														pedidos cancelados</label> <input type="checkbox" id="ch4" /> <label
-														for="ch4">Listar pedidos fechados</label>
-												</div>
-											</form>
+											<!-- 													<a class="btn-floating btn-large blue btn modal-trigger" -->
+											<!-- 														th:href="@{/pedido/novo}"> -->
+											<!-- 													<i class="mdi-content-add"></i>	 -->
+											<!-- 													</a> -->
+											<!-- 												</div> -->
+											<!-- 												<div class="left col 4"> -->
+
+											<!-- 													<a class="btn-floating btn-large blue btn modal-trigger" -->
+											<!-- 														href="#modal5" > -->
+											<!-- 													<i class="mdi-action-info"></i>	 -->
+											<!-- 													</a> -->
+											<!-- 												</div> -->
+
+											<!-- 												<div class="right col l3"> -->
+											<!-- 													<input type="checkbox" id="ch1" th:checked="true"  th:field="*{checkedPedidoAberto}" />  -->
+											<!-- 													<label for="ch1">Listar	pedidos abertos</label>  -->
+
+											<!-- 													<input type="checkbox" id="ch2"  th:checked="${pedido.status} == 'ABERTO'"  th:field="*{checkedPedidoEmAndamento}" />  -->
+											<!-- 													<label for="ch2">Listar pedidos em andamento </label> -->
+											<!-- 												</div> -->
+
+											<!-- 												<div class="right col l3"> -->
+											<!-- 													<input type="checkbox" id="ch3" /> <label for="ch3">Listar -->
+											<!-- 														pedidos cancelados</label> <input type="checkbox" id="ch4" /> <label -->
+											<!-- 														for="ch4">Listar pedidos fechados</label> -->
+											<!-- 												</div> -->
+											<!-- 											</form> -->
 										</div>
 										<br />
 										<div class="divider"></div>
@@ -145,10 +156,6 @@
 								</div>
 								<!--end container-->
 
-
-
-
-
 							</div>
 						</div>
 					</div>
@@ -157,7 +164,109 @@
 			</div>
 		</div>
 		<!--end container-->
+
+
+
+
+
+		<div class="col s12 m8 l9">
+
+			<div id="modal1" class="modal bottom-sheet">
+				<div class="modal-content">
+
+					<div layout:fragment="content">
+						<!--Form Advance-->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<div class="card-panel">
+									<h4 class="header2">Form Advance</h4>
+									<div class="row">
+										<form class="col s12">
+											<div class="row">
+												<div class="input-field col s6">
+													<input id="first_name" type="text"> <label
+														for="first_name">First Name</label>
+												</div>
+
+												<div class="input-field col s6">
+													<input id="last_name" type="text"> <label
+														for="last_name">Last Name</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<input id="email5" type="email"> <label for="email">Email</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<input id="password6" type="password"> <label
+														for="password">Password</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s6">
+													<select>
+														<option value="" disabled selected>Choose your
+															profile</option>
+														<option value="1">Manager</option>
+														<option value="2">Developer</option>
+														<option value="3">Business</option>
+													</select> <label>Select Profile</label>
+												</div>
+												<div class="input-field col s6">
+													<input type="date" class="datepicker"> <label
+														for="dob">DOB</label>
+												</div>
+
+											</div>
+
+											<div class="row">
+												<div class="file-field input-field col s6">
+													<input class="file-path validate" type="text" />
+													<div class="btn">
+														<span>Age</span> <input type="file" />
+													</div>
+												</div>
+												<div class="input-field col s6">
+													<span>Image</span>
+													<p class="range-field">
+														<input type="range" id="test5" min="0" max="100" />
+													</p>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s12">
+													<textarea id="message5" class="materialize-textarea"
+														length="120"></textarea>
+													<label for="message">Message</label>
+												</div>
+												<div class="row">
+													<div class="input-field col s12">
+														<button class="btn cyan waves-effect waves-light right"
+															type="submit" name="action">
+															Submit <i class="mdi-content-send right"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
 	</section>
+
+
+
+
 	<script type="text/javascript">
 		/*Show entries on click hide*/
 		$(document).ready(function() {

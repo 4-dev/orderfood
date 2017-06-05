@@ -18,6 +18,15 @@ public class Pedido {
 	private Cliente cliente;
 	private Mesa mesa;
 	private Usuario usuario;
+	private List<String> checkedItems;
+
+	public List<String> getCheckedItems() {
+		return checkedItems;
+	}
+
+	public void setCheckedItems(List<String> checkedItems) {
+		this.checkedItems = checkedItems;
+	}
 
 	public long getNumped() {
 		return numped;
@@ -106,7 +115,7 @@ public class Pedido {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public LocalDateTime getDataCancel() {
 		return dataCancel;
 	}
@@ -199,6 +208,5 @@ public class Pedido {
 			return false;
 		return true;
 	}
-
 
 }

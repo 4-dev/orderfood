@@ -19,16 +19,30 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
-	
 	public List<Pedido> pedidosAbertos() {
-	 StatusPedido statusPedido = StatusPedido.ABERTO;
-	 return  pedidoRepository.retornaStatusPedido(statusPedido);
+		StatusPedido statusPedido = StatusPedido.ABERTO;
+		return pedidoRepository.retornaStatusPedido(statusPedido);
+	}
+
+	public List<Pedido> pedidosEmAndamento() {
+		StatusPedido statusPedido = StatusPedido.EMANDAMENTO;
+		return pedidoRepository.retornaStatusPedido(statusPedido);
 	}
 	
-//	public StatusPedido reservarMesa() {
-		
-		
-//		return pedidoRepository.selectProdutoList();
-//	}
- 
+
+	public List<Pedido> pedidosFechados() {
+		StatusPedido statusPedido = StatusPedido.FINALIZADO;
+		return pedidoRepository.retornaStatusPedido(statusPedido);
+	}
+
+	public List<Pedido> pedidosEmCancelados() {
+		StatusPedido statusPedido = StatusPedido.CANCELADO;
+		return pedidoRepository.retornaStatusPedido(statusPedido);
+	}	
+
+	// public StatusPedido reservarMesa() {
+
+	// return pedidoRepository.selectProdutoList();
+	// }
+
 }

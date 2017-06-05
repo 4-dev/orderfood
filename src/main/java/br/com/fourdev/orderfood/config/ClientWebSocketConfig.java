@@ -94,7 +94,7 @@ public class ClientWebSocketConfig {
 		helloClient.subscribeGreetings(stompSession);
 
 		logger.info("Sending hello message" + stompSession);
-		helloClient.sendHello(stompSession, "Deyvid " + stompSession.getSessionId());
+		helloClient.sendHello(stompSession, "teste " + stompSession.getSessionId());
 		Thread.sleep(60000);
 
 	}

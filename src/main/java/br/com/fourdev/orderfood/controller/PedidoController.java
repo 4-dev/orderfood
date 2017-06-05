@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.service.PedidoService;
 
@@ -21,15 +20,41 @@ public class PedidoController {
 	
 	@Autowired
 	private PedidoService pedidoService;
+	public boolean listaEmAndamento;
+	
 	
 	@GetMapping("/abertos")
-	public ModelAndView status(Pedido pedido){
+	public ModelAndView listaPedidosAbertos(Pedido pedido){
 		ModelAndView modelAndView = new ModelAndView("pedido/lista-pedido-abertos");
-		modelAndView.addObject(pedido);
-		modelAndView.addObject(pedidoService);
-		
+			modelAndView.addObject(pedido);
+			modelAndView.addObject(pedidoService);
 		return modelAndView ;
 	}
+	
+	
+	@GetMapping("/emandamento")
+	public ModelAndView listaPedidosEmAndamento(Pedido pedido){
+		ModelAndView modelAndView = new ModelAndView("pedido/lista-pedido-emandamento");
+			modelAndView.addObject(pedido);
+			modelAndView.addObject(pedidoService);
+		return modelAndView ;
+	}
+	 
+	@GetMapping("/fechados")
+	public ModelAndView listaPedidosFechados(Pedido pedido){
+		ModelAndView modelAndView = new ModelAndView("pedido/lista-pedido-fechados");
+			modelAndView.addObject(pedido);
+			modelAndView.addObject(pedidoService);
+		return modelAndView ;
+	}
+	@GetMapping("/cancelados")
+	public ModelAndView listaPedidosCancelados(Pedido pedido){
+		ModelAndView modelAndView = new ModelAndView("pedido/lista-pedido-cancelados");
+			modelAndView.addObject(pedido);
+			modelAndView.addObject(pedidoService);
+		return modelAndView ;
+	}	
+
 	
 	@GetMapping("/novo")
 	public ModelAndView novo(Pedido pedido){
