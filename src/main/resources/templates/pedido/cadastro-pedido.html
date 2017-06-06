@@ -34,72 +34,97 @@
 
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<div id="card-alert" class="card green lighten-5 alert-dismissible"
-						th:if="${not #strings.isEmpty(mensagem)}">
-						<div class="card-content green-text">
-							<p>
-								<i class="mdi-navigation-check"></i> <span th:text="${mensagem}"></span>
-							</p>
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<div class="card-panel">
+								<div class="row">
+									<form class="col s12" th:action="@{/pedido/additem}"
+										th:object="${itemPedido}" method="POST">
+										<h4 class="header2">Adicionar Item</h4>
+										<div class="row">
+											<div class="input-field col s4">
+												<i class="mdi-action-account-circle prefix"></i> <input
+													id="icon_prefix" type="text" class="validate"
+													th:field="*{produto}"> <label for="icon_prefix">Produto</label>
+											</div>
+											<div class="input-field col s4">
+												<i class="mdi-action-lock-outline prefix"></i> <input
+													id="icon_password" type="text" class="validate"
+													th:field="*{quantidade}"> <label
+													for="icon_password">Quantidade</label>
+											</div>
+											<div class="input-field col s4">
+												<div class="input-field col s12">
+													<button class="btn cyan waves-effect waves-light"
+														type="submit" name="action">
+														<i class="mdi-action-lock-open"></i> Adicionar
+													</button>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
-						<button type="button" class="close green-text"
-							data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
 					</div>
 
-					<div class="card-panel hoverable">
-						<h4 class="header2">Pedido</h4>
-						<form method="POST" th:object="${pedido}" class="formValidate"
-							id="formValidate">
-
-							<div id="card-alert" class="card red lighten-5 alert-dismissible"
-								th:if="${#fields.hasAnyErrors()}">
-								<div class="card-content red-text">
-									<th:block th:each="erro : ${#fields.detailedErrors()}">
-										<div>
-											<i class="mdi-alert-error"></i> <span
-												th:text="${erro.message}"></span>
-										</div>
-									</th:block>
-
-								</div>
-								<button type="button" class="close red-text"
-									data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
-
+					<div class="row">
+						<div class="card-panel">
 							<div class="row">
+								<div class="col s12 m12 l12">
+									<h5>Itens</h5>
 
-								<div class="col l8">
-									<input type="hidden" th:field="*{status}" />
+									<form method="POST" th:object="${ItemPedido}" class="formValidate"
+										id="formValidate">
 
-									<div class="row">
-										<div class="input-field col s12">
-											<input id="observacao" type="text" th:field="*{observacao}" />
-											<label for="observacao"
-												th:classappend="${#fields.hasErrors('observacao')} ? materialize-red-text">observacao</label>
-										</div>
-									</div>
-
-
-									<div class="row">
-										<div class="input-field col s12">
-											<input id="observacao" type="text" th:field="*{observacao}" />
-											<label for="observacao"
-												th:classappend="${#fields.hasErrors('observacao')} ? materialize-red-text">observacao</label>
-										</div>
-									</div>
-
-
+										<table id="data-table-simple" class="responsive-table"
+											cellspacing="0" width="100%">
+											<thead>
+												<tr>
+													<th>Pedido</th>
+													<th>Produto</th>
+													<th>Qtde</th>
+													<th>VL. Unit</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th>Pedido</th>
+													<th>Produto</th>
+													<th>Qtde</th>
+													<th>VL. Unit</th>
+												</tr>
+											</tfoot>
+											<tbody>
+												<tr th:each="i: ${itens}">
+													<td th:text="${i.numped}"></td>
+													<td th:text="${i.produto}"></td>
+													<td th:text="${i.quantidade}"></td>
+													<td
+														th:text="${#numbers.formatDecimal(i.valorUnitario, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</form>
+								
+									
 								</div>
+									<div class="input-field col s4">
+												<div class="input-field col s12">
+													<button class="btn cyan waves-effect waves-light"
+														type="submit" name="action">
+														<i class="mdi-action-lock-open"></i> Finalizar
+													</button>
+												</div>
+											</div>
 							</div>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
+
+	</div>
 	</div>
 	<!-- end container-->
 </section>
