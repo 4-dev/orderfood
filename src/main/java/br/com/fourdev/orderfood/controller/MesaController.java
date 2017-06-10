@@ -57,4 +57,12 @@ public class MesaController {
 		
 	}
 
+	
+	@PostMapping("/status/finalizarmesa")
+	public ModelAndView finalizarMesa(@Valid int idmesa, BindingResult result, RedirectAttributes attributes){
+		mesaService.finalizarMesa(idmesa);
+		attributes.addFlashAttribute("mensagem", "Mesa Salva com Sucesso!");
+		return new ModelAndView("redirect:status");
+	}
+	
 }
