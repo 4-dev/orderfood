@@ -41,7 +41,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 				mesa.getStatus() });
 	}
 
-	public void updateMesa(int id, Mesa mesa) {
+	public void updateMesa(Mesa mesa) {
 		if (mesa != null) {
 			String query = "update mesa set ";
 			query += " descricao = ?, ";
@@ -63,7 +63,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 	@Override
 	public StatusMesa reservarMesa(Mesa mesa) {
 		StatusMesa statusmesa = StatusMesa.DISPONIVEL;
-		updateMesa(0, mesa);
+		updateMesa(mesa);
 		return statusmesa;
 	}
 
