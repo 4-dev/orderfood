@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.service.MesaService;
+import br.com.fourdev.orderfood.service.PedidoService;
 
 //@ImportResource("classpath:org/springframework/integration/samples/chat/stomp/server/stomp-server.xml")
 @RestController
@@ -23,6 +24,7 @@ public class MesaRestController {
 	final static Logger logger = LoggerFactory.getLogger(MesaRestController.class);
 	@Autowired
 	private MesaService mesaService;
+	
 	// private SimpMessagingTemplate template;
 
 	@RequestMapping(value = "/listarMesas", method = RequestMethod.GET)
@@ -46,13 +48,13 @@ public class MesaRestController {
 	}
 
 	@RequestMapping(value = "/atualizarMesa/{id}", method = RequestMethod.PUT)
-	public void updateMesa(@RequestBody Mesa mesa, @PathVariable("id") String id) {
+	public void updateMesa(@RequestBody Mesa mesa, @PathVariable("id") int id) {
 		logger.debug("id=" + id);
 		mesaService.updateMesa(id, mesa);
 	}
 
 	@RequestMapping(value = "/deletarMesa/{id}", method = RequestMethod.DELETE)
-	public void deleteMesa(@PathVariable("id") String id) {
+	public void deleteMesa(@PathVariable("id") int id) {
 		mesaService.deleteMesa(id);
 	}
 
