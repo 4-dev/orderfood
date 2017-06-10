@@ -57,6 +57,11 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		return (Pedido) jdbcTemplate.queryForObject(query, new Object[] { numped },
 				new BeanPropertyRowMapper(Pedido.class));
 	}
+	
+	public List<Pedido> retornaPedidoPorMesa(int idmesa) {
+		String query = "SELECT cab.* FROM mesa_pedido mp, cabpedido cab WHERE mp.numped = cab.numped AND mp.idmesa = ? ORDER BY CAB.NUMPED";
+		return jdbcTemplate.query(query, new Object[] { idmesa }, new PedidoRowMapper());
+	}
 
 	public void insertPedido(Pedido pedido) {
 		try {

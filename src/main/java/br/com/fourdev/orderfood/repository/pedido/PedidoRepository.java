@@ -19,4 +19,5 @@ public interface PedidoRepository {
 	
 	public List<Pedido> retornaStatusPedido(StatusPedido statusPedido);
 
+	public List<Pedido> retornaPedidoPorMesa(int idmesa);
 }
