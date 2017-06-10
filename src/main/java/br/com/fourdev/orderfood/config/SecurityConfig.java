@@ -28,7 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/css/**")
 		.antMatchers("/images/**")
 		.antMatchers("/font/**")
-		.antMatchers("/js/**");
+		.antMatchers("/js/**")
+		.antMatchers("/mesa/verificarmesa/**");
 	}
 	
 	@Override
@@ -39,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/mesa/novo").hasAnyAuthority("CADASTRAR_MESA")
 				.antMatchers("/mesa/status").hasAnyAuthority("LISTAR_MESA")
 				.antMatchers("/pedido/abertos").hasAnyAuthority("LISTAR_PEDIDO")
+				.antMatchers("/mesa/verificarmesa").hasAnyAuthority("LISTAR_MESA")
 				.antMatchers("/").hasAnyAuthority("ACESSO_GERAL")
 				.anyRequest()
 				.authenticated()
