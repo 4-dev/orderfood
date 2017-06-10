@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.service.MesaService;
+import br.com.fourdev.orderfood.service.PedidoService;
 
 @Controller
 @RequestMapping("mesa")
@@ -20,14 +21,15 @@ public class MesaController {
 	
 	@Autowired
 	private MesaService mesaService;
+	@Autowired
+	private PedidoService pedidoService;
 	
 	@GetMapping("/status")
 	public ModelAndView status(Mesa mesa){
 		ModelAndView modelAndView = new ModelAndView("mesa/status-mesa");
 		modelAndView.addObject(mesa);
 		modelAndView.addObject(mesaService);
-	
-		
+		modelAndView.addObject(pedidoService);
 		return modelAndView ;
 	}
 	
