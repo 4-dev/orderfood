@@ -38,11 +38,11 @@ public class MesaService {
 		mesaRepository.insertMesa(mesa);
 	}
 
-	public void updateMesa(String id, Mesa mesa) {
+	public void updateMesa(int id, Mesa mesa) {
 		mesaRepository.updateMesa(id, mesa);
 	}
 
-	public void deleteMesa(String id) {
+	public void deleteMesa(int id) {
 		mesaRepository.deleteMesa(id);
 	}
 
@@ -65,9 +65,11 @@ public class MesaService {
 			logger.info("Enviando mensagem" + cws.stompSession);
 			cws.helloClient.sendHello(cws.stompSession, String.valueOf(mesa.getIdmesa()));
 			Thread.sleep(1000);
+		
+			mesa.setStatus(StatusMesa.OCUPADA.getDescricao());
+			mesaRepository.updateMesa(idmesa, mesa);
 			vbliberouMesa = true;			
 
-			
 		}
 		return vbliberouMesa;
 	}
