@@ -39,7 +39,7 @@ public class MesaService {
 	}
 
 	public void updateMesa(int id, Mesa mesa) {
-		mesaRepository.updateMesa(id, mesa);
+		mesaRepository.updateMesa(mesa);
 	}
 
 	public void deleteMesa(int id) {
@@ -67,13 +67,20 @@ public class MesaService {
 			Thread.sleep(1000);
 		
 			mesa.setStatus(StatusMesa.OCUPADA.getDescricao());
-			mesaRepository.updateMesa(idmesa, mesa);
+			mesa.setIdmesa(idmesa);
+			mesaRepository.updateMesa(mesa);
 			vbliberouMesa = true;			
 
 		}
 		return vbliberouMesa;
 	}
 
+	public void finalizarMesa(int idmesa){
+		Mesa mesa = new Mesa();
+		mesa.setIdmesa(idmesa);
+		mesa.setStatus(StatusMesa.DISPONIVEL.getDescricao());
+		mesaRepository.updateMesa(mesa);
+	}
 	public StatusMesa reservarMesa(int idmesa) {
 		Mesa mesa = new Mesa();
 		StatusMesa statusMesa = null;
