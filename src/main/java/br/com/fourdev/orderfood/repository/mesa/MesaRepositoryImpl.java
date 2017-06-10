@@ -29,7 +29,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 	}
 
 	public Mesa selectMesaPorId(int idmesa) {
-		String query = "select * from mesa where id=? ";
+		String query = "select * from mesa where idmesa=? ";
 		return (Mesa) jdbcTemplate.queryForObject(query, new Object[] { idmesa }, new BeanPropertyRowMapper(Mesa.class));
 	}
 
