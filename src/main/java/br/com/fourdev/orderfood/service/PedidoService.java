@@ -39,6 +39,10 @@ public class PedidoService {
 		StatusPedido statusPedido = StatusPedido.CANCELADO;
 		return pedidoRepository.retornaStatusPedido(statusPedido);
 	}	
+	
+	public List<Pedido> retornaPedidoPorMesa(int idmesa) {
+		return pedidoRepository.retornaPedidoPorMesa(idmesa);
+	}
 
 	// public StatusPedido reservarMesa() {
 
