@@ -13,9 +13,9 @@ public interface MesaRepository  {
 
 	public void insertMesa(Mesa mesa);
 
-	public void updateMesa(String id, Mesa mesa);
+	public void updateMesa(int id, Mesa mesa);
 
-	public void deleteMesa(String id);
+	public void deleteMesa(int id);
 
 	public StatusMesa reservarMesa(Mesa mesa);
 

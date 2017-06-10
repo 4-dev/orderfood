@@ -24,7 +24,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 	// codprod = ?";
 
 	public List<Mesa> selectMesaList() {
-		String query = "select * from mesa";
+		String query = "select * from mesa order by idmesa";
 		return jdbcTemplate.query(query, new BeanPropertyRowMapper(Mesa.class));
 	}
 
@@ -41,22 +41,21 @@ public class MesaRepositoryImpl implements MesaRepository {
 				mesa.getStatus() });
 	}
 
-	public void updateMesa(String id, Mesa mesa) {
+	public void updateMesa(int id, Mesa mesa) {
 		if (mesa != null) {
 			String query = "update mesa set ";
 			query += " descricao = ?, ";
-			query += " horaAberta = ?,";
-			query += " horaFechada = ?,";
+//			query += " horaAberta = ?,";
+//			query += " horaFechada = ?,";
 			query += " status = ?";
-			query += " where id = ?";
+			query += " where idmesa = ?";
 			// + "pedidos = ?, "
 			// + "total = ?";
-			jdbcTemplate.update(query, new Object[] { mesa.getIdmesa(), mesa.getDescricao(), mesa.getPedidos(),
-					mesa.getHoraAberta(), mesa.getHoraAberta(), mesa.getStatus(), mesa.getTotal() });
+			jdbcTemplate.update(query, new Object[] {mesa.getDescricao(), mesa.getStatus(), mesa.getIdmesa() });
 		}
 	}
 
-	public void deleteMesa(String id) {
+	public void deleteMesa(int id) {
 		String query = "delete from mesa where id=?";
 		jdbcTemplate.update(query, new Object[] { id });
 	}
@@ -64,7 +63,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 	@Override
 	public StatusMesa reservarMesa(Mesa mesa) {
 		StatusMesa statusmesa = StatusMesa.DISPONIVEL;
-		updateMesa("0", mesa);
+		updateMesa(0, mesa);
 		return statusmesa;
 	}
 
