@@ -32,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/images/**")
 		.antMatchers("/font/**")
 		.antMatchers("/js/**")
-		.antMatchers("/gs-guide-websocket/**") // permissão para o websocket
-		.antMatchers("/mesa/verificarmesa/**");
+		.antMatchers("/gs-guide-websocket/**") // Deyvid - permissão para o websocket
+		.antMatchers("/mesa/verificarmesa/**"); // Deyvid - permissão para chamada do aplicativo
 		
 	}
 	
