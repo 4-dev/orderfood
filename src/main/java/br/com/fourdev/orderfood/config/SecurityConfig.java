@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.socket.server.RequestUpgradeStrategy;
+import org.springframework.web.socket.server.standard.TomcatRequestUpgradeStrategy;
+import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -29,7 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/images/**")
 		.antMatchers("/font/**")
 		.antMatchers("/js/**")
-		.antMatchers("/mesa/verificarmesa/**");
+		.antMatchers("/mesa/verificarmesa/**")
+		.antMatchers("ws://**");
 	}
 	
 	@Override
@@ -42,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/pedido/abertos").hasAnyAuthority("LISTAR_PEDIDO")
 				.antMatchers("/mesa/verificarmesa").hasAnyAuthority("LISTAR_MESA")
 				.antMatchers("/").hasAnyAuthority("ACESSO_GERAL")
+				.antMatchers("ws://").hasAnyAuthority("ACESSO_GERAL")
 				.anyRequest()
 				.authenticated()
 			.and()
