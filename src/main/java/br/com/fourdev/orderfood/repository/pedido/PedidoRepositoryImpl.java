@@ -9,11 +9,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import br.com.fourdev.orderfood.model.Cliente;
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusPedido;
-import ch.qos.logback.core.net.server.Client;
 
 @Repository("PedidoRepository")
 public class PedidoRepositoryImpl implements PedidoRepository {
