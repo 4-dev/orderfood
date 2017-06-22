@@ -1,5 +1,10 @@
 package br.com.fourdev.orderfood.config;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import org.apache.log4j.Logger;
 import org.springframework.messaging.simp.stomp.StompFrameHandler;
 import org.springframework.messaging.simp.stomp.StompHeaders;
@@ -13,11 +18,6 @@ import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 import org.springframework.web.socket.sockjs.frame.Jackson2SockJsMessageCodec;
-
-import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by nick on 30/09/2015.
