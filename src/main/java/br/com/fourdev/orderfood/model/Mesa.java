@@ -32,7 +32,7 @@ public class Mesa {
 	private LocalDate horaFechada;
 
 	//	private StatusMesa status;
-	private String status = "LIBERADA";
+	private String status = "DISPONIVEL";
 	
 	@Transient
 	private BigDecimal total;
