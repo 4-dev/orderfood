@@ -55,7 +55,7 @@ public class MesaService {
 		
 		Mesa mesa = mesaRepository.selectMesaPorId(idmesa);
 		
-		if ("LIBERADA".equalsIgnoreCase(mesa.getStatus().toString())) {
+		if ("DISPONIVEL".equalsIgnoreCase(mesa.getStatus().toString())) {
 			ClientWebSocketConfig cws = null;
 			cws.conectaOuRetornaWebSocket();
 
