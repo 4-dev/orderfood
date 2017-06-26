@@ -6,6 +6,7 @@
 <head>
 <title>Pesquisa de Produto</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/upload.min.css}" />
+<link th:href="@{/js/plugins/data-tables/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet"/>
 </head>
 <section id="content" layout:fragment="conteudo">
 
@@ -41,21 +42,15 @@
 				<div class="col s12 m12 l12">
 
 					<div class="card-panel hoverable">
-						<h4 class="header2">Pesquisa</h4>
-				
-
-						<div class="divider"></div>
-						<div id="table-datatables">
-<!-- 						<div id="stripped"> -->
-							
+						<h4 class="header2" style="padding: 7px"><i class="mdi-action-search"></i> Buscar Produtos</h4>
+						<div>
 							<div class="row">
 								<div class="col s12 m12 l12">
-									<table id="data-table-simple" class="responsive-table display highlight bordered" cellspacing="0">
-<!-- 									<table  class="responsive-table display highlight bordered"> -->
+									<table id="data-table-simple" class="responsive-table display highlight bordered">
 										<thead>
 											<tr>
 												<th>Imagem</th>
-												<th>Name</th>
+												<th>Nome</th>
 												<th class="center">Volume</th>
 												<th class="center">Unidade</th>
 												<th>Valor</th>
@@ -64,6 +59,19 @@
 												<th>Ações</th>
 											</tr>
 										</thead>
+
+										<tfoot class="centered">
+											<tr>
+												<th>Imagem</th>
+												<th>Nome</th>
+												<th class="center">Volume</th>
+												<th class="center">Unidade</th>
+												<th>Valor</th>
+												<th class="center">Quantidade</th>
+												<th>Categoria</th>
+												<th>Ações</th>
+											</tr>
+										</tfoot>
 
 										<tbody>
 											<tr th:each="produto : ${produtos}">
@@ -110,7 +118,19 @@
 	<script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
 
 	<script>
-		
+
+	/*Show entries on click hide*/
+    $(document).ready(function(){
+        $(".dropdown-content.select-dropdown li").on( "click", function() {
+            var that = this;
+            setTimeout(function(){
+            if($(that).parent().hasClass('active')){
+                    $(that).parent().removeClass('active');
+                    $(that).parent().hide();
+            }
+            },100);
+        });
+    });
 
 		//fechar alertas automatico
 		$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){});

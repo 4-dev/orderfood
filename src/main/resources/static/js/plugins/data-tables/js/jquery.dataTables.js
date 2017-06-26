@@ -3396,9 +3396,9 @@
 			div[0].id = tableId+'_length';
 		}
 	
-		div.children().append(
-			settings.oLanguage.sLengthMenu.replace( '_MENU_', select[0].outerHTML )
-		);
+//		div.children().append(
+//			settings.oLanguage.sLengthMenu.replace( '_MENU_', select[0].outerHTML )
+//		);
 	
 		// Can't use `select` variable as user might provide their own and the
 		// reference is broken by the use of outerHTML
@@ -9810,7 +9810,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"aLengthMenu": [ 10, 25, 50, 100 ],
+		"aLengthMenu": [ 5, 25, 50, 100 ],
 	
 	
 		/**
@@ -10839,7 +10839,7 @@
 		 *      } );
 		 *    } )
 		 */
-		"iDisplayLength": 10,
+		"iDisplayLength": 6,
 	
 	
 		/**
@@ -10987,7 +10987,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sFirst": "First",
+				"sFirst": "Primeiro",
 	
 	
 				/**
@@ -11010,7 +11010,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sLast": "Last",
+				"sLast": "Ultimo",
 	
 	
 				/**
@@ -11033,7 +11033,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "Próximo",
 	
 	
 				/**
@@ -11056,7 +11056,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "Anterior"
 			},
 	
 			/**
@@ -11079,7 +11079,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "Nenhum dado encontrado na tabela",
 	
 	
 			/**
@@ -11111,7 +11111,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "Mostrando _START_ a _END_ de _TOTAL_ resultados",
 	
 	
 			/**
@@ -11132,7 +11132,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "Mostrando 0 a 0 de 0 resultado",
 	
 	
 			/**
@@ -11154,7 +11154,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
+			"sInfoFiltered": "(filtrado de um total _MAX_ resultados)",
 	
 	
 			/**
@@ -11272,7 +11272,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Show _MENU_ entries",
+			"sLengthMenu": "Mostrar _MENU_ resultados",
 	
 	
 			/**
@@ -11296,7 +11296,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLoadingRecords": "Loading...",
+			"sLoadingRecords": "Buscando...",
 	
 	
 			/**
@@ -11317,7 +11317,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Processing...",
+			"sProcessing": "Processando...",
 	
 	
 			/**
@@ -11352,7 +11352,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Buscar",
+			"sSearch": "",
 	
 	
 			/**
@@ -11363,7 +11363,7 @@
 			 *  @dtopt Language
 			 *  @name DataTable.defaults.language.searchPlaceholder
 			 */
-			"sSearchPlaceholder": "Busca por nome",
+			"sSearchPlaceholder": "Digite sua pesquisa...",
 	
 	
 			/**
