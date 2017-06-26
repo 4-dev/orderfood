@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout-padrao">
+<head>
+<title>Pesquisa de Produto</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/upload.min.css}" />
+</head>
+<section id="content" layout:fragment="conteudo">
+
+	<!--breadcrumbs start-->
+	<div id="breadcrumbs-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col s12 m12 l12">
+					<h5 class="breadcrumbs-title">Pesquisa de Produto</h5>
+					<ol class="breadcrumbs">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="#">Cadastros</a></li>
+						<li class="active">Pesquisa</li>
+					</ol>
+				</div>
+				<div class="fixed-action-btn">
+				  <a th:href="@{/produto/novo}" class="btn-floating btn-large blue">
+				    <i class="large mdi-content-add"></i>
+				  </a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--breadcrumbs end-->
+
+
+	<!--start container-->
+	<div class="container">
+		<div class="section">
+			<div class="divider"></div>
+
+			<div class="row">
+				<div class="col s12 m12 l12">
+
+					<div class="card-panel hoverable">
+						<h4 class="header2">Pesquisa</h4>
+				
+
+						<div class="divider"></div>
+						<div id="table-datatables">
+<!-- 						<div id="stripped"> -->
+							
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<table id="data-table-simple" class="responsive-table display highlight bordered" cellspacing="0">
+<!-- 									<table  class="responsive-table display highlight bordered"> -->
+										<thead>
+											<tr>
+												<th>Imagem</th>
+												<th>Name</th>
+												<th class="center">Volume</th>
+												<th class="center">Unidade</th>
+												<th>Valor</th>
+												<th class="center">Quantidade</th>
+												<th>Categoria</th>
+												<th>Ações</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr th:each="produto : ${produtos}">
+												<td id="thumbnail">
+													<img  th:src="@{/foto/temp/{foto}(foto=${produto.foto})}" class="circle responsive-img" />
+												</td>
+												<td th:text="${produto.nome}"></td>
+												<td th:text="${produto.volume}" class="center"></td>
+												<td th:text="${produto.unidade}" class="center"></td>
+												<td th:text="|R$ ${produto.valor}|"></td>
+												<td th:text="${produto.qtestoque}" class="center"></td>
+												<td th:text="${produto.categoria.descricao}"></td>
+												<td>
+													<a href="#" class="primary-content tooltipped" 
+														data-position="top" data-delay="50" data-tooltip="Editar" 
+														th:href="@{/produto/{id}(id=${produto.id})}"
+														style="padding-right: 10px">
+														<i class="mdi-content-create"></i>
+													</a>
+													<a href="#" class="red-text tooltipped" data-position="top" data-delay="50" data-tooltip="Excluir">
+														<i class="mdi-navigation-close"></i>
+													</a>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<!--end container-->
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/js/uikit.min.js}"></script>
+	<script th:src="@{/js/upload.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
+
+	<script>
+		
+
+		//fechar alertas automatico
+		$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){});
+	</script>
+
+</th:block>
+</html>
+
