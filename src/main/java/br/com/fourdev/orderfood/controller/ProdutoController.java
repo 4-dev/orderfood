@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +20,7 @@ import br.com.fourdev.orderfood.model.Produto;
 import br.com.fourdev.orderfood.model.Unidade;
 import br.com.fourdev.orderfood.repository.produto.Produtos;
 import br.com.fourdev.orderfood.service.ProdutoService;
+import br.com.fourdev.orderfood.service.exception.ErroAoExcluirProdutoException;
 
 @Controller
 @RequestMapping("produto")
@@ -76,8 +76,11 @@ public class ProdutoController {
 	
 	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("id") Produto produto){
-	
-		produtos.delete(produto);
+		try {
+			produtoService.delete(produto);
+		} catch (ErroAoExcluirProdutoException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 		
 		return ResponseEntity.ok().build();
 	}

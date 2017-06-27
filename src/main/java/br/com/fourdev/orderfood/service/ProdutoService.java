@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.fourdev.orderfood.model.Produto;
 import br.com.fourdev.orderfood.repository.produto.Produtos;
+import br.com.fourdev.orderfood.service.exception.ErroAoExcluirProdutoException;
 
 @Service
 public class ProdutoService {
@@ -26,22 +27,23 @@ public class ProdutoService {
 		return produtos.selectProdutoPorId(id);
 	}
 
-	public void insertProduto(Produto produto) {
-		produtos.insertProduto(produto);
-	}
-
-	public void updateProduto(String id, Produto produto) {
-		produtos.updateProduto(id, produto);
-	}
-
-	public void deleteProduto(String id) {
-		produtos.deleteProduto(id);
-	}
 	
 	
 	//Implementaçoes para o tymeleaf 
 	public void salvar(Produto produto){
 		produtos.save(produto);
+	}
+
+	public void delete(Produto produto) {
+		
+		try {
+			produtos.delete(produto);
+			produtos.flush();
+			
+		} catch (Exception e) {
+			throw new ErroAoExcluirProdutoException("Impossível apagar produto, já utlilizado em alguma venda!");
+		}
+		
 	}
 	
 	
