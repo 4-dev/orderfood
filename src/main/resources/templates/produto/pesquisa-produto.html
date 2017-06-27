@@ -7,14 +7,16 @@
 <title>Pesquisa de Produto</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/upload.min.css}" />
 <link th:href="@{/js/plugins/data-tables/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet"/>
+<link th:href="@{js/plugins/sweetalert/sweetalert.css}" type="text/css" rel="stylesheet"/>
 </head>
 <section id="content" layout:fragment="conteudo">
 
 	<!--breadcrumbs start-->
 	<div id="breadcrumbs-wrapper">
 		<div class="container">
+			
 			<div class="row">
-				<div class="col s12 m12 l12">
+				<div class="col s10 m10 l10">
 					<h5 class="breadcrumbs-title">Pesquisa de Produto</h5>
 					<ol class="breadcrumbs">
 						<li><a href="index.html">Home</a></li>
@@ -22,11 +24,13 @@
 						<li class="active">Pesquisa</li>
 					</ol>
 				</div>
-				<div class="fixed-action-btn">
-				  <a th:href="@{/produto/novo}" class="btn-floating btn-large blue">
+				<div class="fixed-action-btn horizontal of-btn-floating" >
+				 <a th:href="@{/produto/novo}" class="btn-floating btn-large cyan 
+				 	tooltipped" data-position="left" data-delay="50" data-tooltip="Cadastrar Novo Produto">
 				    <i class="large mdi-content-add"></i>
 				  </a>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -76,7 +80,8 @@
 										<tbody>
 											<tr th:each="produto : ${produtos}">
 												<td id="thumbnail">
-													<img  th:src="@{/foto/temp/{foto}(foto=${produto.foto})}" class="circle responsive-img" />
+													<img th:if="${#strings.isEmpty(produto.foto)}" th:src="@{/images/mockup.jpg}" class="circle responsive-img" />
+													<img  th:unless="${#strings.isEmpty(produto.foto)}" th:src="@{/foto/temp/{foto}(foto=${produto.foto})}" class="circle responsive-img" />
 												</td>
 												<td th:text="${produto.nome}"></td>
 												<td th:text="${produto.volume}" class="center"></td>
@@ -91,13 +96,15 @@
 														style="padding-right: 10px">
 														<i class="mdi-content-create"></i>
 													</a>
-													<a href="#" class="red-text tooltipped" data-position="top" data-delay="50" data-tooltip="Excluir">
+													<a href="#" class="red-text tooltipped js-exclusao-btn" data-position="top" data-delay="50" data-tooltip="Excluir"
+														data:url="@{/produto/{id}(id=${produto.id})}"
+															data:id="${produto.id}" data:objeto="${produto.nome}">
 														<i class="mdi-navigation-close"></i>
 													</a>
 												</td>
 											</tr>
 
-										</tbody>
+	 									</tbody>
 									</table>
 								</div>
 
@@ -119,21 +126,11 @@
 
 	<script>
 
-	/*Show entries on click hide*/
-    $(document).ready(function(){
-        $(".dropdown-content.select-dropdown li").on( "click", function() {
-            var that = this;
-            setTimeout(function(){
-            if($(that).parent().hasClass('active')){
-                    $(that).parent().removeClass('active');
-                    $(that).parent().hide();
-            }
-            },100);
-        });
-    });
-
 		//fechar alertas automatico
 		$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){});
+		
+		  
+		
 	</script>
 
 </th:block>

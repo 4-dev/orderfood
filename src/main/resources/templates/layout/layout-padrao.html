@@ -77,12 +77,17 @@
 	    
 		<script th:src="@{/js/jquery.maskMoney.min.js}"></script>
 		
-		<!--custom-script.js-->
-	    <script type="text/javascript" th:src="@{/js/custom-script.js}"></script>
 
 		<!-- Datatable -->
 		<script type="text/javascript" th:src="@{/js/plugins/data-tables/js/jquery.dataTables.js}"></script>	    
-   		<script type="text/javascript" th:src="@{/js/plugins/data-tables/data-tables-script.js}"></script>	    
+   		<script type="text/javascript" th:src="@{/js/plugins/data-tables/data-tables-script.js}"></script>	 
+   		
+   		<!--sweetalert -->
+    	<script type="text/javascript" th:src="@{js/plugins/sweetalert/sweetalert.min.js}"></script>  
+   		
+   		<!--custom-script.js-->
+	    <script type="text/javascript" th:src="@{/js/custom-script.js}"></script>
+	    <script type="text/javascript" th:src="@{/js/exclusao.js}"></script>   
 		
 		<th:block layout:fragment="javascript-extra"></th:block>
 	
