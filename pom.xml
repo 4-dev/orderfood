@@ -52,6 +52,36 @@
 			<artifactId>stomp-websocket</artifactId>
 			<version>2.3.3</version>
 		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.7</version>
+		</dependency>
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>io.pivotal.spring.cloud</groupId> -->
+<!-- 			<artifactId>spring-cloud-services-starter-config-client</artifactId> -->
+<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.cloud</groupId> -->
+		<!-- <artifactId>spring-cloud-spring-service-connector</artifactId> -->
+		<!-- <version>1.2.4.RELEASE</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.cloud</groupId> -->
+		<!-- <artifactId>spring-cloud-cloudfoundry-connector</artifactId> -->
+		<!-- <version>1.2.4.RELEASE</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.fasterxml.jackson.core</groupId> -->
+		<!-- <artifactId>jackson-databind</artifactId> -->
+		<!-- <version>2.6.3</version> -->
+		<!-- </dependency> -->
+
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
@@ -108,7 +138,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -116,6 +146,7 @@
 
 
 	</dependencies>
+ 
 
 	<build>
 		<plugins>
@@ -132,9 +163,13 @@
 				<version>4.0.3</version>
 				<configuration>
 					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://localhost:5432/4dev</url>
-					<user>root</user>
-					<password>root</password>
+<!-- 					<url>jdbc:postgresql://localhost:5432/4dev</url> -->
+<!-- 					<user>root</user> -->
+<!-- 					<password>root</password> -->
+					<url>jdbc:postgresql://stampy.db.elephantsql.com:5432/oufbulra?currentSchema=orderfood</url>
+					<user>oufbulra</user>
+					<password>SPpei0yhldriA0Ukz32cfeSs2VkKs-cx</password>
+										
 					<schemas>
 						<schema>orderfood</schema>
 					</schemas>
