@@ -120,18 +120,11 @@
 </section>
 
 <th:block layout:fragment="javascript-extra">
-	<script th:src="@{/js/uikit.min.js}"></script>
-	<script th:src="@{/js/upload.min.js}"></script>
-	<script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
-
-	<script>
-
-		//fechar alertas automatico
-		$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function(){});
-		
-		  
-		
-	</script>
+	
+	<!--sweetalert -->
+    <script type="text/javascript" th:src="@{js/plugins/sweetalert/sweetalert.min.js}"></script>  
+ 	<script type="text/javascript" th:src="@{/js/exclusao.js}"></script> 
+	
 
 </th:block>
 </html>
