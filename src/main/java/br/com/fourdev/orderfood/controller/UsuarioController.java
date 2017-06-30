@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fourdev.orderfood.model.Usuario;
 import br.com.fourdev.orderfood.repository.Grupos;
+import br.com.fourdev.orderfood.repository.usuario.Usuarios;
 import br.com.fourdev.orderfood.service.UsuarioService;
 import br.com.fourdev.orderfood.service.exception.EmailCadastradoException;
 import br.com.fourdev.orderfood.service.exception.SenhaObrigatoraException;
@@ -22,6 +23,9 @@ import br.com.fourdev.orderfood.service.exception.SenhaObrigatoraException;
 public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private Usuarios usuarios;
 	
 	@Autowired
 	private Grupos grupos;
@@ -60,5 +64,16 @@ public class UsuarioController {
 		
 		return new ModelAndView("redirect:novo");
 	}
+	
+	@GetMapping
+	public ModelAndView pesquisa(){
+		ModelAndView modelAndView = new ModelAndView("usuario/pesquisa-usuario");
+		
+		modelAndView.addObject("usuarios", usuarios.findAll());
+		
+		return modelAndView;
+	}
+	
+	
 
 }

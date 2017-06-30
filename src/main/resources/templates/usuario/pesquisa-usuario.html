@@ -4,7 +4,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/layout-padrao">
 <head>
-<title>Produtos</title>
+<title>Usuários</title>
 <link th:href="@{/js/plugins/data-tables/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet"/>
 <link th:href="@{js/plugins/sweetalert/sweetalert.css}" type="text/css" rel="stylesheet"/>
 </head>
@@ -16,16 +16,16 @@
 			
 			<div class="row">
 				<div class="col s10 m10 l10">
-					<h5 class="breadcrumbs-title">Produtos</h5>
+					<h5 class="breadcrumbs-title">Usuários</h5>
 					<ol class="breadcrumbs">
 						<li><a href="index.html">Home</a></li>
 						<li><a href="#">Pesquisa</a></li>
-						<li class="active">Produto</li>
+						<li class="active">Usuário</li>
 					</ol>
 				</div>
 				<div class="fixed-action-btn horizontal of-btn-floating" >
-				 <a th:href="@{/produto/novo}" class="btn-floating btn-large cyan 
-				 	tooltipped" data-position="left" data-delay="50" data-tooltip="Cadastrar Novo Produto">
+				 <a th:href="@{/usuario/novo}" class="btn-floating btn-large cyan 
+				 	tooltipped" data-position="left" data-delay="50" data-tooltip="Cadastrar Usuário">
 				    <i class="large mdi-content-add"></i>
 				  </a>
 				</div>
@@ -45,59 +45,44 @@
 				<div class="col s12 m12 l12">
 
 					<div class="card-panel hoverable">
-						<h4 class="header2" style="padding: 7px"><i class="mdi-action-search"></i> Buscar Produtos</h4>
+						<h4 class="header2" style="padding: 7px"><i class="mdi-action-search"></i> Buscar Usuário</h4>
 						<div>
 							<div class="row">
 								<div class="col s12 m12 l12">
 									<table id="data-table-simple" class="responsive-table display highlight bordered">
 										<thead>
 											<tr>
-												<th>Imagem</th>
 												<th>Nome</th>
-												<th class="center">Volume</th>
-												<th class="center">Unidade</th>
-												<th>Valor</th>
-												<th class="center">Quantidade</th>
-												<th>Categoria</th>
-												<th>Ações</th>
+												<th>Email</th>
+												<th class="center">Status</th>
+												<th class="center">Ações</th>
 											</tr>
 										</thead>
 
 										<tfoot class="centered">
 											<tr>
-												<th>Imagem</th>
 												<th>Nome</th>
-												<th class="center">Volume</th>
-												<th class="center">Unidade</th>
-												<th>Valor</th>
-												<th class="center">Quantidade</th>
-												<th>Categoria</th>
-												<th>Ações</th>
+												<th>Email</th>
+												<th class="center">Status</th>
+												<th class="center">Ações</th>
 											</tr>
 										</tfoot>
 
 										<tbody>
-											<tr th:each="produto : ${produtos}">
-												<td id="thumbnail">
-													<img th:if="${#strings.isEmpty(produto.foto)}" th:src="@{/images/mockup.jpg}" class="circle responsive-img" />
-													<img  th:unless="${#strings.isEmpty(produto.foto)}" th:src="@{/foto/temp/{foto}(foto=${produto.foto})}" class="circle responsive-img" />
-												</td>
-												<td th:text="${produto.nome}"></td>
-												<td th:text="${produto.volume}" class="center"></td>
-												<td th:text="${produto.unidade}" class="center"></td>
-												<td th:text="|R$ ${produto.valor}|"></td>
-												<td th:text="${produto.qtestoque}" class="center"></td>
-												<td th:text="${produto.categoria.descricao}"></td>
-												<td>
+											<tr th:each="usuario : ${usuarios}">
+												<td th:text="${usuario.nome}"></td>
+												<td th:text="${usuario.email}"></td>
+												<td th:text="${usuario.ativo}" class="center"></td>
+												<td class="center">
 													<a href="#" class="primary-content tooltipped" 
 														data-position="top" data-delay="50" data-tooltip="Editar" 
-														th:href="@{/produto/{id}(id=${produto.id})}"
+														th:href="@{/usuario/{id}(id=${usuario.id})}"
 														style="padding-right: 10px">
 														<i class="mdi-content-create"></i>
 													</a>
 													<a href="#" class="red-text tooltipped js-exclusao-btn" data-position="top" data-delay="50" data-tooltip="Excluir"
-														data:url="@{/produto/{id}(id=${produto.id})}"
-															data:id="${produto.id}" data:objeto="${produto.nome}">
+														data:url="@{/usuario/{id}(id=${usuario.id})}"
+															data:id="${usuario.id}" data:objeto="${usuario.nome}">
 														<i class="mdi-navigation-close"></i>
 													</a>
 												</td>
@@ -127,4 +112,3 @@
 
 </th:block>
 </html>
-
