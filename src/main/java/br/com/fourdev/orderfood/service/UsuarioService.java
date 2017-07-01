@@ -27,7 +27,7 @@ public class UsuarioService {
 		
 		Optional<Usuario> usuarioExistente = usuarios.findByEmail(usuario.getEmail());
 		
-		if (usuarioExistente.isPresent()) {
+		if (usuarioExistente.isPresent() && !usuarioExistente.get().equals(usuario)) {
 			throw new EmailCadastradoException("email do usuário já cadastrado!");
 		}
 
@@ -37,9 +37,12 @@ public class UsuarioService {
 		
 		}
 		
-		if(usuario.isNovo()){
-			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		if (usuario.isNovo() || !StringUtils.isEmpty(usuario.getPassword())) {
+			usuario.setPassword(this.passwordEncoder.encode(usuario.getPassword()));
+		} else if (StringUtils.isEmpty(usuario.getPassword())) {
+			usuario.setPassword(usuarioExistente.get().getPassword());
 		}
+		
 		
 		usuarios.save(usuario);
 	}

@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.fourdev.orderfood.model.Produto;
 import br.com.fourdev.orderfood.model.Usuario;
 import br.com.fourdev.orderfood.repository.Grupos;
 import br.com.fourdev.orderfood.repository.usuario.Usuarios;
@@ -39,8 +42,8 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@PostMapping("/novo")
-	public ModelAndView novo(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes){
+	@RequestMapping(value={"/novo", "{\\d+}"}, method=RequestMethod.POST)
+	public ModelAndView salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes){
 		if (result.hasErrors()) {
 			
 			return novo(usuario);
@@ -70,7 +73,17 @@ public class UsuarioController {
 		ModelAndView modelAndView = new ModelAndView("usuario/pesquisa-usuario");
 		
 		modelAndView.addObject("usuarios", usuarios.findAll());
+		modelAndView.addObject("grupos", grupos.findAll());
 		
+		return modelAndView;
+	}
+	
+	@GetMapping("/{id}")
+	public ModelAndView editar(@PathVariable("id")Usuario usuario){
+		ModelAndView modelAndView = novo(usuario);
+		modelAndView.addObject(usuario);
+		modelAndView.addObject("grupos", grupos.findAll());
+
 		return modelAndView;
 	}
 	
