@@ -79,7 +79,7 @@ public class MesaRestController {
 		}
 		String userJSONString = gson.toJson(valor);
 
-		valor = gson.fromJson(userJSONString, String.class);
+		valor = userJSONString;//gson.fromJson(userJSONString, String.class);
 		return valor;
 
 	}
