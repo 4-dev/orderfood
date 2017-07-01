@@ -24,17 +24,25 @@ public class MesaRepositoryImpl implements MesaRepository {
 	// codprod = ?";
 
 	public List<Mesa> selectMesaList() {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[]{});
+		
 		String query = "select * from mesa order by idmesa";
 		return jdbcTemplate.query(query, new BeanPropertyRowMapper(Mesa.class));
 	}
 
 	public Mesa selectMesaPorId(int idmesa) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[]{});
+		
 		String query = "select * from mesa where idmesa=? ";
 		return (Mesa) jdbcTemplate.queryForObject(query, new Object[] { idmesa }, new BeanPropertyRowMapper(Mesa.class));
 	}
 
 	public void insertMesa(Mesa mesa) {
-
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[]{});
+		
 		String query = "insert into mesa(descricao, status) "
 				+ " values (?,?) ";
 		jdbcTemplate.update(query, new Object[] { mesa.getDescricao(),
@@ -42,6 +50,9 @@ public class MesaRepositoryImpl implements MesaRepository {
 	}
 
 	public void updateMesa(Mesa mesa) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[]{});
+		
 		if (mesa != null) {
 			String query = "update mesa set ";
 			query += " descricao = ?, ";
@@ -56,6 +67,9 @@ public class MesaRepositoryImpl implements MesaRepository {
 	}
 
 	public void deleteMesa(int id) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[]{});
+		
 		String query = "delete from mesa where id=?";
 		jdbcTemplate.update(query, new Object[] { id });
 	}
@@ -69,6 +83,9 @@ public class MesaRepositoryImpl implements MesaRepository {
 
 
 	public int contaMesas() {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[]{});
+		
 		String query = "select count(1) from mesa";
 		int contaMesas = (Integer) this.jdbcTemplate.queryForObject(query, Integer.class);
 		return contaMesas;
