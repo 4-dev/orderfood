@@ -13,7 +13,7 @@
 					</div>
 					<div class="col col s8 m8 l8">
 						<ul id="profile-dropdown" class="dropdown-content">
-							<li><a th:href="@{/dashboard/inicio}"><i class="mdi-action-face-unlock"></i>
+							<li><a><i class="mdi-action-face-unlock"></i>
 									Perfil</a></li>
 							<li><a href="#"><i class="mdi-communication-live-help"></i>
 									Ajuda</a></li>
@@ -41,7 +41,7 @@
 							class="mdi-action-view-carousel"></i> Layouts</a>
 						<div class="collapsible-body">
 							<ul>
-								<li><a href="layout-fullscreen.html">Full Screen</a></li>
+								<li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen">Full Screen</a></li>
 								<li><a href="layout-horizontal-menu.html">Horizontal
 										Menu</a></li>
 							</ul>
@@ -58,10 +58,11 @@
 								<li><a th:href="@{/produto/novo}">Produto</a></li>
 								<li><a th:href="@{/usuario/novo}">Usuário</a></li>
 								<li><a th:href="@{/mesa/novo}">Mesa</a></li>
-								<li><a th:href="@{/mesa/novo}">Cardápio</a></li>								
 							</ul>
 						</div>
 					</li>
+					<li><a th:href="@{/produto}"><i class=""></i>Produtos</a></li>
+					<li><a th:href="@{/usuario}"><i class="mdi-social-people"></i>Usuários</a></li>
 					<li class="li-hover"><div class="divider"></div></li>
 					<li class="li-hover"><p class="ultra-small margin more-text">Vendas</p></li>
 					<li class="bold"><a
