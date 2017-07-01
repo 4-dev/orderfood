@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusPedido;
 import br.com.fourdev.orderfood.repository.pedido.PedidoRepository;
@@ -18,6 +19,11 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	public void insertPedido(Pedido pedido) {
+		pedidoRepository.insertPedido(pedido);
+	}
+
 
 	public List<Pedido> pedidosAbertos() {
 		StatusPedido statusPedido = StatusPedido.ABERTO;
