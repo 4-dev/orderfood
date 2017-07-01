@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,8 +42,8 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@PostMapping("/novo")
-	public ModelAndView novo(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes){
+	@RequestMapping(value={"/novo", "{\\d+}"}, method=RequestMethod.POST)
+	public ModelAndView salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes){
 		if (result.hasErrors()) {
 			
 			return novo(usuario);
