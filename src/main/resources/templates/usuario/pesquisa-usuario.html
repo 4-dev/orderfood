@@ -54,6 +54,7 @@
 											<tr>
 												<th>Nome</th>
 												<th>Email</th>
+												<th>Grupos</th>
 												<th class="center">Status</th>
 												<th class="center">Ações</th>
 											</tr>
@@ -63,6 +64,7 @@
 											<tr>
 												<th>Nome</th>
 												<th>Email</th>
+												<th>Grupos</th>
 												<th class="center">Status</th>
 												<th class="center">Ações</th>
 											</tr>
@@ -72,7 +74,15 @@
 											<tr th:each="usuario : ${usuarios}">
 												<td th:text="${usuario.nome}"></td>
 												<td th:text="${usuario.email}"></td>
-												<td th:text="${usuario.ativo}" class="center"></td>
+												<td>
+													<span th:each="grupo : ${usuario.grupos}" th:text="|${grupo.nome}${grupoStat.last ? '' : ', '}|"></span>
+												</td>
+												<td class="center">
+													<div class="chip" th:text="${usuario.ativo}?'Ativo':'Inativo'"
+														th:classappend="${usuario.ativo}?'green lighten-2 white-text':'red lighten-2 white-text'" >
+													
+													</div>
+												</td>
 												<td class="center">
 													<a href="#" class="primary-content tooltipped" 
 														data-position="top" data-delay="50" data-tooltip="Editar" 
