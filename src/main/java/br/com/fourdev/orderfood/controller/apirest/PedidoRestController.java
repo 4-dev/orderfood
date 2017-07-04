@@ -112,7 +112,6 @@ public class PedidoRestController {
 			pedido.setDataEntrega(LocalDateTime.now());
 			pedido.setObservacao("");
 			pedido.setStatus(StatusPedido.ABERTO);
-
 			// pedido.setUsuario(usuarios.findOne((long) 1));
 			Mesa mesa = new Mesa();
 			mesa.setDescricao("");
