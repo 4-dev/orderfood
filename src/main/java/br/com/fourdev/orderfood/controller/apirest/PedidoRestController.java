@@ -122,7 +122,6 @@ public class PedidoRestController {
 		}
 		return pedidos;
 	}
-
 	// @RequestMapping(value = "/verificarmesa/{id}", method =
 	// RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	// public String verificarStatusMesa(@PathVariable("id") int idmesa) throws
