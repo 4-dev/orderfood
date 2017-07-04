@@ -1,7 +1,6 @@
 package br.com.fourdev.orderfood.repository.pedido;
 
 import java.util.List;
-
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusPedido;
 
