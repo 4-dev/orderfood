@@ -8,6 +8,8 @@ import org.springframework.jdbc.InvalidResultSetAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Pedido;
@@ -55,7 +57,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		return (Pedido) jdbcTemplate.queryForObject(query, new Object[] { numped },
 				new BeanPropertyRowMapper(Pedido.class));
 	}
-	
+
 	public List<Pedido> retornaPedidoPorMesa(int idmesa) {
 		String query = "SELECT cab.* FROM mesa_pedido mp, cabpedido cab WHERE mp.numped = cab.numped AND mp.idmesa = ? ORDER BY CAB.NUMPED";
 		return jdbcTemplate.query(query, new Object[] { idmesa }, new PedidoRowMapper());
@@ -77,6 +79,70 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 					new Object[] { pedido.getNumped(), pedido.getDataCriacao(), pedido.getValorDesconto(),
 							pedido.getValorTotal(), pedido.getObservacao(), pedido.getDataEntrega(),
 							pedido.getStatus() });
+
+		} catch (InvalidResultSetAccessException e) {
+			throw new RuntimeException(e);
+		} catch (DataAccessException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public void insertPedido(List<Pedido> pedidos) {
+		try {
+			
+			try {
+			String query1 = "set search_path to orderfood, public";
+			jdbcTemplate.update(query1, new Object[] {});
+			
+			for (Pedido pedido : pedidos) {
+				String qry = "select max(numped) + 1 as numped from itempedido";
+				long numped = jdbcTemplate.queryForObject(qry, Long.class);
+				
+				for (ItemPedido itemPedido : pedido.getItens()) {
+					System.out.println(itemPedido.getProduto());
+
+					String query = "insert into itempedido(numped, produto, quantidade, valorUnitario) "
+							+ " values (?,?,?,?) ";
+					jdbcTemplate.update(query, new Object[] {numped, itemPedido.getProduto(),
+							itemPedido.getQuantidade(), itemPedido.getValorUnitario() });
+				}
+
+						
+				
+				String query = "insert into cabpedido(numped, dataCriacao, valorDesconto, "
+						+ "	valorTotal, observacao, dataEntrega, status) " + " values (?, ?,?,?,?,CURRENT_DATE,?) ";
+				jdbcTemplate.update(query,
+						new Object[] {numped ,pedido.getDataCriacao(), pedido.getValorDesconto(),
+								pedido.getValorTotal(), pedido.getObservacao(), pedido.getDataEntrega(),
+								pedido.getStatus() });
+			}
+			
+	
+			} catch (Exception e) {
+				System.out.println(e.getMessage());// TODO: handle exception
+			} 
+			
+
+			// for (ItemPedido item : pedidos. getItens()) {
+			// String query = "insert into itempedido(numped, produto,
+			// quantidade, valorUnitario) "
+			// + " values (?,?,?,?) ";
+			// jdbcTemplate.update(query, new Object[] { item.getNumped(),
+			// item.getProduto(), item.getQuantidade(),
+			// item.getValorUnitario() });
+			// }
+			//
+			// String query = "insert into cabpedido(numped, dataCriacao,
+			// valorDesconto, "
+			// + " valorTotal, observacao, dataEntrega, status) " + " values
+			// (?,?,?,?,?,?,?) ";
+			// jdbcTemplate.update(query,
+			// new Object[] { pedido.getNumped(), pedido.getDataCriacao(),
+			// pedido.getValorDesconto(),
+			// pedido.getValorTotal(), pedido.getObservacao(),
+			// pedido.getDataEntrega(),
+			// pedido.getStatus() });
 
 		} catch (InvalidResultSetAccessException e) {
 			throw new RuntimeException(e);
