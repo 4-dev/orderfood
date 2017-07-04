@@ -15,9 +15,13 @@
                         
                         <li><a href="#" class="waves-effect waves-block waves-light" th:text="${#authentication.name}"></a>
                         </li>
-                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="mdi-action-settings-overscan"></i></a>
+                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light 
+                        	toggle-fullscreen tooltipped" data-position="left" data-delay="50" data-tooltip="Full Screen">
+                        	<i class="mdi-action-settings-overscan"></i></a>
                         </li>
-                         <li><a th:href="@{/logout}" class="waves-effect waves-block waves-light"><i class="mdi-hardware-keyboard-tab"></i></a>
+                         <li><a th:href="@{/logout}" 
+                         	class="waves-effect waves-block waves-light tooltipped" data-position="left" data-delay="50" data-tooltip="Sair do Sistema!">
+                         <i class="mdi-hardware-keyboard-tab"></i></a>
                         </li>
                         
                     </ul>
