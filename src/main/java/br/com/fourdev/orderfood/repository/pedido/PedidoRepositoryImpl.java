@@ -123,7 +123,6 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 				System.out.println(e.getMessage());// TODO: handle exception
 			} 
 			
-
 			// for (ItemPedido item : pedidos. getItens()) {
 			// String query = "insert into itempedido(numped, produto,
 			// quantidade, valorUnitario) "
