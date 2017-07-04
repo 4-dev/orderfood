@@ -52,10 +52,6 @@ public class PedidoRestController {
 
 	@RequestMapping(value = "/gerarpedido", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String insertPedido(@RequestBody String pedidoJson) {
-		// logger.debug("numped=" + pedidoJson);
-		// Pedido pedido = new Pedido();
-		// pedido.setNumped(2);
-		// pedidoService.insertPedido(pedido);
 		List<Pedido> pedidos = transformarJsonPedido(pedidoJson); 
 		if (!pedidos.isEmpty()) {
 			try {
