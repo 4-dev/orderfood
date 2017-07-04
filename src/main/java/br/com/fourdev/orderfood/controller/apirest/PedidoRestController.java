@@ -56,19 +56,29 @@ public class PedidoRestController {
 		// Pedido pedido = new Pedido();
 		// pedido.setNumped(2);
 		// pedidoService.insertPedido(pedido);
-
-		transformarJsonPedido(pedidoJson);
-		return new Gson().toJson("OK");
+		List<Pedido> pedidos = transformarJsonPedido(pedidoJson); 
+		if (!pedidos.isEmpty()) {
+			try {
+				pedidoService.insertPedido(pedidos);	
+			} catch (Exception e) {
+				return new Gson().toJson("ERRO: "+e.getMessage());
+			}
+			
+			return new Gson().toJson("OK");
+		} else {
+			return new Gson().toJson("ERRO");
+		}
+		
 	}
 
-	private void transformarJsonPedido(String pedidoJson) {
+	private List<Pedido> transformarJsonPedido(String pedidoJson) {
 
-		Gson gson = new Gson();
+		// Gson gson = new Gson();
 		String jsonInString = pedidoJson;
 		JsonParser jsonParser = new JsonParser();
 		JsonObject jo = (JsonObject) jsonParser.parse(jsonInString);
 		JsonArray jsonArr = jo.getAsJsonArray("listPedidos");
-
+		List<Pedido> pedidos = new ArrayList<Pedido>();
 
 		for (int i = 0; i < jsonArr.size(); i++) {
 			System.out.println(jsonArr.get(i).getAsJsonObject().get("codigo"));
@@ -77,11 +87,11 @@ public class PedidoRestController {
 			List<ItemPedido> itens = new ArrayList<ItemPedido>();
 			JsonArray jsonItens = jsonArr.get(i).getAsJsonObject().get("itens").getAsJsonArray();
 			for (int j = 0; j < jsonItens.size(); j++) {
-				int codPedido = jsonItens.get(i).getAsJsonObject().get("codPedido").getAsInt();
-				int codProduto = jsonItens.get(i).getAsJsonObject().get("codProduto").getAsInt();
-				int quantidade = jsonItens.get(i).getAsJsonObject().get("quantidade").getAsInt();
-				BigDecimal valorTotal = jsonItens.get(i).getAsJsonObject().get("valorTotal").getAsBigDecimal();
-				BigDecimal valorUnitario = jsonItens.get(i).getAsJsonObject().get("valorUnitario").getAsBigDecimal();
+				int codPedido = jsonItens.get(j).getAsJsonObject().get("codPedido").getAsInt();
+				int codProduto = jsonItens.get(j).getAsJsonObject().get("codProduto").getAsInt();
+				int quantidade = jsonItens.get(j).getAsJsonObject().get("quantidade").getAsInt();
+				BigDecimal valorTotal = jsonItens.get(j).getAsJsonObject().get("valorTotal").getAsBigDecimal();
+				BigDecimal valorUnitario = jsonItens.get(j).getAsJsonObject().get("valorUnitario").getAsBigDecimal();
 
 				System.out.println(codPedido);
 				ItemPedido itemPedido = new ItemPedido();
@@ -113,8 +123,10 @@ public class PedidoRestController {
 			pedido.setMesa(mesa);
 
 			pedido.setItens(itens);
-//			pedido.setNumped(jsonArr.get(i).getAsJsonObject().get("codigo").getAsInt());
+			// pedido.setNumped(jsonArr.get(i).getAsJsonObject().get("codigo").getAsInt());
+			pedidos.add(pedido);
 		}
+		return pedidos;
 	}
 
 	// @RequestMapping(value = "/verificarmesa/{id}", method =
