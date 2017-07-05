@@ -54,12 +54,12 @@ public class PedidoRestController {
 		List<Pedido> pedidos = transformarJsonPedido(pedidoJson); 
 		if (!pedidos.isEmpty()) {
 			try {
-				pedidoService.insertPedido(pedidos);	
+				pedidoService.insertPedido(pedidos);
+				return new Gson().toJson("OK");
 			} catch (Exception e) {
 				return new Gson().toJson("ERRO: "+e.getMessage());
 			}
-			
-			return new Gson().toJson("OK");
+
 		} else {
 			return new Gson().toJson("ERRO");
 		}
