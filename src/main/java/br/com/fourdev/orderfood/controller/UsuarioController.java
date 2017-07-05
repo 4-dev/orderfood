@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -82,6 +83,14 @@ public class UsuarioController {
 		modelAndView.addObject(usuario);
 		modelAndView.addObject("grupos", grupos.findAll());
 
+		return modelAndView;
+	}
+	
+	@GetMapping("/perfil/{id}")
+	public ModelAndView perfil(@PathVariable("id")Usuario usuario){
+		ModelAndView modelAndView = new ModelAndView("usuario/perfil");
+		modelAndView.addObject("usuario", usuario);
+		
 		return modelAndView;
 	}
 	

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 	<aside id="left-sidebar-nav" th:fragment="layout-sidebar">
 		<ul id="slide-out" class="side-nav fixed leftside-navigation">
@@ -13,76 +13,101 @@
 					</div>
 					<div class="col col s8 m8 l8">
 						<ul id="profile-dropdown" class="dropdown-content">
-							<li><a><i class="mdi-action-face-unlock"></i>
-									Perfil</a></li>
+							<li><a
+								th:href="@{/usuario/perfil/{id}(id=${#authentication.principal.usuario.id})}"><i
+									class="mdi-action-face-unlock"></i> Perfil</a></li>
 							<li><a href="#"><i class="mdi-communication-live-help"></i>
 									Ajuda</a></li>
 							<li class="divider"></li>
-							<li><a th:href="@{/logout}"><i class="mdi-hardware-keyboard-tab"></i>
-									Logout</a></li>
+							<li><a th:href="@{/logout}"><i
+									class="mdi-hardware-keyboard-tab"></i> Logout</a></li>
 						</ul>
 						<a
-							class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn"
-							href="#" data-activates="profile-dropdown" th:text="${#strings.abbreviate(#authentication.principal.usuario.nome, 17)}">
-							<i class="mdi-navigation-arrow-drop-down right"></i></a>
-							<p class="user-roal" sec:authorize="hasAuthority('ACESSO_ADMIN')">Adiministrador</p>
-							<p class="user-roal" sec:authorize="!hasAuthority('ACESSO_ADMIN')">Usuário</p>
-						
+							class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn "
+							href="#" data-activates="profile-dropdown"
+							>
+							[[${#strings.abbreviate(#authentication.principal.usuario.nome, 17)}]]
+							<i class="mdi-navigation-arrow-drop-down right"></i>
+						</a>
+						<p class="user-roal" sec:authorize="hasAuthority('ACESSO_ADMIN')">Adiministrador</p>
+						<p class="user-roal" sec:authorize="!hasAuthority('ACESSO_ADMIN')">Usuário</p>
+
 					</div>
 				</div>
 			</li>
-			<li th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/inicio' ? 'active':''}" class="bold"><a th:href="@{/dashboard/inicio}"
+			<li
+				th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard/inicio' ? 'active':''}"
+				class="bold"><a th:href="@{/dashboard/inicio}"
 				class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>
 					Dashboard</a></li>
-			
+
 			<li class="no-padding">
 				<ul class="collapsible collapsible-accordion">
-					<li th:classappend="${#httpServletRequest.getRequestURI().endsWith('novo') ? 'active':''}" class="bold">
-					<a th:classappend="${#httpServletRequest.getRequestURI().endsWith('novo') ? 'active':''}"
+					<li
+						th:classappend="${#httpServletRequest.getRequestURI().endsWith('novo') ? 'active':''}"
+						class="bold"><a
+						th:classappend="${#httpServletRequest.getRequestURI().endsWith('novo') ? 'active':''}"
 						class="collapsible-header waves-effect waves-cyan"><i
 							class="mdi-av-queue"></i> Cadastro </a>
 						<div class="collapsible-body">
 							<ul>
-								<li th:classappend="${#httpServletRequest.getRequestURI() == '/produto/novo' ? 'active':''}">
-									<a th:href="@{/produto/novo}">Produto
-									</a></li>
-								<li th:classappend="${#httpServletRequest.getRequestURI() == '/usuario/novo' ? 'active':''}" ><a th:href="@{/usuario/novo}">
-									Usuário</a></li>
-								<li th:classappend="${#httpServletRequest.getRequestURI() == '/mesa/novo' ? 'active':''}">
-									<a th:href="@{/mesa/novo}">Mesa</a></li>
+								<li
+									th:classappend="${#httpServletRequest.getRequestURI() == '/produto/novo' ? 'active':''}">
+									<a th:href="@{/produto/novo}">Produto </a>
+								</li>
+								<li
+									th:classappend="${#httpServletRequest.getRequestURI() == '/usuario/novo' ? 'active':''}"><a
+									th:href="@{/usuario/novo}"> Usuário</a></li>
+								<li
+									th:classappend="${#httpServletRequest.getRequestURI() == '/mesa/novo' ? 'active':''}">
+									<a th:href="@{/mesa/novo}">Mesa</a>
+								</li>
 							</ul>
-						</div>
-					</li>
-					<li th:classappend="${#httpServletRequest.getRequestURI() == '/produto' ? 'active':''}">
+						</div></li>
+					<li
+						th:classappend="${#httpServletRequest.getRequestURI() == '/produto' ? 'active':''}">
 						<a th:href="@{/produto}"><i class="mdi-action-view-list"></i>Produtos</a>
 					</li>
-					<li th:classappend="${#httpServletRequest.getRequestURI() == '/usuario' ? 'active':''}">
+					<li
+						th:classappend="${#httpServletRequest.getRequestURI() == '/usuario' ? 'active':''}">
 						<a th:href="@{/usuario}"><i class="mdi-social-people"></i>Usuários</a>
 					</li>
 					<li class="li-hover"><div class="divider"></div></li>
 					<li class="li-hover"><p class="ultra-small margin more-text">Vendas</p></li>
-					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/pedido') ? 'active':''}" class="bold">
-					<a th:classappend="${#httpServletRequest.getRequestURI().startsWith('/pedido') ? 'active':''}"
+					<li
+						th:classappend="${#httpServletRequest.getRequestURI().startsWith('/pedido') ? 'active':''}"
+						class="bold"><a
+						th:classappend="${#httpServletRequest.getRequestURI().startsWith('/pedido') ? 'active':''}"
 						class="collapsible-header  waves-effect waves-cyan"><i
 							class="mdi-action-shopping-cart"></i> Pedidos</a>
 						<div class="collapsible-body">
 							<ul>
-								
-								<li th:classappend="${#httpServletRequest.getRequestURI() == '/pedido/abertos' ? 'active':''}">
-								  <a th:href="@{/pedido/abertos}">Lista Abertos</a></li>
-								<li th:classappend="${#httpServletRequest.getRequestURI() == '/pedido/emandamento' ? 'active':''}">
-								  <a th:href="@{/pedido/emandamento}">Lista Em Andamento</a></li>
-								<li th:classappend="${#httpServletRequest.getRequestURI() == '/pedido/fechados' ? 'active':''}">
-									<a th:href="@{/pedido/fechados}">Lista Fechados</a></li>
-								<li th:classappend="${#httpServletRequest.getRequestURI() == '/pedido/cancelados' ? 'active':''}">
-									<a th:href="@{/pedido/cancelados}">Lista Cancelados</a></li>
-								
+
+								<li
+									th:classappend="${#httpServletRequest.getRequestURI() == '/pedido/abertos' ? 'active':''}">
+									<a th:href="@{/pedido/abertos}">Lista Abertos</a>
+								</li>
+								<li
+									th:classappend="${#httpServletRequest.getRequestURI() == '/pedido/emandamento' ? 'active':''}">
+									<a th:href="@{/pedido/emandamento}">Lista Em Andamento</a>
+								</li>
+								<li
+									th:classappend="${#httpServletRequest.getRequestURI() == '/pedido/fechados' ? 'active':''}">
+									<a th:href="@{/pedido/fechados}">Lista Fechados</a>
+								</li>
+								<li
+									th:classappend="${#httpServletRequest.getRequestURI() == '/pedido/cancelados' ? 'active':''}">
+									<a th:href="@{/pedido/cancelados}">Lista Cancelados</a>
+								</li>
+
 							</ul>
 						</div></li>
 
-					<li th:classappend="${#httpServletRequest.getRequestURI() == '/mesa/status' ? 'active':''}">
-						<a th:href="@{/mesa/status}"><i class="mdi-maps-restaurant-menu"></i>
-							Mesas</a></li>
+					<li
+						th:classappend="${#httpServletRequest.getRequestURI() == '/mesa/status' ? 'active':''}">
+						<a th:href="@{/mesa/status}"><i
+							class="mdi-maps-restaurant-menu"></i> Mesas</a>
+					</li>
 
 					<li class="li-hover"><div class="divider"></div></li>
 					<li class="li-hover"><p class="ultra-small margin more-text">Diárias</p></li>
