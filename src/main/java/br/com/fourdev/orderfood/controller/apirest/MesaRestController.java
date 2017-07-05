@@ -1,9 +1,7 @@
 
 package br.com.fourdev.orderfood.controller.apirest;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import br.com.fourdev.orderfood.model.Mesa;
+import br.com.fourdev.orderfood.model.Produto;
 import br.com.fourdev.orderfood.service.MesaService;
+import br.com.fourdev.orderfood.service.ProdutoService;
 
 //@ImportResource("classpath:org/springframework/integration/samples/chat/stomp/server/stomp-server.xml")
 @RestController
@@ -28,6 +28,10 @@ public class MesaRestController {
 	final static Logger logger = LoggerFactory.getLogger(MesaRestController.class);
 	@Autowired
 	private MesaService mesaService;
+	
+	@Autowired
+	private ProdutoService produtoService;
+	
 
 	// private SimpMessagingTemplate template;
 
@@ -73,13 +77,15 @@ public class MesaRestController {
 		Gson gson = new Gson();
 		String valor = "";
 		if (mesaService.verificarStatusMesa(idmesa)) {
-			valor += "Mesa disponivel";
+//			valor += "Mesa disponivel";
+			List<Produto> produtos = produtoService.selectProdutoList();
+			valor += gson.toJson(produtos);
 		} else {
 			valor += "Mesa ocupada";
 		}
-		String userJSONString = gson.toJson(valor);
-
-		valor = userJSONString;//gson.fromJson(userJSONString, String.class);
+//		String userJSONString = gson.toJson(valor);
+//
+//		valor = userJSONString;//gson.fromJson(userJSONString, String.class);
 		return valor;
 
 	}
