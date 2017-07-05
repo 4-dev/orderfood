@@ -5,19 +5,7 @@
 	layout:decorator="layout/layout-padrao">
 <head>
 <title>Status das Mesas</title>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/bootstrap-switch.min.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/upload.min.css}" />
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/sockjs-client/sockjs.min.js"></script>
-<script src="/webjars/stomp-websocket/stomp.min.js"></script>
-<script src="/js/app.js"></script>
-<script type="text/javascript">
-	// 	var botoes = document.querySelectorAll("button.MINHA-CLASSE");
-	// 	for (var i = 0; i < botoes.length; i++) {
-	// 		botoes[i].click();
-	// 	}
-</script>
+
 </head>
 <body onload="connect();">
 	<section id="content" layout:fragment="conteudo">
@@ -45,95 +33,32 @@
 			<div class="section">
 				<div class="divider"></div>
 
-				<div class="row">
-					<div class="col s12 m12 l12">
-						<div id="card-alert"
-							class="card green lighten-5 alert-dismissible"
-							th:if="${not #strings.isEmpty(mensagem)}">
-							<div class="card-content green-text">
-								<p>
-									<i class="mdi-navigation-check"></i> <span
-										th:text="${mensagem}"></span>
-								</p>
-							</div>
-							<button type="button" class="close green-text"
-								data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-
-						<div id="main-content" class="container">
-							<div class="row">
-								<div class="col-md-6">
-									<!-- 								<form class="form-inline"> -->
-									<!-- 									<div class="form-group"> -->
-									<!-- 										<label for="connect">WebSocket connection:</label> -->
-									<!-- 										<button id="connect" class="btn btn-default" type="submit">Connect</button> -->
-									<!-- 										<button id="disconnect" class="btn btn-default" type="submit" -->
-									<!-- 											disabled="disabled">Disconnect</button> -->
-									<!-- 									</div> -->
-									<!-- 								</form> -->
-								</div>
-								<!-- 							<div class="col-md-6"> -->
-								<!-- 								<form class="form-inline"> -->
-								<!-- 									<div class="form-group"> -->
-								<!-- 										<label for="name">What is your name?</label> <input -->
-								<!-- 											type="text" id="name" class="form-control" -->
-								<!-- 											placeholder="Your name here..."> -->
-								<!-- 									</div> -->
-								<!-- 									<button id="send" class="btn btn-default" type="submit">Send</button> -->
-								<!-- 								</form> -->
-								<!-- 							</div> -->
-							</div>
-							<!-- 						<div class="row"> -->
-							<!-- 							<div class="col-md-12"> -->
-							<!-- 								<table id="conversation" class="table table-striped"> -->
-							<!-- 									<thead> -->
-							<!-- 										<tr> -->
-							<!-- 											<th>Greetings</th> -->
-							<!-- 										</tr> -->
-							<!-- 									</thead> -->
-							<!-- 									<tbody id="greetings"> -->
-							<!-- 									</tbody> -->
-							<!-- 								</table> -->
-							<!-- 							</div> -->
-							<!-- 						</div> -->
-						</div>
-
-
 
 						<div class="row">
-							<!-- 						<div class="col s12 m3"  th:each="i:${#numbers.sequence(1, mesaService.contaMesas())}"> -->
-							<div class="col s12 m3"
-								th:each="i: ${mesaService.selectMesaList()}">
-
-
+							<div class="col s12 m3 l2" th:each="i: ${mesaService.selectMesaList()}">
 
 								<div th:id="mesaStatus+${i.idmesa}"
-									th:class="${i.status == 'DISPONIVEL' ? 'card blue-grey darken-1' : 'card deep-orange darken-1'}">
-									<div class="card-content white-text">
-										<span class="card-title" th:text="'Mesa '+${i.idmesa}">
-										</span>
-										<p
-											th:text="${i.status == 'DISPONIVEL' ? 'Diponível' : 'Ocupada' }"></p>
+									th:class="${i.status == 'DISPONIVEL' ? 'card hoverable blue-grey darken-1' : 'card hoverable deep-orange darken-1'}">
+									<div class="white-text center-align">
+										<div>
+											<span class="card-title" th:text="'Mesa '+${i.idmesa}"></span>
+										</div>
+										<div class="mesa-imagem card-image waves-effect waves-light modal-trigger center-align"
+											th:href="${'#modal'+i.idmesa}">
+											<img th:src="@{/images/mesa.png}" class="responsive-img" />
+										</div>
+										<div class="row" style="margin-bottom: 15px;">
+											<div th:classappend="${i.status == 'DISPONIVEL'?'green-text':'red-text'}" class="chip center-align"
+											 	th:text="${i.status == 'DISPONIVEL' ? 'Diponível' : 'Ocupada'}" th:id="descStatus+${i.idmesa}" >
+											 
+											</div>
+										</div>
 									</div>
-									<div class="card-action">
-										<a>Detalhes</a> <a
-											class="waves-effect waves-light btn modal-trigger light-blue "
-											th:href="${'#modal'+i.idmesa}">...</a>
-
-
-									</div>
-
 									<div th:id="modal+${i.idmesa}" class="modal">
 										<div class="modal-content">
-											<!-- 											<p th:text="${'#modal'+i.idmesa}" /> -->
-
 											<div class="row">
 												<div class="col s12 m12 l12">
-													<table id="data-table-simple"
-														class="responsive-table display striped" cellspacing="0"
-														width="100%">
+													<table class="responsive-table display striped bordered">
 														<thead>
 															<tr>
 																<th>Status</th>
@@ -145,48 +70,25 @@
 																<th>Mesa</th>
 															</tr>
 														</thead>
-														<tfoot>
-															<tr>
-																<th>Status</th>
-																<th>Pedido</th>
-																<th>Observacao</th>
-																<th>Vl. Total</th>
-																<th>Dt. Criação</th>
-																<th>Cliente</th>
-																<th>Mesa</th>
-															</tr>
-														</tfoot>
 														<tbody>
-															<tr
-																th:each="p: ${pedidoService.retornaPedidoPorMesa(i.idmesa)}">
-																<td th:text="${p.status}"></td>
-																<td th:text="${p.numped}"></td>
-																<td th:text="${p.observacao}"></td>
-																<td
-																	th:text="${#numbers.formatDecimal(p.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
-																<td th:text="${p.dataCriacao}"></td>
-																<td th:text="${p.cliente.idcliente}"></td>
-																<td th:text="${p.mesa.idmesa}"></td>
-															</tr>
-
+															
+																<tr
+																	th:each="p: ${pedidoService.retornaPedidoPorMesa(i.idmesa)}">
+																	<td th:text="${p.status}"></td>
+																	<td th:text="${p.numped}"></td>
+																	<td th:text="${p.observacao}"></td>
+																	<td
+																		th:text="${#numbers.formatDecimal(p.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
+																	<td th:text="${p.dataCriacao}"></td>
+																	<td th:text="${p.cliente.idcliente}"></td>
+																	<td th:text="${p.mesa.idmesa}"></td>
+																</tr>
+															
 														</tbody>
 
 													</table>
 
-													<ul class="collection">
-														<!-- 														<th:block -->
-														<!-- 															th:each="p : ${pedidoService.pedidosAv"> -->
-														<!-- 															<li class="collection-item avatar"><i -->
-														<!-- 																class="mdi-maps-restaurant-menu circle green darken-2"></i> -->
-														<!-- 																<span class="title" th:text="${p.status}"></span> -->
-														<!-- 																<p>Ativa</p> <a href="#" class="secondary-content"> -->
-														<!-- 																	<i class="mdi-content-create"></i> -->
-														<!-- 															</a></li> -->
-														<!-- 														</th:block> -->
-
-													</ul>
-
-
+													
 												</div>
 											</div>
 
@@ -205,8 +107,6 @@
 					</div>
 				</div>
 
-			</div>
-		</div>
 		<!--end container-->
 
 
@@ -215,20 +115,17 @@
 </body>
 
 <th:block layout:fragment="javascript-extra">
-	<script th:src="@{/js/uikit.min.js}"></script>
-	<script th:src="@{/js/upload.min.js}"></script>
-	<script th:src="@{/js/bootstrap-switch.min.js}"></script>
-	<script type="text/javascript" th:src="@{/js/foto-upload.js}"></script>
+<!-- 	<script src="/webjars/jquery/jquery.min.js"></script> -->
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<script src="/js/app.js"></script>
 
 	<script>
-		$('.js-status').bootstrapSwitch();
-
-		//fechar alertas automatico
-		$(".alert-dismissible").fadeTo(7000, 500).slideUp(500, function() {
-		});
-		function showGreeting(message) {
-			$("#greetings").append("<tr><td>" + message + "</td></tr>");
-		}
+		// 	var botoes = document.querySelectorAll("button.MINHA-CLASSE");
+		// 	for (var i = 0; i < botoes.length; i++) {
+		// 	botoes[i].click();
+		// 	}
+		
 	</script>
 
 </th:block>

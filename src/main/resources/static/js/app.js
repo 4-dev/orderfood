@@ -27,12 +27,18 @@ function connect() {
             
             var msg = JSON.parse(greeting.body).content;
             var idDiv = "#mesaStatus"+msg;
+            var descStatus = "#descStatus"+msg;
+            var desc = $(descStatus).text();
 //            alert('aqui stompClient.connect '+idDiv);
             if(JSON.parse(greeting.body).content = '') {
 //            	$("#cardStatus").attr("class", "card yellow darken-1");
+            	console.log(desc);
+            	 $(descStatus).append("Disponivel");
             	$(idDiv).attr("class", "card blue-grey darken-1");            	
             } else {
             	$(idDiv).attr("class", "card deep-orange darken-1");
+            	$(descStatus).append("");
+            	$(descStatus).append("Ocupada");
             }
         });
     });
