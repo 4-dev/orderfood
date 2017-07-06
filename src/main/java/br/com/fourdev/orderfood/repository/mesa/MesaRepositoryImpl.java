@@ -1,5 +1,6 @@
 package br.com.fourdev.orderfood.repository.mesa;
 
+import java.sql.Types;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,22 +69,22 @@ public class MesaRepositoryImpl implements MesaRepository {
 				MapSqlParameterSource params = new MapSqlParameterSource();
 				if ((!"".equalsIgnoreCase(mesa.getDescricao()) && (mesa.getDescricao() != null))) {
 					query += "descricao = :descricao, ";
-					params.addValue("descricao ", mesa.getDescricao());
+					params.addValue("descricao", mesa.getDescricao(),Types.VARCHAR);
 				}
 				// query += " horaAberta = ?,";
 				// query += " horaFechada = ?,";
 				if ((!"".equalsIgnoreCase(mesa.getStatus()) && (mesa.getStatus() != null))) {
 					query += "status = :status";
-					params.addValue("status ", mesa.getStatus());
+					params.addValue("status", mesa.getStatus(), Types.VARCHAR);
 				}
 				query += " where idmesa = :idmesa";
-				params.addValue("idmesa", mesa.getIdmesa());
+				params.addValue("idmesa", mesa.getIdmesa(), Types.INTEGER);
 
-				try {
+//				try {
 					namedParameterJdbcTemplate.update(query, params);
-				} catch (Exception e) {
-					System.out.println(e.getCause());
-				}
+//				} catch (Exception e) {
+//					System.out.println(e.getCause());
+//				}
 				
 			}
 		} catch (InvalidResultSetAccessException e) {
