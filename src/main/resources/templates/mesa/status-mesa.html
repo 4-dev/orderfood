@@ -41,7 +41,7 @@
 									th:class="${i.status == 'DISPONIVEL' ? 'card hoverable blue-grey darken-1' : 'card hoverable deep-orange darken-1'}">
 									<div class="white-text center-align">
 										<div>
-											<span class="card-title" th:text="'Mesa '+${i.idmesa}"></span>
+											<span class="card-title mesa-titulo" th:text="'Mesa '+${i.idmesa}"></span>
 										</div>
 										<div class="mesa-imagem card-image waves-effect waves-light modal-trigger center-align"
 											th:href="${'#modal'+i.idmesa}">
@@ -49,8 +49,8 @@
 										</div>
 										<div class="row" style="margin-bottom: 15px;">
 											<div th:classappend="${i.status == 'DISPONIVEL'?'green-text':'red-text'}" class="chip center-align"
-											 	th:text="${i.status == 'DISPONIVEL' ? 'Diponível' : 'Ocupada'}" th:id="descStatus+${i.idmesa}" >
-											 
+											 	 th:id="descStatus+${i.idmesa}" >
+											 	<span th:text="${i.status == 'DISPONIVEL' ? 'Diponível' : 'Ocupada'}"></span>
 											</div>
 										</div>
 									</div>

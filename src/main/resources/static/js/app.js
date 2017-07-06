@@ -33,12 +33,11 @@ function connect() {
             if(JSON.parse(greeting.body).content = '') {
 //            	$("#cardStatus").attr("class", "card yellow darken-1");
             	console.log(desc);
-            	 $(descStatus).append("Disponivel");
+            	$(descStatus).html('<span class="green-text">Disponivel</span>');
             	$(idDiv).attr("class", "card blue-grey darken-1");            	
             } else {
             	$(idDiv).attr("class", "card deep-orange darken-1");
-            	$(descStatus).append("");
-            	$(descStatus).append("Ocupada");
+            	$(descStatus).html('<span class="red-text">Ocupada</span>');
             }
         });
     });
