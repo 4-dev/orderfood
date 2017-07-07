@@ -1,6 +1,8 @@
 package br.com.fourdev.orderfood.repository.pedido;
 
 import java.util.List;
+
+import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusPedido;
 
@@ -21,4 +23,5 @@ public interface PedidoRepository {
 	public List<Pedido> retornaStatusPedido(StatusPedido statusPedido);
 
 	public List<Pedido> retornaPedidoPorMesa(int idmesa);
+	public List<ItemPedido> retornaItemPorPedido(int idPedido);
 }

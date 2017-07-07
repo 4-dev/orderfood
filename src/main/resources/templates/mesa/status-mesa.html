@@ -55,39 +55,83 @@
 										</div>
 									</div>
 									<div th:id="modal+${i.idmesa}" class="modal">
+									
 										<div class="modal-content">
 											<div class="row">
 												<div class="col s12 m12 l12">
-													<table class="responsive-table display striped bordered">
-														<thead>
-															<tr>
-																<th>Status</th>
-																<th>Pedido</th>
-																<th>Observacao</th>
-																<th>Vl. Total</th>
-																<th>Dt. Criação</th>
-																<th>Cliente</th>
-																<th>Mesa</th>
-															</tr>
-														</thead>
-														<tbody>
-															
-																<tr
-																	th:each="p: ${pedidoService.retornaPedidoPorMesa(i.idmesa)}">
-																	<td th:text="${p.status}"></td>
-																	<td th:text="${p.numped}"></td>
-																	<td th:text="${p.observacao}"></td>
-																	<td
-																		th:text="${#numbers.formatDecimal(p.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
-																	<td th:text="${p.dataCriacao}"></td>
-																	<td th:text="${p.cliente.idcliente}"></td>
-																	<td th:text="${p.mesa.idmesa}"></td>
-																</tr>
-															
-														</tbody>
-
-													</table>
-
+													<div class="card">
+				                                       	<span class="grey-text text-darken-4"></span>
+				                                       	<div class="card-content">
+				                                       		<span class="card-title mesa-titulo" th:text="'Mesa '+${i.idmesa}"></span>
+				                                       		<span th:classappend="${i.status == 'DISPONIVEL'?'blue-grey darken-1':'deep-orange darken-1'}" style="margin-right: 10px;"
+				                                       			class="chip white-text right mdi-action-cached"
+				                                       			 th:text="${i.status == 'DISPONIVEL' ? 'Diponível' : 'Ocupada'}"></span>
+				                                       		<table class="responsive-table display striped bordered">
+				                                       			
+																<thead>
+																	<tr>
+																		<th>Status</th>
+																		<th>Pedido</th>
+																		<th>Observacao</th>
+																		<th>Vl. Total</th>
+																		<th>Dt. Criação</th>
+																		<th>Cliente</th>
+																		<th>Mesa</th>
+																		<th class="center">Itens</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	
+																		<tr
+																			th:each="p: ${pedidoService.retornaPedidoPorMesa(i.idmesa)}">
+																			<td th:text="${p.status}"></td>
+																			<td th:text="${p.numped}"></td>
+																			<td th:text="${p.observacao}"></td>
+																			<td
+																				th:text="${#numbers.formatDecimal(p.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
+																			<td th:text="${p.dataCriacao}"></td>
+																			<td th:text="${p.cliente.idcliente}"></td>
+																			<td th:text="${p.mesa.idmesa}"></td>
+																			<td class="center">
+																				<a class="btn-floating waves-effect waves-light center blue-grey light-4">
+																					<i class="mdi-action-info-outline activator" th:action="@{/mesa/status/itens/{idpedido}(idpedido=${p.numped})}"></i>
+																				</a>
+																			</td>
+																			
+																		</tr>
+																	
+																</tbody>
+		
+															</table>
+						                                       	
+				                                       	</div>
+														  <div class="card-reveal">
+						                                        <span class="card-title grey-text text-darken-4">Itens do Pedido<i class="mdi-navigation-close right"></i></span>
+						                                        <table class="responsive-table display striped bordered">
+						                                            <thead>
+						                                               <tr>
+						                                                    <th>Código</th>
+						                                                    <th>nome</th>
+						                                                    <th>Quantidade</th>
+						                                                    <th>Valor</th>
+						                                                    <th>Total</th>
+						                                                </tr>
+						                                            </thead>
+						                                            <tbody>
+						                                                <tr>
+						                                                    <td>1</td>
+						                                                    <td>xxxx</td>
+						                                                    <td>2</td>
+						                                                    <td>R$ 3,50</td>
+						                                                    <td>R$ 7,00</td>
+						                                                </tr>
+						                                                
+																	</tbody>
+																				
+																</table>
+																
+															</div>	
+															<span class="left task-cat green">$ 17,00</span>
 													
 												</div>
 											</div>
@@ -106,7 +150,7 @@
 
 					</div>
 				</div>
-
+			</div>
 		<!--end container-->
 
 

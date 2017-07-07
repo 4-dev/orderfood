@@ -76,6 +76,7 @@ public class PedidoController {
 		return new ModelAndView("redirect:novo");
 		
 	}
+	
 
 	
 	@GetMapping("/novo")

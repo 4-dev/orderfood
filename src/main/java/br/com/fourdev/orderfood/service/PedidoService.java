@@ -62,6 +62,10 @@ public class PedidoService {
 		return pedidoRepository.retornaPedidoPorMesa(idmesa);
 	}
 	
+	public List<ItemPedido> retornaItenPorPedido(int idPedido) {
+		return pedidoRepository.retornaItemPorPedido(idPedido);
+	}
+	
 	
 
 	private List<Pedido> transformarJsonPedido(String pedidoJson) {

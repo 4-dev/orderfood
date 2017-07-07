@@ -1,5 +1,7 @@
 package br.com.fourdev.orderfood.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Mesa;
-import br.com.fourdev.orderfood.model.Produto;
 import br.com.fourdev.orderfood.service.MesaService;
 import br.com.fourdev.orderfood.service.PedidoService;
 
@@ -57,6 +60,14 @@ public class MesaController {
 		
 		return new ModelAndView("redirect:novo");
 		
+	}
+	
+	@GetMapping("/status/itens/{idpedido}")
+	public @ResponseBody List<ItemPedido> itensDoPedido(@PathVariable("idpedido")int idPedido){
+//		ModelAndView modelAndView = new ModelAndView();
+		List<ItemPedido> itens = pedidoService.retornaItenPorPedido(idPedido);
+//		modelAndView.addObject("itens", pedidoService.retornaItenPorPedido(idPedido));
+		return itens;
 	}
 
 	

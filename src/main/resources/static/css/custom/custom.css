@@ -224,6 +224,26 @@ customização do switch checkbox para funcionar com thymelea
     font-weight: bold;
 }
 
+.chip {
+    display: inline-block;
+    height: 32px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(0,0,0,0.6);
+    line-height: 32px;
+    padding: 0 10px 0 12px;
+    border-radius: 10px;
+    background-color: #e4e4e4;
+}
+
+.task-cat {
+    padding: 3px 5px;
+   	margin-left: 20px;
+   	margin-bottom: 20px;
+    font-size: 1.5rem;
+     border-radius: 19px;
+}
+
 
 
 
