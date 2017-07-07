@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import br.com.fourdev.orderfood.model.ItemPedido;
-import br.com.fourdev.orderfood.model.Produto;
 
 public class ItemPedidoRowMapper implements RowMapper<ItemPedido> {
 

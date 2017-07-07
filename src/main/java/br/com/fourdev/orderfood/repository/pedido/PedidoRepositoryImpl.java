@@ -52,6 +52,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Pedido selectPedidoPorId(String numped) {
 		String query = "select * from Pedido where id=? ";
 		return (Pedido) jdbcTemplate.queryForObject(query, new Object[] { numped },
