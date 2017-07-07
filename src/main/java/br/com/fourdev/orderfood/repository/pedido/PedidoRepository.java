@@ -13,15 +13,18 @@ public interface PedidoRepository {
 	public Pedido selectPedidoPorId(String id);
 
 	public void insertPedido(Pedido pedido);
-	
+
 	public void insertPedido(List<Pedido> pedidos);
 
 	public void updatePedido(String id, Pedido pedido);
 
 	public void deletePedido(String id);
-	
+
 	public List<Pedido> retornaStatusPedido(StatusPedido statusPedido);
 
 	public List<Pedido> retornaPedidoPorMesa(int idmesa);
+
 	public List<ItemPedido> retornaItemPorPedido(int idPedido);
+	
+	public void atualizarStatusPedido(Pedido pedido);
 }

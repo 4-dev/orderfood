@@ -8,6 +8,8 @@ import org.springframework.jdbc.InvalidResultSetAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fourdev.orderfood.model.Produto;
 
@@ -29,14 +31,15 @@ public class ProdutosImpl implements ProdutosQueries {
 	// private static final String DELETE_PRODUTO = "delete from pcprodut where
 	// codprod = ?";
 
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<Produto> selectProdutoList() {
 
 		try {
-			String query1 = "set search_path to orderfood, public";
-			jdbcTemplate.update(query1, new Object[]{});
+//			String query1 = "set search_path to orderfood, public";
+//			jdbcTemplate.update(query1, new Object[]{});
 			
 			
-			String query = "select * from produto";
+			String query = "select * from ORDERFOOD.produto";
 			return jdbcTemplate.query(query, new BeanPropertyRowMapper<Produto>(Produto.class));
 		} catch (InvalidResultSetAccessException e) {
 			throw new RuntimeException(e);

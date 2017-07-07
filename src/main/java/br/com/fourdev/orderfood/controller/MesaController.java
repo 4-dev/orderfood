@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Mesa;
+import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.service.MesaService;
 import br.com.fourdev.orderfood.service.PedidoService;
 
@@ -74,7 +75,8 @@ public class MesaController {
 	@GetMapping("/status/finalizarmesa/{idmesa}")
 	public ModelAndView finalizarMesa(@PathVariable("idmesa")int idmesa, RedirectAttributes attributes){
 		
-		mesaService.finalizarMesa(idmesa);
+		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa);
+		mesaService.finalizarMesa(idmesa, pedidos);
 		attributes.addFlashAttribute("mensagem", "Mesa Salva com Sucesso!");
 		return new ModelAndView("redirect:../../status");
 	}

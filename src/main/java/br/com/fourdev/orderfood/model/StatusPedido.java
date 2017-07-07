@@ -2,9 +2,9 @@ package br.com.fourdev.orderfood.model;
 
 public enum StatusPedido {
 	ABERTO("ABERTO"),
-	EMANDAMENTO("EmAndamento"),
-	CANCELADO("Cancelado"),
-	FINALIZADO("Finalizado");
+	EMANDAMENTO("EMANDAMENTO"),
+	CANCELADO("CANCELADO"),
+	FINALIZADO("FINALIZADO");
 	
 	private String descricao;
 

@@ -62,7 +62,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		String query = "SELECT cab.* FROM mesa_pedido mp, cabpedido cab WHERE mp.numped = cab.numped AND mp.idmesa = ? ORDER BY CAB.NUMPED";
 		return jdbcTemplate.query(query, new Object[] { idmesa }, new PedidoRowMapper());
 	}
-	
+
 	public List<ItemPedido> retornaItemPorPedido(int numPedido) {
 		String query = "SELECT prod.*, ip.numped, ip.quantidade FROM itempedido ip, produto prod WHERE ip.produto = prod.id AND ip.numped = ? ORDER BY prod.id";
 		return jdbcTemplate.query(query, new Object[] { numPedido }, new ItemPedidoRowMapper());
@@ -95,39 +95,36 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void insertPedido(List<Pedido> pedidos) {
 		try {
-			
-			try {
-			String query1 = "set search_path to orderfood, public";
-			jdbcTemplate.update(query1, new Object[] {});
-			
-			for (Pedido pedido : pedidos) {
-				String qry = "select max(numped) + 1 as numped from itempedido";
-				long numped = jdbcTemplate.queryForObject(qry, Long.class);
-				
-				for (ItemPedido itemPedido : pedido.getItens()) {
-					System.out.println(itemPedido.getProduto());
 
-					String query = "insert into itempedido(numped, produto, quantidade, valorUnitario) "
-							+ " values (?,?,?,?) ";
-					jdbcTemplate.update(query, new Object[] {numped, itemPedido.getProduto(),
-							itemPedido.getQuantidade(), itemPedido.getValorUnitario() });
+			try {
+				String query1 = "set search_path to orderfood, public";
+				jdbcTemplate.update(query1, new Object[] {});
+
+				for (Pedido pedido : pedidos) {
+					String qry = "select max(numped) + 1 as numped from itempedido";
+					long numped = jdbcTemplate.queryForObject(qry, Long.class);
+
+					for (ItemPedido itemPedido : pedido.getItens()) {
+						System.out.println(itemPedido.getProduto());
+
+						String query = "insert into itempedido(numped, produto, quantidade, valorUnitario) "
+								+ " values (?,?,?,?) ";
+						jdbcTemplate.update(query, new Object[] { numped, itemPedido.getProduto(),
+								itemPedido.getQuantidade(), itemPedido.getValorUnitario() });
+					}
+
+					String query = "insert into cabpedido(numped, dataCriacao, valorDesconto, "
+							+ "	valorTotal, observacao, dataEntrega, status) " + " values (?, ?,?,?,?,CURRENT_DATE,?) ";
+					jdbcTemplate.update(query,
+							new Object[] { numped, pedido.getDataCriacao(), pedido.getValorDesconto(),
+									pedido.getValorTotal(), pedido.getObservacao(), pedido.getDataEntrega(),
+									pedido.getStatus() });
 				}
 
-						
-				
-				String query = "insert into cabpedido(numped, dataCriacao, valorDesconto, "
-						+ "	valorTotal, observacao, dataEntrega, status) " + " values (?, ?,?,?,?,CURRENT_DATE,?) ";
-				jdbcTemplate.update(query,
-						new Object[] {numped ,pedido.getDataCriacao(), pedido.getValorDesconto(),
-								pedido.getValorTotal(), pedido.getObservacao(), pedido.getDataEntrega(),
-								pedido.getStatus() });
-			}
-			
-	
 			} catch (Exception e) {
 				System.out.println(e.getMessage());// TODO: handle exception
-			} 
-			
+			}
+
 			// for (ItemPedido item : pedidos. getItens()) {
 			// String query = "insert into itempedido(numped, produto,
 			// quantidade, valorUnitario) "
@@ -153,6 +150,20 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		} catch (DataAccessException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public void atualizarStatusPedido(Pedido pedido) {
+		try {
+			String query = "update CABPEDIDO set STATUS = ? where NUMPED = ? ";
+			 jdbcTemplate.update(query,new Object[] {pedido.getStatus().getDescricao(), pedido.getNumped()});	
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} 
+		 
+		// Pedido.getDescricao(), Pedido.getUrlFoto(),
+		// Pedido.getVolume(), Pedido.getValor(), Pedido.getQuantidadeEstoque(),
+		// Pedido.getCategoria().getDescricao() });
 	}
 
 	public void updatePedido(String id, Pedido pedido) {

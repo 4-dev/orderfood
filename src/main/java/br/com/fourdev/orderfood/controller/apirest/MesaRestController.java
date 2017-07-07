@@ -1,6 +1,7 @@
 
 package br.com.fourdev.orderfood.controller.apirest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -68,20 +69,16 @@ public class MesaRestController {
 
 	@RequestMapping(value = "/verificarmesa/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String  verificarStatusMesa(@PathVariable("id") int idmesa) throws Exception {
-//		Mesa mesa = new Mesa();
-//		mesa.setIdmesa(123);
-//		mesa.setDescricao("João da Silva");
-//		mesa.setStatus("joaodasilva@mail.com");
-
 		// código que faz o trabalho ;-)
 		Gson gson = new Gson();
 		String valor = "";
 		if (mesaService.verificarStatusMesa(idmesa)) {
 //			valor += "Mesa disponivel";
-			List<Produto> produtos = produtoService.selectProdutoList();
+			List<Produto> produtos = new ArrayList<Produto>();
+			produtos = produtoService.selectProdutoList();
 			valor += gson.toJson(produtos);
 		} else {
-			valor += "Mesa ocupada";
+			valor += gson.toJson("Mesa ocupada");
 		}
 //		String userJSONString = gson.toJson(valor);
 //

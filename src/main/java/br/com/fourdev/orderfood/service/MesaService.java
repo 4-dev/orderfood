@@ -13,8 +13,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.fourdev.orderfood.config.ClientWebSocketConfig;
 import br.com.fourdev.orderfood.model.Mesa;
+import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusMesa;
+import br.com.fourdev.orderfood.model.StatusPedido;
 import br.com.fourdev.orderfood.repository.mesa.MesaRepository;
+import br.com.fourdev.orderfood.repository.pedido.PedidoRepository;
 
 @Service
 public class MesaService {
@@ -23,6 +26,9 @@ public class MesaService {
 
 	@Autowired
 	private MesaRepository mesaRepository;
+
+	@Autowired
+	private PedidoRepository pedidoRepository;
 
 	private StompSession stompSession;
 
@@ -75,11 +81,18 @@ public class MesaService {
 		return vbliberouMesa;
 	}
 
-	public void finalizarMesa(int idmesa){
+	public void finalizarMesa(int idmesa, List<Pedido> pedidos){
 		Mesa mesa = new Mesa();
 		mesa.setIdmesa(idmesa);
 		mesa.setStatus(StatusMesa.DISPONIVEL.getDescricao());
 		mesaRepository.updateMesa(mesa);
+		
+		// Alterando o Status do Pedido
+		for (Pedido pedido : pedidos) {
+			pedido.setStatus(StatusPedido.FINALIZADO);
+			pedidoRepository.atualizarStatusPedido(pedido);
+		}
+		
 	}
 	public StatusMesa reservarMesa(int idmesa) {
 		Mesa mesa = new Mesa();
