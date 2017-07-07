@@ -64,9 +64,9 @@ public class MesaController {
 	
 	@GetMapping("/status/itens/{idpedido}")
 	public @ResponseBody List<ItemPedido> itensDoPedido(@PathVariable("idpedido")int idPedido){
-//		ModelAndView modelAndView = new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView();
 		List<ItemPedido> itens = pedidoService.retornaItenPorPedido(idPedido);
-//		modelAndView.addObject("itens", pedidoService.retornaItenPorPedido(idPedido));
+		modelAndView.addObject("itens", itens);
 		return itens;
 	}
 

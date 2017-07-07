@@ -64,7 +64,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	}
 	
 	public List<ItemPedido> retornaItemPorPedido(int numPedido) {
-		String query = "SELECT prod.* FROM itempedido ip, produto prod WHERE ip.produto = prod.id AND ip.numped = ? ORDER BY prod.id";
+		String query = "SELECT prod.*, ip.numped, ip.quantidade FROM itempedido ip, produto prod WHERE ip.produto = prod.id AND ip.numped = ? ORDER BY prod.id";
 		return jdbcTemplate.query(query, new Object[] { numPedido }, new ItemPedidoRowMapper());
 	}
 

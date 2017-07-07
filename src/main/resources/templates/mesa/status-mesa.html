@@ -93,8 +93,9 @@
 																			<td th:text="${p.cliente.idcliente}"></td>
 																			<td th:text="${p.mesa.idmesa}"></td>
 																			<td class="center">
-																				<a class="btn-floating waves-effect waves-light center blue-grey light-4">
-																					<i class="mdi-action-info-outline activator" th:action="@{/mesa/status/itens/{idpedido}(idpedido=${p.numped})}"></i>
+																				<a class="btn-floating waves-effect waves-light center blue-grey light-4" th:href="@{/mesa/status/itens/{idpedido}(idpedido=${p.numped})}">
+																					<i class="mdi-action-info-outline activator" 
+																						></i>
 																				</a>
 																			</td>
 																			
@@ -118,12 +119,12 @@
 						                                                </tr>
 						                                            </thead>
 						                                            <tbody>
-						                                                <tr>
-						                                                    <td>1</td>
-						                                                    <td>xxxx</td>
-						                                                    <td>2</td>
-						                                                    <td>R$ 3,50</td>
-						                                                    <td>R$ 7,00</td>
+						                                                <tr th:each="item: ${itens}">
+						                                                    <td th:text="${item.produto}">1</td>
+						                                                    <td th:text="${item.nome}">xxxx</td>
+						                                                    <td th:text="$item.quantidade">2</td>
+						                                                    <td th:text="${item.valorUnitario}">R$ 3,50</td>
+						                                                    <td th:text="${item.valorTotal}">R$ 7,00</td>
 						                                                </tr>
 						                                                
 																	</tbody>

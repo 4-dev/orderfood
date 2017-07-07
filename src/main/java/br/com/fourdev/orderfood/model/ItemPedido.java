@@ -6,12 +6,43 @@ public class ItemPedido {
 
 	private long numped;
 	private long produto;
+	
+	private String nome;
+	
+	
 	private long quantidade;
 	private BigDecimal valorUnitario;
+	
+	private BigDecimal valorTotal;
 
 	public long getQuantidade() {
 		return quantidade;
 	}
+
+	
+	public String getNome() {
+		return nome;
+	}
+
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+
 
 	public void setQuantidade(long quantidade) {
 		this.quantidade = quantidade;
