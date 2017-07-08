@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import br.com.fourdev.orderfood.dto.ObjectSync;
+import br.com.fourdev.orderfood.dto.ProdutoDTO;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Produto;
 import br.com.fourdev.orderfood.service.MesaService;
@@ -29,10 +31,9 @@ public class MesaRestController {
 	final static Logger logger = LoggerFactory.getLogger(MesaRestController.class);
 	@Autowired
 	private MesaService mesaService;
-	
+
 	@Autowired
 	private ProdutoService produtoService;
-	
 
 	// private SimpMessagingTemplate template;
 
@@ -68,22 +69,39 @@ public class MesaRestController {
 	}
 
 	@RequestMapping(value = "/verificarmesa/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String  verificarStatusMesa(@PathVariable("id") int idmesa) throws Exception {
+	public String verificarStatusMesa(@PathVariable("id") int idmesa) throws Exception {
 		// código que faz o trabalho ;-)
 		Gson gson = new Gson();
 		String valor = "";
+		ObjectSync objectSync = new ObjectSync();
 		if (mesaService.verificarStatusMesa(idmesa)) {
-//			valor += "Mesa disponivel";
-			List<Produto> produtos = new ArrayList<Produto>();
-			produtos = produtoService.selectProdutoList();
-			valor += gson.toJson(produtos);
+			objectSync.setListProdutos(listaProdutoDTO());
+			objectSync.setMensagem("Mesa disponível");
+			valor += gson.toJson(objectSync);
 		} else {
-			valor += gson.toJson("Mesa ocupada");
+			objectSync.setListProdutos(null);
+			objectSync.setMensagem("Mesa ocupada");
+			valor += gson.toJson(objectSync);
 		}
-//		String userJSONString = gson.toJson(valor);
-//
-//		valor = userJSONString;//gson.fromJson(userJSONString, String.class);
+		// String userJSONString = gson.toJson(valor);
+		//
+		// valor = userJSONString;//gson.fromJson(userJSONString, String.class);
 		return valor;
 
+	}
+
+	private List<ProdutoDTO> listaProdutoDTO() {
+		List<ProdutoDTO> listaProdDTO = new ArrayList<ProdutoDTO>();
+		List<Produto> produtos = produtoService.selectProdutoList();
+		for (Produto produto : produtos) {
+			ProdutoDTO produtoDTO = new ProdutoDTO();
+			produtoDTO.setCodigo(produto.getId());
+			produtoDTO.setCategoria(produto.getCategoria().getDescricao());
+			produtoDTO.setDescricao(produto.getDescricao());
+			produtoDTO.setQtEstoque(produto.getQtestoque());
+			produtoDTO.setValor(produto.getValor().doubleValue());
+			listaProdDTO.add(produtoDTO);
+		}
+		return listaProdDTO;
 	}
 }

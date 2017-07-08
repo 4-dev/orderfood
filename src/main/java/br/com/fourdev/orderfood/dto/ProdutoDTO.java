@@ -2,17 +2,17 @@ package br.com.fourdev.orderfood.dto;
 
 public class ProdutoDTO {
 
-	private int codigo;
+	private long codigo;
 	private String categoria;
 	private String descricao;
 	private Double valor;
-	private Double qtEstoque;
+	private long qtEstoque;
 
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -40,11 +40,11 @@ public class ProdutoDTO {
 		this.valor = valor;
 	}
 
-	public Double getQtEstoque() {
+	public long getQtEstoque() {
 		return qtEstoque;
 	}
 
-	public void setQtEstoque(Double qtEstoque) {
+	public void setQtEstoque(long qtEstoque) {
 		this.qtEstoque = qtEstoque;
 	}
 
