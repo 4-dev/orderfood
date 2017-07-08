@@ -63,7 +63,7 @@
 													<div class="card">
 				                                       	<span class="grey-text text-darken-4"></span>
 				                                       	<div class="card-content">
-				                                       		<span class="card-title mesa-titulo" th:text="'Mesa '+${i.idmesa}"></span>
+				                                       		<span class="card-title mesa-titulo" th:text="'Mesa '+${i.idmesa}" style="margin-left: 5px;"></span>
 				                                       		<span th:classappend="${i.status == 'DISPONIVEL'?'blue-grey darken-1':'deep-orange darken-1'}" style="margin-right: 10px;"
 				                                       			class="chip white-text right mdi-action-cached"
 				                                       			 th:text="${i.status == 'DISPONIVEL' ? 'Diponível' : 'Ocupada'}"></span>
@@ -71,13 +71,13 @@
 				                                       			
 																<thead>
 																	<tr>
-																		<th>Status</th>
-																		<th>Pedido</th>
+																		<th class="center">Status</th>
+																		<th class="center">Pedido</th>
 																		<th>Observacao</th>
 																		<th>Vl. Total</th>
 																		<th>Dt. Criação</th>
-																		<th>Cliente</th>
-																		<th>Mesa</th>
+<!-- 																		<th>Cliente</th> -->
+																		<th class="left">Mesa</th>
 																		<th class="center">Itens</th>
 																	</tr>
 																</thead>
@@ -85,14 +85,16 @@
 																	
 																		<tr
 																			th:each="p: ${pedidoService.retornaPedidoPorMesa(i.idmesa)}">
-																			<td th:text="${p.status}"></td>
-																			<td th:text="${p.numped}"></td>
+																			<td class="center"  th:text="${p.status}"></td>
+																			<td class="center" th:text="${p.numped}"></td>
 																			<td th:text="${p.observacao}"></td>
 																			<td
-																				th:text="${#numbers.formatDecimal(p.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
+																				th:text="|R$ ${#numbers.formatDecimal(p.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}|"></td>
+																			
 																			<td th:text="${p.dataCriacao}"></td>
-																			<td th:text="${p.cliente.idcliente}"></td>
-																			<td th:text="${p.mesa.idmesa}"></td>
+
+<!-- 																			<td th:text="${p.cliente.idcliente}"></td> -->
+																			<td th:text="|Mesa ${p.mesa.idmesa}|"></td>
 																			<td class="center">
 																				<a class="btn-floating waves-effect waves-light center blue-grey light-4 js-itens-btn"
 																					 data:url="@{/mesa/status/itens/{idpedido}(idpedido=${p.numped})}">
@@ -112,19 +114,22 @@
 						                                        <span class="card-title grey-text text-darken-4">Itens do Pedido <i class="mdi-navigation-expand-more right grey-text"></i></span>
 
 
-															<div id="jsGrid-odata"></div>
+															<div id="jsGrid-odata" style="margin-top: 10px;"></div>
 
 																
 															</div>	
-															<span class="left task-cat green">$ 17,00</span>
+															<span class="left task-cat green accent-3">$ 0,00</span>
 													
 												</div>
 											</div>
 
 										</div>
 										<div class="modal-footer">
-											<a th:href="@{/mesa/status/finalizarmesa/{idmesa}(idmesa=${i.idmesa})}">Finalizar Mesa</a> <a
-												class="waves-effect waves-green btn-flat modal-action
+											<a class="btn waves-effect waves-light cyan left" th:href="@{/mesa/status/finalizarmesa/{idmesa}(idmesa=${i.idmesa})}">
+												<i class="large mdi-editor-attach-money right"></i>
+												Finalizar
+											</a> 
+											<a class="waves-effect waves-green btn-flat modal-action
 											modal-close"><i class="mdi-navigation-arrow-forward red-text"></i></a>
 										</div>
 									</div>
