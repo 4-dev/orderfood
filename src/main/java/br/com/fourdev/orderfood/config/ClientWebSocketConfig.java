@@ -43,6 +43,8 @@ public class ClientWebSocketConfig {
 
 		String url = "ws://{host}:{port}/gs-guide-websocket";
 		return stompClient.connect(url, headers, new MyHandler(), "localhost", 9090);
+//		String url = "wss://{host}/gs-guide-websocket";
+//		return stompClient.connect(url, headers, new MyHandler(), "orderfood.cfapps.io");
 
 	}
 

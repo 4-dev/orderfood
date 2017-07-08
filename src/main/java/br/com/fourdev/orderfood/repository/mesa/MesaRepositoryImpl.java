@@ -64,6 +64,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 
 			String query1 = "set search_path to orderfood, public";
 			jdbcTemplate.update(query1, new Object[] {});
+			
 			if (mesa != null) {
 				String query = "update mesa set ";
 				MapSqlParameterSource params = new MapSqlParameterSource();
@@ -113,7 +114,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 		String query1 = "set search_path to orderfood, public";
 		jdbcTemplate.update(query1, new Object[] {});
 
-		String query = "select count(1) from mesa";
+		String query = "select count(idmesa) from mesa";
 		int contaMesas = (Integer) this.jdbcTemplate.queryForObject(query, Integer.class);
 		return contaMesas;
 	}

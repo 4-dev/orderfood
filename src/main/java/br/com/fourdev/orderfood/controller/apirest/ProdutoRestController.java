@@ -24,7 +24,7 @@ public class ProdutoRestController {
 
 	@RequestMapping(value = "/produto/listarProdutos", method = RequestMethod.GET)
 	public List<Produto> selectProdutoList() {
-		return produtoService.selectProdutoList();
+		return produtoService.selectProdutos(); //selectProdutoList();
 	}
 
 	@RequestMapping(value = "/produto/buscarProdutoPorCodigo/{id}", method = RequestMethod.GET)

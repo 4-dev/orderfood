@@ -19,14 +19,17 @@ public class ProdutoService {
 	@Autowired
 	private Produtos produtos;
 	
-	public List<Produto> selectProdutoList() {
-		return produtos.selectProdutoList();
-	}
+//	public List<Produto> selectProdutoList() {
+//		return produtos.selectProdutoList();
+//	}
 
 	public Produto selectProdutoById(String id) {
 		return produtos.selectProdutoPorId(id);
 	}
 
+	public List<Produto> selectProdutos() {
+		return produtos.findAll();
+	}
 	
 	
 	//Implementaçoes para o tymeleaf 

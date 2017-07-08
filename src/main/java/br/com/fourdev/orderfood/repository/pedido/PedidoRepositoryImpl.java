@@ -24,7 +24,9 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	public List<Pedido> selectPedidoList() {
 
 		try {
-
+			String query1 = "set search_path to orderfood, public";
+			jdbcTemplate.update(query1, new Object[] {});
+			
 			String query = "select * from cabpedido cab " + "INNER JOIN  itempedido item ON (cab.numped = item.numped)";
 			List<Pedido> listaPedidos = jdbcTemplate.query(query, new PedidoRowMapper());
 
@@ -40,7 +42,9 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	public List<Pedido> retornaStatusPedido(StatusPedido statusPedido) {
 
 		try {
-
+			String query1 = "set search_path to orderfood, public";
+			jdbcTemplate.update(query1, new Object[] {});
+			
 			String query = "select * from cabpedido cab where status = ?";
 			return jdbcTemplate.query(query, new Object[] { statusPedido.getDescricao() }, new PedidoRowMapper());
 
@@ -54,23 +58,34 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Pedido selectPedidoPorId(String numped) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+		
 		String query = "select * from Pedido where id=? ";
 		return (Pedido) jdbcTemplate.queryForObject(query, new Object[] { numped },
 				new BeanPropertyRowMapper(Pedido.class));
 	}
 
 	public List<Pedido> retornaPedidoPorMesa(int idmesa) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+		
 		String query = "SELECT cab.* FROM mesa_pedido mp, cabpedido cab WHERE mp.numped = cab.numped AND mp.idmesa = ? ORDER BY CAB.NUMPED";
 		return jdbcTemplate.query(query, new Object[] { idmesa }, new PedidoRowMapper());
 	}
 
 	public List<ItemPedido> retornaItemPorPedido(int numPedido) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+		
 		String query = "SELECT prod.*, ip.numped, ip.quantidade FROM itempedido ip, produto prod WHERE ip.produto = prod.id AND ip.numped = ? ORDER BY prod.id";
 		return jdbcTemplate.query(query, new Object[] { numPedido }, new ItemPedidoRowMapper());
 	}
 
 	public void insertPedido(Pedido pedido) {
 		try {
+			String query1 = "set search_path to orderfood, public";
+			jdbcTemplate.update(query1, new Object[] {});
 
 			for (ItemPedido item : pedido.getItens()) {
 				String query = "insert into itempedido(numped, produto, quantidade, valorUnitario) "
