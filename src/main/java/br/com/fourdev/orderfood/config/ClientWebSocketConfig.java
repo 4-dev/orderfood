@@ -13,11 +13,16 @@ import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.socket.WebSocketHttpHeaders;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.StompWebSocketEndpointRegistration;
+import org.springframework.web.socket.config.annotation.WebMvcStompEndpointRegistry;
+import org.springframework.web.socket.messaging.StompSubProtocolErrorHandler;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
 import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 import org.springframework.web.socket.sockjs.frame.Jackson2SockJsMessageCodec;
+import org.springframework.web.util.UrlPathHelper;
 
 /**
  * Created by nick on 30/09/2015.
@@ -34,17 +39,23 @@ public class ClientWebSocketConfig {
 	public ListenableFuture<StompSession> connect() {
 
 		Transport webSocketTransport = new WebSocketTransport(new StandardWebSocketClient());
+		System.out.println(webSocketTransport.getTransportTypes());
+		
 		List<Transport> transports = Collections.singletonList(webSocketTransport);
-
+		System.out.println(transports.toString());
+		
 		SockJsClient sockJsClient = new SockJsClient(transports);
+		System.out.println(sockJsClient.isRunning());
+		
 		sockJsClient.setMessageCodec(new Jackson2SockJsMessageCodec());
-
+		System.out.println(sockJsClient.isRunning());
+		
 		WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
-
-		String url = "ws://{host}:{port}/gs-guide-websocket";
-		return stompClient.connect(url, headers, new MyHandler(), "localhost", 9090);
-//		String url = "wss://{host}/gs-guide-websocket";
-//		return stompClient.connect(url, headers, new MyHandler(), "orderfood.cfapps.io");
+		
+//		String url = "ws://{host}:{port}/gs-guide-websocket";
+//		return stompClient.connect(url, headers, new MyHandler(), "127.0.0.1", 9090);
+		String url = "wss://{host}:{port}/gs-guide-websocket";
+		return stompClient.connect(url, headers, new MyHandler(), "orderfood.cfapps.io", 4443);
 
 	}
 
@@ -86,20 +97,20 @@ public class ClientWebSocketConfig {
 		stompSession.disconnect();
 	}
 
-	public static void main(String[] args) throws Exception {
-		ClientWebSocketConfig helloClient = new ClientWebSocketConfig();
-
-		ListenableFuture<StompSession> f = helloClient.connect();
-		StompSession stompSession = f.get();
-
-		logger.info("Subscribing to greeting topic using session " + stompSession);
-		helloClient.subscribeGreetings(stompSession);
-
-		logger.info("Sending hello message" + stompSession);
-		helloClient.sendHello(stompSession, "teste " + stompSession.getSessionId());
-		Thread.sleep(60000);
-
-	}
+//	public static void main(String[] args) throws Exception {
+//		ClientWebSocketConfig helloClient = new ClientWebSocketConfig();
+//
+//		ListenableFuture<StompSession> f = helloClient.connect();
+//		StompSession stompSession = f.get();
+//
+//		logger.info("Subscribing to greeting topic using session " + stompSession);
+//		helloClient.subscribeGreetings(stompSession);
+//
+//		logger.info("Sending hello message" + stompSession);
+//		helloClient.sendHello(stompSession, "teste " + stompSession.getSessionId());
+//		Thread.sleep(60000);
+//
+//	}
 
 }
 

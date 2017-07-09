@@ -70,7 +70,7 @@ public class MesaService {
 
 			logger.info("Enviando mensagem" + cws.stompSession);
 			cws.helloClient.sendHello(cws.stompSession, String.valueOf(mesa.getIdmesa()));
-			Thread.sleep(15000);
+			Thread.sleep(1000);
 		
 			mesa.setStatus(StatusMesa.OCUPADA.getDescricao());
 			mesa.setIdmesa(idmesa);

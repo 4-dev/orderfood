@@ -20,7 +20,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		// RequestUpgradeStrategy upgradeStrategy = new
 		// TomcatRequestUpgradeStrategy();
-		registry.addEndpoint("/gs-guide-websocket").setAllowedOrigins("*").withSockJS();
+		registry.addEndpoint("/gs-guide-websocket").withSockJS();
 		// ((StompWebSocketEndpointRegistration)
 		// registry).setHandshakeHandler(new
 		// DefaultHandshakeHandler(upgradeStrategy))

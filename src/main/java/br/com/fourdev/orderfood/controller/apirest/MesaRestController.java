@@ -104,7 +104,7 @@ public class MesaRestController {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Erro no método listaProdutoDTO(): "+e.getCause());
+			System.out.println("Erro no método listaProdutoDTO(): " + e.getCause());
 		}
 		return listaProdDTO;
 	}
