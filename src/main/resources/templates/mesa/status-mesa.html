@@ -7,6 +7,7 @@
 <title>Status das Mesas</title>
 <link th:href="@{/js/plugins/jsgrid/css/jsgrid.min.css}" type="text/css" rel="stylesheet" media="screen,projection">
 <link th:href="@{/js/plugins/jsgrid/css/jsgrid-theme.min.css}" type="text/css" rel="stylesheet" media="screen,projection">
+<link th:href="@{/js/plugins/sweetalert/sweetalert.css}" type="text/css" rel="stylesheet"/>
 </head>
 <body onload="connect();">
 	<section id="content" layout:fragment="conteudo">
@@ -125,7 +126,11 @@
 
 										</div>
 										<div class="modal-footer">
-											<a class="btn waves-effect waves-light cyan left" th:href="@{/mesa/status/finalizarmesa/{idmesa}(idmesa=${i.idmesa})}">
+									
+											<a class="btn waves-effect waves-light cyan left js-confirma-btn modal-action
+											modal-close"
+												 	data:url="@{/mesa/status/finalizarmesa/{idmesa}(idmesa=${i.idmesa})}"
+													 data:objeto="|Mesa ${i.idmesa}|">
 												<i class="large mdi-editor-attach-money right"></i>
 												Finalizar
 											</a> 
@@ -149,9 +154,9 @@
 </body>
 
 <th:block layout:fragment="javascript-extra">
-<!-- 	<script src="/webjars/jquery/jquery.min.js"></script> -->
 	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
 	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	 <script type="text/javascript" th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script> 
 	<script src="/js/app.js"></script>
 	
 	<script type="text/javascript" th:src="@{/js/plugins/jsgrid/js/jsgrid.min.js}"></script>
