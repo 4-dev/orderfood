@@ -1,6 +1,7 @@
 package br.com.fourdev.orderfood.controller.apirest;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,7 @@ public class PedidoRestController {
 		JsonObject jo = (JsonObject) jsonParser.parse(jsonInString);
 		JsonArray jsonArr = jo.getAsJsonArray("listPedidos");
 		List<Pedido> pedidos = new ArrayList<Pedido>();
+		BigDecimal valorTotalPedido = BigDecimal.ZERO;
 
 		for (int i = 0; i < jsonArr.size(); i++) {
 			System.out.println(jsonArr.get(i).getAsJsonObject().get("codigo"));
@@ -95,29 +97,34 @@ public class PedidoRestController {
 				itemPedido.setQuantidade(quantidade);
 				itemPedido.setValorUnitario(valorUnitario);
 				itens.add(itemPedido);
-
-				System.out.println(codProduto);
-				System.out.println(quantidade);
-				System.out.println(valorTotal);
-				System.out.println(valorUnitario);
+				// Somando total do pedido
+				valorTotalPedido = valorTotalPedido.add(valorTotal);
 			}
 
 			Pedido pedido = new Pedido();
+			
+			pedido.setDataCriacao(LocalDateTime.now());
+			pedido.setDataEntrega(LocalDateTime.now());
+			pedido.setObservacao("");
+			pedido.setValorTotal(valorTotalPedido.setScale(2, BigDecimal.ROUND_CEILING));
+			pedido.setStatus(StatusPedido.ABERTO);
+			// pedido.setUsuario(usuarios.findOne((long) 1));
+			
+			//Setando o Cliente
 			Cliente cliente = new Cliente();
 			cliente.setIdcliente(1);
 			cliente.setNome("admin");
 			pedido.setCliente(cliente);
-			pedido.setDataCriacao(LocalDateTime.now());
-			pedido.setDataEntrega(LocalDateTime.now());
-			pedido.setObservacao("");
-			pedido.setStatus(StatusPedido.ABERTO);
-			// pedido.setUsuario(usuarios.findOne((long) 1));
+			
+			//Setando a Mesa
 			Mesa mesa = new Mesa();
+			mesa.setIdmesa(jsonArr.get(i).getAsJsonObject().get("codMesa").getAsInt());
 			mesa.setDescricao("");
 			pedido.setMesa(mesa);
 
+			// Setando os itens
 			pedido.setItens(itens);
-			// pedido.setNumped(jsonArr.get(i).getAsJsonObject().get("codigo").getAsInt());
+
 			pedidos.add(pedido);
 		}
 		return pedidos;

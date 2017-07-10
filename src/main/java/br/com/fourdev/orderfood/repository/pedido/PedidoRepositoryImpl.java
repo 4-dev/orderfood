@@ -81,33 +81,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		String query = "SELECT prod.*, ip.numped, ip.quantidade FROM itempedido ip, produto prod WHERE ip.produto = prod.id AND ip.numped = ? ORDER BY prod.id";
 		return jdbcTemplate.query(query, new Object[] { numPedido }, new ItemPedidoRowMapper());
 	}
-
-	public void insertPedido(Pedido pedido) {
-		try {
-			String query1 = "set search_path to orderfood, public";
-			jdbcTemplate.update(query1, new Object[] {});
-
-			for (ItemPedido item : pedido.getItens()) {
-				String query = "insert into itempedido(numped, produto, quantidade, valorUnitario) "
-						+ " values (?,?,?,?) ";
-				jdbcTemplate.update(query, new Object[] { item.getNumped(), item.getProduto(), item.getQuantidade(),
-						item.getValorUnitario() });
-			}
-
-			String query = "insert into cabpedido(numped, dataCriacao, valorDesconto, "
-					+ "	valorTotal, observacao, dataEntrega, status) " + " values (?,?,?,?,?,?,?) ";
-			jdbcTemplate.update(query,
-					new Object[] { pedido.getNumped(), pedido.getDataCriacao(), pedido.getValorDesconto(),
-							pedido.getValorTotal(), pedido.getObservacao(), pedido.getDataEntrega(),
-							pedido.getStatus() });
-
-		} catch (InvalidResultSetAccessException e) {
-			throw new RuntimeException(e);
-		} catch (DataAccessException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
+ 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void insertPedido(List<Pedido> pedidos) {
 		try {
@@ -123,43 +97,58 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 					for (ItemPedido itemPedido : pedido.getItens()) {
 						System.out.println(itemPedido.getProduto());
 
-						String query = "insert into itempedido(numped, produto, quantidade, valorUnitario) "
-								+ " values (?,?,?,?) ";
+						// Itens do Pedido
+						String query = "insert into itempedido(numped, "
+								+ "produto, "
+								+ "quantidade, "
+								+ "valorUnitario) "
+								+ " values (?, ?, ?, ?) ";
 						jdbcTemplate.update(query, new Object[] { numped, itemPedido.getProduto(),
 								itemPedido.getQuantidade(), itemPedido.getValorUnitario() });
 					}
 
-					String query = "insert into cabpedido(numped, dataCriacao, valorDesconto, "
-							+ "	valorTotal, observacao, dataEntrega, status) " + " values (?, ?,?,?,?,CURRENT_DATE,?) ";
-					jdbcTemplate.update(query,
-							new Object[] { numped, pedido.getDataCriacao(), pedido.getValorDesconto(),
-									pedido.getValorTotal(), pedido.getObservacao(), pedido.getDataEntrega(),
-									pedido.getStatus() });
+					// Cabeçalho do Pedido
+					String query = "INSERT INTO cabpedido"+
+					"( numped,"+ // 1
+					"  datacriacao,"+ // 2
+					"  valordesconto,"+ //3
+					"  valortotal,"+ // 4
+					"  observacao,"+ // 5
+					"  dataentrega,"+ // 6
+					"  datacancel,"+ // 7
+					"  status,"+ // 8
+					"  idcliente,"+ // 9
+					"  idmesa,"+ // 10
+					"  idusuario"+ // 11
+					" ) VALUES ("+ 
+					"  ?,"+ // 1
+					"  CURRENT_DATE,"+ // 2
+					"  ?,"+ // 3
+					"  ?,"+ // 4
+					"  ?,"+ // 5
+					"  CURRENT_DATE,"+ // 6
+					"  NULL,"+ // 7
+					"  ?,"+ // 8
+					"  ?,"+ // 9
+					"  ?,"+ // 10
+					"  ?"+ // 11
+					")";
+					
+					jdbcTemplate.update(query, 
+								      new Object[] { numped, // 1
+								    		  pedido.getValorDesconto(), // 3
+								    		  pedido.getValorTotal(),  // 4
+								    		  pedido.getObservacao(),  // 5
+								    		  pedido.getStatus().getDescricao(),// 8
+								    		  pedido.getCliente().getIdcliente(),// 9
+								    		  pedido.getMesa().getIdmesa(), // 10
+								    		  1}); // 11
 				}
 
 			} catch (Exception e) {
 				System.out.println(e.getMessage());// TODO: handle exception
+				
 			}
-
-			// for (ItemPedido item : pedidos. getItens()) {
-			// String query = "insert into itempedido(numped, produto,
-			// quantidade, valorUnitario) "
-			// + " values (?,?,?,?) ";
-			// jdbcTemplate.update(query, new Object[] { item.getNumped(),
-			// item.getProduto(), item.getQuantidade(),
-			// item.getValorUnitario() });
-			// }
-			//
-			// String query = "insert into cabpedido(numped, dataCriacao,
-			// valorDesconto, "
-			// + " valorTotal, observacao, dataEntrega, status) " + " values
-			// (?,?,?,?,?,?,?) ";
-			// jdbcTemplate.update(query,
-			// new Object[] { pedido.getNumped(), pedido.getDataCriacao(),
-			// pedido.getValorDesconto(),
-			// pedido.getValorTotal(), pedido.getObservacao(),
-			// pedido.getDataEntrega(),
-			// pedido.getStatus() });
 
 		} catch (InvalidResultSetAccessException e) {
 			throw new RuntimeException(e);
@@ -194,6 +183,12 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	public void deletePedido(String id) {
 		String query = "delete from Pedido where id=?";
 		jdbcTemplate.update(query, new Object[] { id });
+	}
+
+	@Override
+	public void insertPedido(Pedido pedido) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
