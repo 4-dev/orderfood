@@ -87,20 +87,24 @@ public class MesaRestController {
 		//
 		// valor = userJSONString;//gson.fromJson(userJSONString, String.class);
 		return valor;
-
 	}
 
 	private List<ProdutoDTO> listaProdutoDTO() {
 		List<ProdutoDTO> listaProdDTO = new ArrayList<ProdutoDTO>();
-		List<Produto> produtos = produtoService.selectProdutoList();
-		for (Produto produto : produtos) {
-			ProdutoDTO produtoDTO = new ProdutoDTO();
-			produtoDTO.setCodigo(produto.getId());
-			produtoDTO.setCategoria(produto.getCategoria().getDescricao());
-			produtoDTO.setDescricao(produto.getDescricao());
-			produtoDTO.setQtEstoque(produto.getQtestoque());
-			produtoDTO.setValor(produto.getValor().doubleValue());
-			listaProdDTO.add(produtoDTO);
+		try {
+			List<Produto> produtos = produtoService.selectProdutos();
+			for (Produto produto : produtos) {
+				ProdutoDTO produtoDTO = new ProdutoDTO();
+				produtoDTO.setCodigo(produto.getId());
+				produtoDTO.setCategoria(produto.getCategoria().getDescricao());
+				produtoDTO.setDescricao(produto.getDescricao());
+				produtoDTO.setQtEstoque(produto.getQtestoque());
+				produtoDTO.setValor(produto.getValor().doubleValue());
+				listaProdDTO.add(produtoDTO);
+			}
+
+		} catch (Exception e) {
+			System.out.println("Erro no método listaProdutoDTO(): " + e.getCause());
 		}
 		return listaProdDTO;
 	}

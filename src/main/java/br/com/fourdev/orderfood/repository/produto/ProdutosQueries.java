@@ -6,7 +6,7 @@ import br.com.fourdev.orderfood.model.Produto;
 
 public interface ProdutosQueries {
 
-	public List<Produto> selectProdutoList();
+//	public List<Produto> selectProdutoList();
 
 	public Produto selectProdutoPorId(String id);
 
