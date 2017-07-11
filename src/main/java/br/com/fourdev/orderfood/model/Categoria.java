@@ -2,8 +2,9 @@ package br.com.fourdev.orderfood.model;
 
 public enum Categoria {
 
-	BEBIDAS("Bebidas"), MASSAS("Massas"), SALADAS("Saladas"), SANDUICHES("Sanduiches"), PIZZAS("Pizzas"), GELADOS(
-			"Gelados"), CARNES("Carnes"), PRATOS("Pratos");
+	BEBIDAS("Bebidas"), 
+	PRATOS("Pratos"), 
+	SOBREMESAS("Sobremesas");
 
 	private String descricao;
 
