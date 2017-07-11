@@ -39,8 +39,8 @@
 						<div class="row">
 							<div class="col s12 m3 l2" th:each="i: ${mesaService.selectMesaList()}">
 
-								<div th:id="mesaStatus+${i.idmesa}"
-									th:class="${i.status == 'DISPONIVEL' ? 'card hoverable blue-grey darken-1' : 'card hoverable deep-orange darken-1'}">
+								<div th:id="mesaStatus+${i.idmesa}" class="js-mesas"
+									th:classappend="${i.status == 'DISPONIVEL' ? 'card hoverable blue-grey darken-1' : 'card hoverable deep-orange darken-1'}">
 									<div class="white-text center-align">
 										<div>
 											<span class="card-title mesa-titulo" th:text="'Mesa '+${i.idmesa}"></span>
@@ -130,7 +130,7 @@
 											<a class="btn waves-effect waves-light cyan left js-confirma-btn modal-action
 											modal-close"
 												 	data:url="@{/mesa/status/finalizarmesa/{idmesa}(idmesa=${i.idmesa})}"
-													 data:objeto="|Mesa ${i.idmesa}|">
+													 data:objeto="|Mesa ${i.idmesa}|"  >
 												<i class="large mdi-editor-attach-money right"></i>
 												Finalizar
 											</a> 

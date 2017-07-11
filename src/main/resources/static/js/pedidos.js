@@ -50,7 +50,9 @@ $('.js-confirma-btn').click(function(evento){
         type: "info",   showCancelButton: true,   
         closeOnConfirm: false,   
         showLoaderOnConfirm: true, }, 
+        
         function(){   
+        	
         	$.ajax({
     			url: url,
     			method: 'get',
@@ -59,14 +61,23 @@ $('.js-confirma-btn').click(function(evento){
     		});
             function onSucesso(){
         		console.log('Finalizada com sucesso!');
-        	}
+        		
+        		setTimeout(function(url){     
+        			swal({title: objeto+" finalizada!"},
+        				function() {
+        				window.location.reload();
+        			
+        			});  
+        		}, 2500); 
+            	
+        	};
         	
         	function onErro(e) {
         		swal('Oops!', e.responseText, 'error');
-        	}
-            setTimeout(function(){     
-            	swal("Conta finalizada!");   
-            	}, 2000); 
+        	};
+            
+           
         });
+
 });
 	
