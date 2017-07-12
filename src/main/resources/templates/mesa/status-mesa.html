@@ -119,7 +119,9 @@
 
 																
 															</div>	
-															<span class="left task-cat green accent-3" th:text="|R$ ${mesaService.totalPorMesa(i.idmesa)}|"></span>
+															<span class="left task-cat green accent-3" th:if="${mesaService.totalPorMesa(i.idmesa)} == null">R$ 0,00</span>
+															<span class="left task-cat green accent-3" th:unless="${mesaService.totalPorMesa(i.idmesa)} == null"
+																th:text="|R$ ${mesaService.totalPorMesa(i.idmesa)}|"></span>
 													
 												</div>
 											</div>
