@@ -92,7 +92,7 @@
 																			<td
 																				th:text="|R$ ${#numbers.formatDecimal(p.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}|"></td>
 																			
-																			<td th:text="${p.dataCriacao}"></td>
+																			<td th:text="${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}"></td>
 
 <!-- 																			<td th:text="${p.cliente.idcliente}"></td> -->
 																			<td th:text="|Mesa ${p.mesa.idmesa}|"></td>
@@ -121,7 +121,7 @@
 															</div>	
 															<span class="left task-cat green accent-3" th:if="${mesaService.totalPorMesa(i.idmesa)} == null">R$ 0,00</span>
 															<span class="left task-cat green accent-3" th:unless="${mesaService.totalPorMesa(i.idmesa)} == null"
-																th:text="|R$ ${mesaService.totalPorMesa(i.idmesa)}|"></span>
+																th:text="|R$ ${#numbers.formatDecimal(mesaService.totalPorMesa(i.idmesa), 0, 'DEFAULT', 2, 'DEFAULT')}|"></span>
 													
 												</div>
 											</div>

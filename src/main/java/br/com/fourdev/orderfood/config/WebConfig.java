@@ -9,11 +9,16 @@ import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.FixedLocaleResolver;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+	@Bean
+	public Java8TimeDialect java8TimeDialect() {
+	    return new Java8TimeDialect();
+	}
 	
 	
 	

@@ -33,7 +33,7 @@ public class ItemPedido {
 
 
 	public BigDecimal getValorTotal() {
-		return valorUnitario.multiply(new BigDecimal(quantidade));
+		return valorTotal;
 	}
 
 
