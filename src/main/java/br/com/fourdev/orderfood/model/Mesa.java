@@ -35,7 +35,7 @@ public class Mesa {
 	private String status = "DISPONIVEL";
 	
 	@Transient
-	private BigDecimal total;
+	private BigDecimal total = BigDecimal.ZERO;
 
 	public int getIdmesa() {
 		return idmesa;
@@ -88,6 +88,8 @@ public class Mesa {
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
+	
+	
 
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;

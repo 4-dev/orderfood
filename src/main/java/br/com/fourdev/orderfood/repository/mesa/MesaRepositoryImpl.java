@@ -1,7 +1,11 @@
 package br.com.fourdev.orderfood.repository.mesa;
 
+import java.math.BigDecimal;
 import java.sql.Types;
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -16,12 +20,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.StatusMesa;
+import br.com.fourdev.orderfood.model.Usuario;
 
 @Repository("mesaRepository")
 public class MesaRepositoryImpl implements MesaRepository {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private EntityManager manager;
 	
 	@Autowired
 	 private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -117,6 +125,17 @@ public class MesaRepositoryImpl implements MesaRepository {
 		String query = "select count(idmesa) from mesa";
 		int contaMesas = (Integer) this.jdbcTemplate.queryForObject(query, Integer.class);
 		return contaMesas;
+	}
+
+	@Override
+	public Double totalPorMesa(int idmesa){
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+		
+		
+		String query = "SELECT sum(cab.valortotal) FROM mesa_pedido mp, cabpedido cab WHERE mp.numped = cab.numped AND mp.idmesa = ?";
+		Double total = this.jdbcTemplate.queryForObject(query, new Object[] { idmesa }, Double.class);
+		return total;
 	}
 
 }

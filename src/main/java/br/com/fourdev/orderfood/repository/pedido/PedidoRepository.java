@@ -27,4 +27,5 @@ public interface PedidoRepository {
 	public List<ItemPedido> retornaItemPorPedido(int idPedido);
 	
 	public void atualizarStatusPedido(Pedido pedido);
+	
 }

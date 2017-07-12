@@ -45,8 +45,12 @@ $('.js-confirma-btn').click(function(evento){
 	var botaoClicado = $(evento.currentTarget);
 	var url = botaoClicado.data('url');
 	var objeto = botaoClicado.data('objeto');
+	var total = botaoClicado.data('total');
+	var mesas = $('.js-mesas');
+	
+	
 	swal({   title: "Finalizar "+objeto+"?",   
-        text: "Total: R$ ",   
+        text: "Total: R$ "+total,   
         type: "info",   showCancelButton: true,   
         closeOnConfirm: false,   
         showLoaderOnConfirm: true, }, 
@@ -64,11 +68,11 @@ $('.js-confirma-btn').click(function(evento){
         		
         		setTimeout(function(url){     
         			swal({title: objeto+" finalizada!"},
+        				
         				function() {
-        				window.location.reload();
-        			
-        			});  
-        		}, 2500); 
+        					window.location.reload();
+        				});  
+        		}, 5000); 
             	
         	};
         	

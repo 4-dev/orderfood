@@ -107,7 +107,7 @@
 																		</tr>
 																	
 																</tbody>
-		
+				
 															</table>
 						                                       	
 				                                       	</div>
@@ -119,7 +119,7 @@
 
 																
 															</div>	
-															<span class="left task-cat green accent-3">$ 0,00</span>
+															<span class="left task-cat green accent-3" th:text="|R$ ${mesaService.totalPorMesa(i.idmesa)}|"></span>
 													
 												</div>
 											</div>
@@ -130,7 +130,7 @@
 											<a class="btn waves-effect waves-light cyan left js-confirma-btn modal-action
 											modal-close"
 												 	data:url="@{/mesa/status/finalizarmesa/{idmesa}(idmesa=${i.idmesa})}"
-													 data:objeto="|Mesa ${i.idmesa}|"  >
+													 data:objeto="|Mesa ${i.idmesa}|" data:total="${mesaService.totalPorMesa(i.idmesa)}" >
 												<i class="large mdi-editor-attach-money right"></i>
 												Finalizar
 											</a> 

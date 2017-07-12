@@ -81,4 +81,9 @@ public class MesaController {
 		return new ModelAndView("redirect:../../status");
 	}
 	
+	@GetMapping("/cupom")
+	public String cupom(){
+		return"cupom/cupom";
+	}
+	
 }

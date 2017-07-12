@@ -66,8 +66,6 @@ public class PedidoService {
 		return pedidoRepository.retornaItemPorPedido(idPedido);
 	}
 	
-	
-
 	private List<Pedido> transformarJsonPedido(String pedidoJson) {
 
 //		Gson gson = new Gson();

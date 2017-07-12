@@ -1,5 +1,6 @@
 package br.com.fourdev.orderfood.repository.pedido;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		String query = "SELECT cab.* FROM mesa_pedido mp, cabpedido cab WHERE mp.numped = cab.numped AND mp.idmesa = ? ORDER BY CAB.NUMPED";
 		return jdbcTemplate.query(query, new Object[] { idmesa }, new PedidoRowMapper());
 	}
-
+	
 	public List<ItemPedido> retornaItemPorPedido(int numPedido) {
 		String query1 = "set search_path to orderfood, public";
 		jdbcTemplate.update(query1, new Object[] {});

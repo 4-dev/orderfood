@@ -3,6 +3,7 @@ package br.com.fourdev.orderfood.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
@@ -106,5 +107,8 @@ public class MesaService {
 		return mesaRepository.reservarMesa(mesa);
 	}
 
+	public Double totalPorMesa(int idmesa){
+		return mesaRepository.totalPorMesa(idmesa);
+	}
 
 }

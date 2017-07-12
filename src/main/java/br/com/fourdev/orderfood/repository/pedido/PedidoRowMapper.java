@@ -1,5 +1,6 @@
 package br.com.fourdev.orderfood.repository.pedido;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -7,6 +8,7 @@ import java.time.LocalDateTime;
 import org.springframework.jdbc.core.RowMapper;
 
 import br.com.fourdev.orderfood.model.Cliente;
+import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusPedido;
@@ -47,9 +49,10 @@ public class PedidoRowMapper implements RowMapper<Pedido> {
 		mesa.setIdmesa(rs.getInt("idmesa"));
 //		mesa = mesaRepository.selectMesaPorId(rs.getInt("idmesa"));
 		pedido.setMesa(mesa);
-
+		
 		Usuario usuario = new Usuario();
 		pedido.setUsuario(usuario);
+		
 
 		return pedido;
 	}
