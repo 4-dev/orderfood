@@ -245,8 +245,20 @@ customização do switch checkbox para funcionar com thymelea
     border-radius: 19px;
 }
 
+.img-perfil{
+	height: 300px;
+	width: 250px;
+}
 
+.titulo-perfil{
+	margin-top: 100px;
+	font-weight: bold;
+}
 
+.field-perfil{
+	text-align: right;
+	font-weight: bold;
+}
 
 
 

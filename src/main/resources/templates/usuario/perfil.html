@@ -14,7 +14,7 @@
 			
 			<div class="row">
 				<div class="col s10 m10 l10">
-					<h5 class="breadcrumbs-title" th:text="|Perfil do Usuário ${usuario.nome}|"></h5>
+					<h5 class="breadcrumbs-title" th:text="|Perfil de ${usuario.nome}|"></h5>
 					<ol class="breadcrumbs">
 						<li><a href="index.html">Home</a></li>
 						<li><a href="#">Usuário</a></li>
@@ -38,11 +38,69 @@
 				<div class="col s12 m12 l12">
 
 					<div class="card-panel hoverable">
-						<div>
+						<div class="row">
+							<div class="col l9 offset-l1">
+								<div class="row">
+									<div class="col p12 m6 l6">
+										<img th:src="@{/images/user2.png}" alt="perfil" class="responsive-img img-perfil right" />
+										
+									</div>
+									<div class="col p12 m6 l6">
+										<h2 class="titulo-perfil"><span th:text="${usuario.nome}"></span></h2>
+									</div>
+								</div>
+							</div>
 							
-								
-			
-				
+							<div class="col l9 offset-l1">
+								<div class="row">
+									<div class="col p12 m6 l6">
+										<h3 class="field-perfil"><span>Email:</span></h3>
+									</div>
+									<div class="col p12 m6 l6">
+										<h3 class=""><span th:text="${usuario.email}"></span></h3>
+									</div>
+								</div>
+							</div>
+							<div class="col l9 offset-l1">
+								<div class="row">
+									<div class="col p12 m6 l6">
+										<h3 class="field-perfil"><span>Grupos:</span></h3>
+									</div>
+									<div class="col p12 m6 l6">
+										<h3 class=""><span th:each="grupo : ${usuario.grupos}" th:text="|${grupo.nome}${grupoStat.last ? '' : ', '}|"></span></h3>
+									</div>
+								</div>
+							</div>
+							<div class="col l9 offset-l1">
+								<div class="row">
+									<div class="col p12 m6 l6">
+										<h3 class="field-perfil"><span>Data Nasc.:</span></h3>
+									</div>
+									<div class="col p12 m6 l6">
+										<h3 class=""><span th:text="${#calendars.format(usuario.dataNascimento, 'dd/MMM/yyyy')}"></span></h3>
+									</div>
+								</div>
+							</div>
+							<div class="col l9 offset-l1">
+								<div class="row">
+									<div class="col p12 m6 l6">
+										<h3 class="field-perfil"><span>Status:</span></h3>
+									</div>
+									<div class="col p12 m6 l6">
+										<h3 class=""><span th:text="${usuario.ativo}?'Ativo':'Inativo'"></span></h3>
+									</div>
+								</div>
+							</div>
+							<div class="col l9 offset-l1">
+								<div class="row">
+									<div class="col p12 m6 l6">
+										<h3 class="field-perfil"><span>Editar:</span></h3>
+									</div>
+									<div class="col p12 m6 l6">
+										<h3 class=""><a th:href="@{/usuario/{id}(id=${usuario.id})}"><i class="mdi-content-create"></i></a></h3>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
