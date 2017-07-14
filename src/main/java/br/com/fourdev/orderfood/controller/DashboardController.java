@@ -54,5 +54,10 @@ public class DashboardController {
 		return new ModelAndView("redirect:novo");
 		
 	}
+	
+	@GetMapping("/sobre")
+	public String sobre(){
+		return "dashboard/sobre";
+	}
 
 }

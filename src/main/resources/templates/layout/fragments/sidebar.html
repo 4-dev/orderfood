@@ -16,8 +16,8 @@
 							<li><a
 								th:href="@{/usuario/perfil/{id}(id=${#authentication.principal.usuario.id})}"><i
 									class="mdi-action-face-unlock"></i> Perfil</a></li>
-							<li><a href="#"><i class="mdi-communication-live-help"></i>
-									Ajuda</a></li>
+							<li><a th:href="@{/dashboard/sobre}"><i class="mdi-communication-live-help"></i>
+									Sobre</a></li>
 							<li class="divider"></li>
 							<li><a th:href="@{/logout}"><i
 									class="mdi-hardware-keyboard-tab"></i> Logout</a></li>
