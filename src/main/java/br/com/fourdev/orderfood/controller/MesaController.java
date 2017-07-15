@@ -24,66 +24,66 @@ import br.com.fourdev.orderfood.service.PedidoService;
 @Controller
 @RequestMapping("mesa")
 public class MesaController {
-	
+
 	@Autowired
 	private MesaService mesaService;
 	@Autowired
 	private PedidoService pedidoService;
-	
+
 	@GetMapping("/status")
-	public ModelAndView status(Mesa mesa){
+	public ModelAndView status(Mesa mesa) {
 		ModelAndView modelAndView = new ModelAndView("mesa/status-mesa");
 		modelAndView.addObject(mesa);
 		modelAndView.addObject(mesaService);
 		modelAndView.addObject(pedidoService);
-		return modelAndView ;
+		return modelAndView;
 	}
-	
+
 	@GetMapping("/novo")
-	public ModelAndView novo(Mesa mesa){
+	public ModelAndView novo(Mesa mesa) {
 		ModelAndView modelAndView = new ModelAndView("mesa/cadastro-mesa");
 		modelAndView.addObject(mesa);
 		modelAndView.addObject("mesas", mesaService.selectMesaList());
 		modelAndView.addObject("qtdMesas", mesaService.contaMesas() + 1);
-		return modelAndView ;
+		return modelAndView;
 	}
-	
+
 	@PostMapping("/novo")
-	public ModelAndView novo(@Valid Mesa mesa, BindingResult result, RedirectAttributes attributes){
+	public ModelAndView novo(@Valid Mesa mesa, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return novo(mesa);
 		}
-		
+
 		mesaService.insertMesa(mesa);
-		
+
 		//
 		attributes.addFlashAttribute("mensagem", "Mesa Salva com Sucesso!");
-		
+
 		return new ModelAndView("redirect:novo");
-		
+
 	}
-	
+
 	@GetMapping("/status/itens/{idpedido}")
-	public @ResponseBody List<ItemPedido> itensDoPedido(@PathVariable("idpedido")int idPedido){
+	public @ResponseBody List<ItemPedido> itensDoPedido(@PathVariable("idpedido") int idPedido) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<ItemPedido> itens = pedidoService.retornaItenPorPedido(idPedido);
 		modelAndView.addObject("itens", itens);
 		return itens;
 	}
-	
-	
-	@GetMapping("/status/finalizarmesa/{idmesa}")
-	public ModelAndView finalizarMesa(@PathVariable("idmesa")int idmesa, RedirectAttributes attributes){
-		
-		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa);
+
+	@GetMapping("/status/finalizarmesa/{idmesa, statusmesa}")
+	public ModelAndView finalizarMesa(@PathVariable("idmesa") int idmesa, @PathVariable("idmesa") String statusmesa,
+			RedirectAttributes attributes) {
+
+		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa, statusmesa);
 		mesaService.finalizarMesa(idmesa, pedidos);
 		attributes.addFlashAttribute("mensagem", "Mesa Salva com Sucesso!");
 		return new ModelAndView("redirect:../../status");
 	}
-	
+
 	@GetMapping("/cupom")
-	public String cupom(){
-		return"cupom/cupom";
+	public String cupom() {
+		return "cupom/cupom";
 	}
-	
+
 }

@@ -18,6 +18,7 @@ import br.com.fourdev.orderfood.model.Cliente;
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
+import br.com.fourdev.orderfood.model.StatusMesa;
 import br.com.fourdev.orderfood.model.StatusPedido;
 import br.com.fourdev.orderfood.repository.pedido.PedidoRepository;
 
@@ -57,9 +58,10 @@ public class PedidoService {
 		StatusPedido statusPedido = StatusPedido.CANCELADO;
 		return pedidoRepository.retornaStatusPedido(statusPedido);
 	}	
-	
-	public List<Pedido> retornaPedidoPorMesa(int idmesa) {
-		return pedidoRepository.retornaPedidoPorMesa(idmesa);
+
+	public List<Pedido> retornaPedidoPorMesa(int idmesa, String statusPedido) {
+		
+		return pedidoRepository.retornaPedidoPorMesa(idmesa, StatusPedido.valueOf(statusPedido));
 	}
 	
 	public List<ItemPedido> retornaItenPorPedido(int idPedido) {

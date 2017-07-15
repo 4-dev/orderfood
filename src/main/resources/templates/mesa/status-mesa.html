@@ -85,7 +85,7 @@
 																<tbody>
 																	
 																		<tr
-																			th:each="p: ${pedidoService.retornaPedidoPorMesa(i.idmesa)}">
+																			th:each="p: ${pedidoService.retornaPedidoPorMesa(i.idmesa, 'ABERTO')}">
 																			<td class="center"  th:text="${p.status}"></td>
 																			<td class="center" th:text="${p.numped}"></td>
 																			<td th:text="${p.observacao}"></td>
