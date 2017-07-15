@@ -4,7 +4,7 @@ public enum Categoria {
 
 	BEBIDAS("Bebidas"), 
 	PRATOS("Pratos"), 
-	SOBREMESAS("Sobremesas");
+	SOBREMESAS("Massas");
 
 	private String descricao;
 

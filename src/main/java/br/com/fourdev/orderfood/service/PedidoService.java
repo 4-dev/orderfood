@@ -60,7 +60,6 @@ public class PedidoService {
 	}	
 
 	public List<Pedido> retornaPedidoPorMesa(int idmesa, String statusPedido) {
-		
 		return pedidoRepository.retornaPedidoPorMesa(idmesa, StatusPedido.valueOf(statusPedido));
 	}
 	
