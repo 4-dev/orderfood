@@ -15,16 +15,14 @@ $('.js-itens-btn').click(function(evento){
                 $.ajax({
                     url: urlItem,
                     contentType: "application/json",
-                    dataType: "json"
-//                    success: function(data){
-//                    	console.log('Url', urlItem);
-//                    	console.log('Dados', data);
-//                        deferred.resolve(data);
-//                        console.log('deferred', deferred.resolve(data));
-//                    }
-                }).done(function(response) {
-                	deferred.resolve(response);
-				});
+                    dataType: "json",
+                    success: function(data){
+                    	console.log('Url', urlItem);
+                    	console.log('Dados', data);
+                        deferred.resolve(data);
+                        console.log('deferred', deferred.resolve(data));
+                    }
+                });
  
                 return deferred.promise();
             }
