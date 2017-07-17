@@ -25,83 +25,62 @@ import br.com.fourdev.orderfood.service.exception.ErroAoExcluirProdutoException;
 @Controller
 @RequestMapping("produto")
 public class ProdutoController {
-	
+
 	@Autowired
 	private ProdutoService produtoService;
-	
+
 	@Autowired
 	private Produtos produtos;
-	
+
 	@GetMapping("/novo")
-	public ModelAndView novo(Produto produto){
+	public ModelAndView novo(Produto produto) {
 		ModelAndView modelAndView = new ModelAndView("produto/cadastro-produto");
 		modelAndView.addObject(produto);
 		modelAndView.addObject("categorias", Categoria.values());
 		modelAndView.addObject("unidades", Unidade.values());
-		
-		return modelAndView ;
+
+		return modelAndView;
 	}
-	
-	
-	@RequestMapping(value={"/novo", "{\\d+}"}, method=RequestMethod.POST)
-	public ModelAndView salvar(@Valid Produto produto, BindingResult result, RedirectAttributes attributes){
+
+	@RequestMapping(value = { "/novo", "{\\d+}" }, method = RequestMethod.POST)
+	public ModelAndView salvar(@Valid Produto produto, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return novo(produto);
 		}
-		
+
 		produtoService.salvar(produto);
-		
-		
+
 		attributes.addFlashAttribute("mensagem", "Produto Salvo com Sucesso!");
-		
+
 		return new ModelAndView("redirect:novo");
-		
+
 	}
-	
+
 	@GetMapping
-	public ModelAndView pesquisa(){
+	public ModelAndView pesquisa() {
 		ModelAndView modelAndView = new ModelAndView("produto/pesquisa-produto");
-		
+
 		modelAndView.addObject("produtos", produtos.findAll());
-		
+
 		return modelAndView;
 	}
-	
+
 	@GetMapping("/{id}")
-	public ModelAndView editar(@PathVariable("id")Produto produto){
+	public ModelAndView editar(@PathVariable("id") Produto produto) {
 		ModelAndView modelAndView = novo(produto);
 		modelAndView.addObject(produto);
 		return modelAndView;
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("id") Produto produto){
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("id") Produto produto) {
 		try {
 			produtoService.delete(produto);
 		} catch (ErroAoExcluirProdutoException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		
+
 		return ResponseEntity.ok().build();
 	}
 
 }
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

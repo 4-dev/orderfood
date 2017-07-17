@@ -71,13 +71,20 @@ public class MesaController {
 		return itens;
 	}
 
-	@GetMapping("/status/finalizarmesa/{idmesa, statusmesa}")
-	public ModelAndView finalizarMesa(@PathVariable("idmesa") int idmesa, @PathVariable("idmesa") String statusmesa,
-			RedirectAttributes attributes) {
+	@GetMapping("/status/finalizarmesa/{idmesa}")
+	public ModelAndView finalizarMesa(@PathVariable("idmesa") int idmesa, RedirectAttributes attributes) {
 
-		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa, statusmesa);
-		mesaService.finalizarMesa(idmesa, pedidos);
-		attributes.addFlashAttribute("mensagem", "Mesa Salva com Sucesso!");
+		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa, "ABERTO");
+		if (!pedidos.isEmpty()) {
+			if (mesaService.finalizarMesa(idmesa, pedidos)) {
+				attributes.addFlashAttribute("mensagem", "Mesa Finalizada.");
+			} else {
+				attributes.addFlashAttribute("mensagem", "Mesa Não atualizada.");
+			}
+		} else {
+			attributes.addFlashAttribute("mensagem", "Não existem pedidos na mesa selecionada.");
+		}
+
 		return new ModelAndView("redirect:../../status");
 	}
 
