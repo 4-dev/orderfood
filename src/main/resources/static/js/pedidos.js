@@ -3,7 +3,7 @@ $('.js-itens-btn').click(function(evento){
 	event.preventDefault(); 
 	var botaoClicado = $(evento.currentTarget);
 	var urlItem = botaoClicado.data('url');
-    $("#jsGrid-odata").jsGrid({
+    $(".jsGrid-odata").jsGrid({
         height: "auto",
         width: "100%",
         sorting: true,
@@ -14,13 +14,17 @@ $('.js-itens-btn').click(function(evento){
                 var deferred = $.Deferred();
                 $.ajax({
                     url: urlItem,
-                    dataType: "json",
-                    success: function(data){
-                    	console.log('Dados', data);
-                        deferred.resolve(data);
-                        console.log('deferred', deferred.resolve(data));
-                    }
-                });
+                    contentType: "application/json",
+                    dataType: "json"
+//                    success: function(data){
+//                    	console.log('Url', urlItem);
+//                    	console.log('Dados', data);
+//                        deferred.resolve(data);
+//                        console.log('deferred', deferred.resolve(data));
+//                    }
+                }).done(function(response) {
+                	deferred.resolve(response);
+				});
  
                 return deferred.promise();
             }
@@ -71,6 +75,9 @@ $('.js-confirma-btn').click(function(evento){
         				
         				function() {
         					window.location.reload();
+        				window.open('/mesa/cupom','pop','left=500, top=100, width=300, height=550');
+        				
+        				
         				});  
         		}, 5000); 
             	
