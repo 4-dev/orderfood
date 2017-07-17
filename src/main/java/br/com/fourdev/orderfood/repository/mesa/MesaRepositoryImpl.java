@@ -67,9 +67,9 @@ public class MesaRepositoryImpl implements MesaRepository {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void updateMesa(Mesa mesa) {
+	public boolean updateMesa(Mesa mesa) {
 		try {
-
+			boolean atualizou = false;
 			String query1 = "set search_path to orderfood, public";
 			jdbcTemplate.update(query1, new Object[] {});
 			
@@ -94,7 +94,10 @@ public class MesaRepositoryImpl implements MesaRepository {
 //				} catch (Exception e) {
 //					System.out.println(e.getCause());
 //				}
+				return atualizou;
 				
+			} else {
+				return atualizou;
 			}
 		} catch (InvalidResultSetAccessException e) {
 			throw new RuntimeException(e);

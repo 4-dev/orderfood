@@ -14,7 +14,7 @@ public interface MesaRepository  {
 
 	public void insertMesa(Mesa mesa);
 
-	public void updateMesa(Mesa mesa);
+	public boolean updateMesa(Mesa mesa);
 
 	public void deleteMesa(int id);
 

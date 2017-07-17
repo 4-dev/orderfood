@@ -82,17 +82,19 @@ public class MesaService {
 		return vbliberouMesa;
 	}
 
-	public void finalizarMesa(int idmesa, List<Pedido> pedidos){
+	public boolean finalizarMesa(int idmesa, List<Pedido> pedidos){
 		Mesa mesa = new Mesa();
 		mesa.setIdmesa(idmesa);
 		mesa.setStatus(StatusMesa.DISPONIVEL.getDescricao());
-		mesaRepository.updateMesa(mesa);
+		boolean atualizou = mesaRepository.updateMesa(mesa);
 		
 		// Alterando o Status do Pedido
 		for (Pedido pedido : pedidos) {
 			pedido.setStatus(StatusPedido.FINALIZADO);
 			pedidoRepository.atualizarStatusPedido(pedido);
 		}
+		
+		return atualizou;
 		
 	}
 	public StatusMesa reservarMesa(int idmesa) {
