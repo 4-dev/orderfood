@@ -110,7 +110,13 @@ public class MesaService {
 	}
 
 	public Double totalPorMesa(int idmesa){
-		return mesaRepository.totalPorMesa(idmesa);
+		Mesa mesa = mesaRepository.selectMesaPorId(idmesa);
+		if (mesa.getStatus().equals(StatusMesa.OCUPADA.getDescricao())) {
+			return mesaRepository.totalPorMesa(idmesa);
+		} else{
+			return null;
+		}
+			
 	}
 
 }
