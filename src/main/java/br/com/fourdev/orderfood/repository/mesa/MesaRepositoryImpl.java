@@ -136,7 +136,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 		jdbcTemplate.update(query1, new Object[] {});
 		
 		
-		String query = "SELECT sum(cab.valortotal) FROM mesa_pedido mp, cabpedido cab WHERE mp.numped = cab.numped AND mp.idmesa = ?";
+		String query = "SELECT sum(cab.valortotal) FROM mesa_pedido mp, cabpedido cab WHERE mp.numped = cab.numped AND cab.status LIKE 'ABERTO'AND mp.idmesa = ?";
 		Double total = this.jdbcTemplate.queryForObject(query, new Object[] { idmesa }, Double.class);
 		return total;
 	}

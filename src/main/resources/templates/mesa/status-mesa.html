@@ -45,10 +45,14 @@
 										<div>
 											<span class="card-title mesa-titulo" th:text="'Mesa '+${i.idmesa}"></span>
 										</div>
+										
 										<div class="mesa-imagem card-image waves-effect waves-light modal-trigger center-align"
-											th:href="${'#modal'+i.idmesa}">
-											<img th:src="@{/images/mesa.png}" class="responsive-img" />
+											th:href="${'#modal'+i.idmesa}" data:id="${i.idmesa}">
+											
+												<img th:src="@{/images/mesa.png}" class="responsive-img"/>
+											
 										</div>
+										
 										<div class="row" style="margin-bottom: 15px;">
 											<div th:classappend="${i.status == 'DISPONIVEL'?'green-text':'red-text'}" class="chip center-align"
 											 	 th:id="descStatus+${i.idmesa}" >
@@ -82,7 +86,7 @@
 																		<th class="center">Itens</th>
 																	</tr>
 																</thead>
-																<tbody>
+																<tbody class="table-body">
 																	
 																		<tr
 																			th:each="p: ${pedidoService.retornaPedidoPorMesa(i.idmesa, 'ABERTO')}">

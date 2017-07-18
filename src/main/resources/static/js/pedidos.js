@@ -17,10 +17,10 @@ $('.js-itens-btn').click(function(evento){
                     contentType: "application/json",
                     dataType: "json",
                     success: function(data){
-                    	console.log('Url', urlItem);
-                    	console.log('Dados', data);
+//                    	console.log('Url', urlItem);
+//                    	console.log('Dados', data);
                         deferred.resolve(data);
-                        console.log('deferred', deferred.resolve(data));
+//                        console.log('deferred', deferred.resolve(data));
                     }
                 });
  
@@ -89,4 +89,24 @@ $('.js-confirma-btn').click(function(evento){
         });
 
 });
+
+
+$('.mesa-imagem').click(function(evento){
+	event.preventDefault(); 
+	var botaoClicado = $(evento.currentTarget);
+	var id = botaoClicado.data('id');
+	
+	$.ajax({
+		url:'/mesa/atualiza/'+id,
+		method: 'get',
+	success: function(data) {
+		console.log(data);
+		}
+	});
+	
+
+});
+	
+
+
 	
