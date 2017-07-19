@@ -68,12 +68,19 @@ public class MesaRestController {
 		mesaService.deleteMesa(id);
 	}
 
-	@RequestMapping(value = "/verificarmesa/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String verificarStatusMesa(@PathVariable("id") int idmesa) throws Exception {
+	@RequestMapping(value = "/verificarmesa/{id}/{imei}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String verificarStatusMesa(@PathVariable("id") int idmesa, @PathVariable("imei") String imei)
+			throws Exception {
 		// código que faz o trabalho ;-)
 		Gson gson = new Gson();
 		String valor = "";
 		ObjectSync objectSync = new ObjectSync();
+
+		// tratando o imei do celular
+		if (!"".equalsIgnoreCase(imei)) {
+			mesaService.validarClienteNaMesa(idmesa, imei);
+		}
+
 		if (mesaService.verificarStatusMesa(idmesa)) {
 			objectSync.setListProdutos(listaProdutoDTO());
 			objectSync.setMensagem("Mesa disponível");

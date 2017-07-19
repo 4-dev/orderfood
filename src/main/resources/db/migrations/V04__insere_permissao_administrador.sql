@@ -27,3 +27,6 @@ INSERT into grupo_permissao (id_grupo, id_permissao) values (3,7);
 INSERT into usuario_grupo (id_usuario, id_grupo) values (
 	(select id from usuario where email = 'admin@orderfood.com'), 1);
 	 
+	
+ALTER TABLE orderfood.cliente
+  ADD COLUMN imei VARCHAR(30);	

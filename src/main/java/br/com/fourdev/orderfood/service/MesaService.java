@@ -3,7 +3,6 @@ package br.com.fourdev.orderfood.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
@@ -13,6 +12,7 @@ import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.stereotype.Service;
 
 import br.com.fourdev.orderfood.config.ClientWebSocketConfig;
+import br.com.fourdev.orderfood.model.Cliente;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusMesa;
@@ -57,11 +57,37 @@ public class MesaService {
 		return mesaRepository.contaMesas();
 	}
 
+	public void validarClienteNaMesa(int idmesa, String imei) {
+		// boolean existe = false;
+		Cliente cliente = new Cliente();
+		cliente = mesaRepository.existeCliente(imei);
+
+		if (cliente == null) {
+			// cadastrar cliente caso nao exista
+			cliente.setNome(imei);
+			cliente.setSexo("");
+			cliente.setImei(imei);
+			mesaRepository.insertCliente(cliente);
+			cliente = mesaRepository.existeCliente(imei);
+		}
+
+		if (!mesaRepository.existeClienteNaMesa(idmesa, imei)) {
+			// verificar se este cliente está em outra mesa e transferir o
+			// pedidos de mesa
+			mesaRepository.insertClienteNaMesa(cliente, idmesa);
+
+		} else {
+			// vincular cliente na mesa
+			mesaRepository.updateClienteNaMesa(cliente, idmesa);
+		}
+		// return existe;
+	}
+
 	public boolean verificarStatusMesa(int idmesa) throws InterruptedException, ExecutionException {
 		boolean vbliberouMesa = false;
-		
+
 		Mesa mesa = mesaRepository.selectMesaPorId(idmesa);
-		
+
 		if ("DISPONIVEL".equalsIgnoreCase(mesa.getStatus().toString())) {
 			ClientWebSocketConfig cws = null;
 			cws.conectaOuRetornaWebSocket();
@@ -72,31 +98,32 @@ public class MesaService {
 			logger.info("Enviando mensagem" + cws.stompSession);
 			cws.helloClient.sendHello(cws.stompSession, String.valueOf(mesa.getIdmesa()));
 			Thread.sleep(1000);
-		
+
 			mesa.setStatus(StatusMesa.OCUPADA.getDescricao());
 			mesa.setIdmesa(idmesa);
 			mesaRepository.updateMesa(mesa);
-			vbliberouMesa = true;			
+			vbliberouMesa = true;
 
 		}
 		return vbliberouMesa;
 	}
 
-	public boolean finalizarMesa(int idmesa, List<Pedido> pedidos){
+	public boolean finalizarMesa(int idmesa, List<Pedido> pedidos) {
 		Mesa mesa = new Mesa();
 		mesa.setIdmesa(idmesa);
 		mesa.setStatus(StatusMesa.DISPONIVEL.getDescricao());
 		boolean atualizou = mesaRepository.updateMesa(mesa);
-		
+
 		// Alterando o Status do Pedido
 		for (Pedido pedido : pedidos) {
 			pedido.setStatus(StatusPedido.FINALIZADO);
 			pedidoRepository.atualizarStatusPedido(pedido);
 		}
-		
+
 		return atualizou;
-		
+
 	}
+
 	public StatusMesa reservarMesa(int idmesa) {
 		Mesa mesa = new Mesa();
 		StatusMesa statusMesa = null;
@@ -109,14 +136,14 @@ public class MesaService {
 		return mesaRepository.reservarMesa(mesa);
 	}
 
-	public Double totalPorMesa(int idmesa){
+	public Double totalPorMesa(int idmesa) {
 		Mesa mesa = mesaRepository.selectMesaPorId(idmesa);
 		if (mesa.getStatus().equals(StatusMesa.OCUPADA.getDescricao())) {
 			return mesaRepository.totalPorMesa(idmesa);
-		} else{
+		} else {
 			return null;
 		}
-			
+
 	}
 
 }

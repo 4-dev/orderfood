@@ -1,12 +1,13 @@
 package br.com.fourdev.orderfood.repository.mesa;
 
 import java.util.List;
-import java.util.Optional;
 
+import br.com.fourdev.orderfood.model.Cliente;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.StatusMesa;
 
 public interface MesaRepository  {
+
 
 	public List<Mesa> selectMesaList();
 
@@ -23,5 +24,15 @@ public interface MesaRepository  {
 	public int contaMesas();
 	
 	public Double totalPorMesa(int idmesa);
-		
+	
+	// Cliente
+	public Cliente existeCliente(String imei);
+	
+	public boolean existeClienteNaMesa(int idmesa, String imei);
+
+	public void insertCliente(Cliente cliente);
+	
+	public void insertClienteNaMesa(Cliente cliente, int idmesa);
+	
+	public void updateClienteNaMesa(Cliente cliente, int idmesa);
 }
