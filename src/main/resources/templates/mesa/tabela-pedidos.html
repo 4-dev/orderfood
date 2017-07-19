@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<table class="responsive-table display striped bordered">
+		<thead>
+			<tr>
+				<th class="center">Status</th>
+				<th class="center">Pedido</th>
+				<th>Observacao</th>
+				<th>Vl. Total</th>
+				<th>Dt. Criação</th>
+				<th class="left">Mesa</th>
+				<th class="center">Itens</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p: ${pedidos}">
+				<td class="center" th:text="${p.status}"></td>
+				<td class="center" th:text="${p.numped}"></td>
+				<td th:text="${p.observacao}"></td>
+				<td
+					th:text="|R$ ${#numbers.formatDecimal(p.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}|"></td>
+
+				<td th:text="${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}"></td>
+
+				<td th:text="|Mesa ${p.mesa.idmesa}|"></td>
+				<td class="center"><a
+					class="btn-floating waves-effect waves-light center blue-grey light-4 js-itens-btn"
+					data:url="@{/mesa/status/itens/{idpedido}(idpedido=${p.numped})}">
+						<i class="mdi-navigation-expand-less activator"></i>
+				</a></td>
+
+			</tr>
+
+		</tbody>
+		
+	</table>
+	<div class="div-total">
+		<span class="left task-cat green accent-3" th:if="${total} == null">R$ 0,00</span>
+		<span class="left task-cat green accent-3" th:unless="${total} == null"
+			th:text="|R$ ${#numbers.formatDecimal(total, 0, 'DEFAULT', 2, 'DEFAULT')}|"></span>
+													
+	</div>
+	<th:block>
+		<script th:src="@{/js/tabela-itens.js}"></script>
+	
+	</th:block>
+</html>

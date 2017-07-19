@@ -72,61 +72,17 @@
 				                                       		<span th:classappend="${i.status == 'DISPONIVEL'?'blue-grey darken-1':'deep-orange darken-1'}" style="margin-right: 10px;"
 				                                       			class="chip white-text right mdi-action-cached"
 				                                       			 th:text="${i.status == 'DISPONIVEL' ? 'Diponível' : 'Ocupada'}"></span>
-				                                       		<table class="responsive-table display striped bordered">
-				                                       			
-																<thead>
-																	<tr>
-																		<th class="center">Status</th>
-																		<th class="center">Pedido</th>
-																		<th>Observacao</th>
-																		<th>Vl. Total</th>
-																		<th>Dt. Criação</th>
-<!-- 																		<th>Cliente</th> -->
-																		<th class="left">Mesa</th>
-																		<th class="center">Itens</th>
-																	</tr>
-																</thead>
-																<tbody class="table-body">
-																	
-																		<tr
-																			th:each="p: ${pedidoService.retornaPedidoPorMesa(i.idmesa, 'ABERTO')}">
-																			<td class="center"  th:text="${p.status}"></td>
-																			<td class="center" th:text="${p.numped}"></td>
-																			<td th:text="${p.observacao}"></td>
-																			<td
-																				th:text="|R$ ${#numbers.formatDecimal(p.valorTotal, 0, 'DEFAULT', 2, 'DEFAULT')}|"></td>
-																			
-																			<td th:text="${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}"></td>
-
-<!-- 																			<td th:text="${p.cliente.idcliente}"></td> -->
-																			<td th:text="|Mesa ${p.mesa.idmesa}|"></td>
-																			<td class="center">
-																				<a class="btn-floating waves-effect waves-light center blue-grey light-4 js-itens-btn"
-																					 data:url="@{/mesa/status/itens/{idpedido}(idpedido=${p.numped})}">
-																					<i class="mdi-navigation-expand-less activator" 
-																						></i>
-																				</a>
-																			</td>
-																			
-																		</tr>
-																	
-																</tbody>
-				
-															</table>
+				                                       		<div class="tabela"></div>
 						                                       	
 				                                       	</div>
-														  <div class="card-reveal">
+														   <div class="card-reveal">
 						                                        <span class="card-title grey-text text-darken-4">Itens do Pedido <i class="mdi-navigation-expand-more right grey-text"></i></span>
 
 
-															<div class="jsGrid-odata" style="margin-top: 10px;"></div>
+																<div class="jsGrid-odata" style="margin-top: 10px;"></div>
 
 																
 															</div>	
-															<span class="left task-cat green accent-3" th:if="${mesaService.totalPorMesa(i.idmesa)} == null">R$ 0,00</span>
-															<span class="left task-cat green accent-3" th:unless="${mesaService.totalPorMesa(i.idmesa)} == null"
-																th:text="|R$ ${#numbers.formatDecimal(mesaService.totalPorMesa(i.idmesa), 0, 'DEFAULT', 2, 'DEFAULT')}|"></span>
-													
 												</div>
 											</div>
 
@@ -167,7 +123,6 @@
 	
 	<script type="text/javascript" th:src="@{/js/plugins/jsgrid/js/jsgrid.min.js}"></script>
 	<script th:src="@{/js/pedidos.js}"></script>
-
-
+	
 </th:block>
 </html>
