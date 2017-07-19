@@ -52,7 +52,7 @@ public class PedidoRestController {
 
 	@RequestMapping(value = "/gerarpedido", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String insertPedido(@RequestBody String pedidoJson) {
-		List<Pedido> pedidos = transformarJsonPedido(pedidoJson); 
+		List<Pedido> pedidos = pedidoService.transformarJsonPedido(pedidoJson); 
 		if (!pedidos.isEmpty()) {
 			try {
 				pedidoService.insertPedido(pedidos);
@@ -67,68 +67,7 @@ public class PedidoRestController {
 		
 	}
 
-	private List<Pedido> transformarJsonPedido(String pedidoJson) {
-
-		// Gson gson = new Gson();
-		String jsonInString = pedidoJson;
-		JsonParser jsonParser = new JsonParser();
-		JsonObject jo = (JsonObject) jsonParser.parse(jsonInString);
-		JsonArray jsonArr = jo.getAsJsonArray("listPedidos");
-		List<Pedido> pedidos = new ArrayList<Pedido>();
-		BigDecimal valorTotalPedido = BigDecimal.ZERO;
-
-		for (int i = 0; i < jsonArr.size(); i++) {
-			System.out.println(jsonArr.get(i).getAsJsonObject().get("codigo"));
-			System.out.println(jsonArr.get(i).getAsJsonObject().get("dtEmissao").getAsString());
-
-			List<ItemPedido> itens = new ArrayList<ItemPedido>();
-			JsonArray jsonItens = jsonArr.get(i).getAsJsonObject().get("itens").getAsJsonArray();
-			for (int j = 0; j < jsonItens.size(); j++) {
-				int codPedido = jsonItens.get(j).getAsJsonObject().get("codPedido").getAsInt();
-				int codProduto = jsonItens.get(j).getAsJsonObject().get("codProduto").getAsInt();
-				int quantidade = jsonItens.get(j).getAsJsonObject().get("quantidade").getAsInt();
-				BigDecimal valorTotal = jsonItens.get(j).getAsJsonObject().get("valorTotal").getAsBigDecimal();
-				BigDecimal valorUnitario = jsonItens.get(j).getAsJsonObject().get("valorUnitario").getAsBigDecimal();
-
-				System.out.println(codPedido);
-				ItemPedido itemPedido = new ItemPedido();
-				itemPedido.setNumped(codPedido);
-				itemPedido.setProduto(codProduto);
-				itemPedido.setQuantidade(quantidade);
-				itemPedido.setValorUnitario(valorUnitario);
-				itens.add(itemPedido);
-				// Somando total do pedido
-				valorTotalPedido = valorTotalPedido.add(valorTotal);
-			}
-
-			Pedido pedido = new Pedido();
-			
-			pedido.setDataCriacao(LocalDateTime.now());
-			pedido.setDataEntrega(LocalDateTime.now());
-			pedido.setObservacao("");
-			pedido.setValorTotal(valorTotalPedido.setScale(2, BigDecimal.ROUND_CEILING));
-			pedido.setStatus(StatusPedido.ABERTO);
-			// pedido.setUsuario(usuarios.findOne((long) 1));
-			
-			//Setando o Cliente
-			Cliente cliente = new Cliente();
-			cliente.setIdcliente(1);
-			cliente.setNome("admin");
-			pedido.setCliente(cliente);
-			
-			//Setando a Mesa
-			Mesa mesa = new Mesa();
-			mesa.setIdmesa(jsonArr.get(i).getAsJsonObject().get("codMesa").getAsInt());
-			mesa.setDescricao("");
-			pedido.setMesa(mesa);
-
-			// Setando os itens
-			pedido.setItens(itens);
-
-			pedidos.add(pedido);
-		}
-		return pedidos;
-	}
+	
 	
 	// @RequestMapping(value = "/verificarmesa/{id}", method =
 	// RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

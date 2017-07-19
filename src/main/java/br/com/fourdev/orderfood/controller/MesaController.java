@@ -5,9 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
-import br.com.fourdev.orderfood.model.StatusPedido;
 import br.com.fourdev.orderfood.service.MesaService;
 import br.com.fourdev.orderfood.service.PedidoService;
 
@@ -78,15 +75,16 @@ public class MesaController {
 	public ModelAndView finalizarMesa(@PathVariable("idmesa") int idmesa, RedirectAttributes attributes) {
 
 		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa, "ABERTO");
-		if (!pedidos.isEmpty()) {
-			if (mesaService.finalizarMesa(idmesa, pedidos)) {
-				attributes.addFlashAttribute("mensagem", "Mesa Finalizada.");
-			} else {
-				attributes.addFlashAttribute("mensagem", "Mesa Não atualizada.");
-			}
-		} else {
-			attributes.addFlashAttribute("mensagem", "Não existem pedidos na mesa selecionada.");
-		}
+//		if (!pedidos.isEmpty()) {
+		mesaService.finalizarMesa(idmesa, pedidos);
+//			if (mesaService.finalizarMesa(idmesa, pedidos)) {
+//				attributes.addFlashAttribute("mensagem", "Mesa Finalizada.");
+//			} else {
+//				attributes.addFlashAttribute("mensagem", "Mesa Não atualizada.");
+//			}
+//		} else {
+//			attributes.addFlashAttribute("mensagem", "Não existem pedidos na mesa selecionada.");
+//		}
 
 		return new ModelAndView("redirect:../../status");
 	}
