@@ -29,7 +29,7 @@ public interface MesaRepository  {
 	public Cliente existeCliente(String imei);
 	
 	public boolean existeClienteNaMesa(int idmesa, String imei);
-
+	
 	public void insertCliente(Cliente cliente);
 	
 	public void insertClienteNaMesa(Cliente cliente, int idmesa);

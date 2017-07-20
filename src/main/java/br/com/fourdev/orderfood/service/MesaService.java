@@ -57,12 +57,16 @@ public class MesaService {
 		return mesaRepository.contaMesas();
 	}
 
+	public boolean existeClienteNaMesa(int idmesa, String imei) {
+		return mesaRepository.existeClienteNaMesa(idmesa, imei);
+	}
+
 	public void validarClienteNaMesa(int idmesa, String imei) {
 		// boolean existe = false;
 		Cliente cliente = new Cliente();
 		cliente = mesaRepository.existeCliente(imei);
 
-		if (cliente == null) {
+		if ("".equalsIgnoreCase(cliente.getImei())) {
 			// cadastrar cliente caso nao exista
 			cliente.setNome(imei);
 			cliente.setSexo("");
@@ -79,8 +83,21 @@ public class MesaService {
 		} else {
 			// vincular cliente na mesa
 			mesaRepository.updateClienteNaMesa(cliente, idmesa);
+
+			atualizarPedidoNovaMesa(idmesa, cliente);
+
 		}
 		// return existe;
+	}
+
+	private void atualizarPedidoNovaMesa(int idmesa, Cliente cliente) {
+		Mesa mesa = mesaRepository.selectMesaPorId(idmesa);
+		List<Pedido> pedidos = pedidoRepository.retornaPedidoPorCliente(cliente.getIdcliente(), StatusPedido.ABERTO);
+		for (Pedido pedido : pedidos) {
+			pedido.setCliente(cliente);
+			pedido.setMesa(mesa);
+			pedidoRepository.updatePedido(pedido);
+		}
 	}
 
 	public boolean verificarStatusMesa(int idmesa) throws InterruptedException, ExecutionException {

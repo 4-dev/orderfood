@@ -86,9 +86,17 @@ public class MesaRestController {
 			objectSync.setMensagem("Mesa disponível");
 			valor += gson.toJson(objectSync);
 		} else {
-			objectSync.setListProdutos(null);
-			objectSync.setMensagem("Mesa ocupada");
-			valor += gson.toJson(objectSync);
+			if (mesaService.existeClienteNaMesa(idmesa, imei)) {
+				objectSync.setListProdutos(listaProdutoDTO());
+				objectSync.setMensagem("Mesa disponível");
+				valor += gson.toJson(objectSync);
+			} else {
+				objectSync.setListProdutos(null);
+				objectSync.setMensagem("Mesa Ocupada");
+				valor += gson.toJson(objectSync);	
+			}
+
+			
 		}
 		// String userJSONString = gson.toJson(valor);
 		//

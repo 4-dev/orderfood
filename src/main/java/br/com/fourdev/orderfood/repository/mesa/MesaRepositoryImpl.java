@@ -151,7 +151,8 @@ public class MesaRepositoryImpl implements MesaRepository {
 			query = "SELECT * FROM cliente WHERE imei = ?";
 			cliente = (Cliente) this.jdbcTemplate.queryForObject(query, new Object[] { imei }, new BeanPropertyRowMapper(Cliente.class));
 		} else {
-			cliente = null;
+			cliente.setImei("");
+			cliente.setIdcliente(0);
 		}
 		
 		return cliente;
