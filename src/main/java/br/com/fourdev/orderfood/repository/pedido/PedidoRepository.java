@@ -17,7 +17,7 @@ public interface PedidoRepository {
 
 	public void insertPedido(List<Pedido> pedidos);
 
-	public void updatePedido(String id, Pedido pedido);
+	public void updatePedido(Pedido pedido);
 
 	public void deletePedido(String id);
 
@@ -27,6 +27,7 @@ public interface PedidoRepository {
 
 	public List<ItemPedido> retornaItemPorPedido(int idPedido);
 	
+	public List<Pedido> retornaPedidoPorCliente(int idcliente, StatusPedido statusPedido);
 	public void atualizarStatusPedido(Pedido pedido);
 	
 }

@@ -1,13 +1,19 @@
 package br.com.fourdev.orderfood.repository.pedido;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.sql.Types;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.InvalidResultSetAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +28,9 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	public List<Pedido> selectPedidoList() {
 
@@ -72,12 +81,8 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		String query1 = "set search_path to orderfood, public";
 		jdbcTemplate.update(query1, new Object[] {});
 
-		String query = "SELECT cab.* "
-				+ "	FROM mesa_pedido mp, cabpedido cab "
-				+ "	WHERE mp.numped = cab.numped "
-				+ "	 AND mp.idmesa = ? "
-				+ "	 AND cab.status = ? "				
-				+ " ORDER BY CAB.NUMPED";
+		String query = "SELECT cab.* " + "	FROM mesa_pedido mp, cabpedido cab " + "	WHERE mp.numped = cab.numped "
+				+ "	 AND mp.idmesa = ? " + "	 AND cab.status = ? " + " ORDER BY CAB.NUMPED";
 		return jdbcTemplate.query(query, new Object[] { idmesa, statusPedido.getDescricao() }, new PedidoRowMapper());
 	}
 
@@ -173,13 +178,40 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		// Pedido.getCategoria().getDescricao() });
 	}
 
-	public void updatePedido(String id, Pedido pedido) {
-		// String query = "update Pedido set nome=?, descricao=? where id=? ";
-		// jdbcTemplate.update(query,
-		// new Object[] { Pedido.getId(), Pedido.getNome(),
-		// Pedido.getDescricao(), Pedido.getUrlFoto(),
-		// Pedido.getVolume(), Pedido.getValor(), Pedido.getQuantidadeEstoque(),
-		// Pedido.getCategoria().getDescricao() });
+	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
+		PedidoRepositoryImpl d = new PedidoRepositoryImpl();
+		Pedido p = new Pedido();
+		p.setNumped(123);
+		d.updatePedido(p);
+	}
+
+	public void updatePedido(Pedido pedido) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+		try {
+			Class c1 = pedido.getClass();
+			// Map fieldMap = new HashMap();
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			Field[] valueObjFields = c1.getDeclaredFields();
+			String queryMontada = "";
+			for (int i = 0; i < valueObjFields.length; i++) {
+				valueObjFields[i].setAccessible(true);
+				Object newObj;
+				newObj = valueObjFields[i].get(pedido);
+				String fieldName = valueObjFields[i].getName();
+				if ((newObj != null) && (!fieldName.equalsIgnoreCase("numped"))) {
+					queryMontada += fieldName + " = :" + fieldName;
+					params.addValue(fieldName, newObj);
+				}
+			}
+			String queryUpdate = "update cabpedido set ";
+			queryUpdate += queryMontada;
+			queryUpdate += " WHERE NUMPED = :NUMPED";
+			params.addValue("numped", pedido.getNumped());
+			namedParameterJdbcTemplate.update(queryUpdate, params);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void deletePedido(String id) {
@@ -191,6 +223,19 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	public void insertPedido(Pedido pedido) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List<Pedido> retornaPedidoPorCliente(int idcliente, StatusPedido statusPedido) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+
+		String query = "SELECT cab.* " 
+				+ "	FROM  cabpedido cab " 
+				+ "	WHERE cab.idcliente = ?" 
+				+ "	 AND cab.status = ? " 
+				+ " ORDER BY CAB.NUMPED";
+		return jdbcTemplate.query(query, new Object[] { idcliente, statusPedido.getDescricao() }, new PedidoRowMapper());
 	}
 
 }
