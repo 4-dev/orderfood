@@ -11,9 +11,9 @@ public class ItemPedido {
 	
 	
 	private long quantidade;
-	private BigDecimal valorUnitario;
+	private BigDecimal valorUnitario = BigDecimal.ZERO;
 	
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal = BigDecimal.ZERO;
 
 	public long getQuantidade() {
 		return quantidade;

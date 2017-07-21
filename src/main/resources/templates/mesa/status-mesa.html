@@ -2,12 +2,14 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/layout-padrao">
+	layout:decorator="layout/layout-padrao"
+	xmlns:data="https://github.com/mxab/thymeleaf-extras-data-attribute">
 <head>
 <title>Status das Mesas</title>
 <link th:href="@{/js/plugins/jsgrid/css/jsgrid.min.css}" type="text/css" rel="stylesheet" media="screen,projection">
 <link th:href="@{/js/plugins/jsgrid/css/jsgrid-theme.min.css}" type="text/css" rel="stylesheet" media="screen,projection">
 <link th:href="@{/js/plugins/sweetalert/sweetalert.css}" type="text/css" rel="stylesheet"/>
+<link th:href="@{/css/cupom.css}" type="text/css" rel="stylesheet"/>
 </head>
 <body onload="connect();">
 	<section id="content" layout:fragment="conteudo">
@@ -92,7 +94,7 @@
 											<a class="btn waves-effect waves-light cyan left js-confirma-btn modal-action
 											modal-close"
 												 	data:url="@{/mesa/status/finalizarmesa/{idmesa}(idmesa=${i.idmesa})}"
-													 data:objeto="|Mesa ${i.idmesa}|" data:total="${mesaService.totalPorMesa(i.idmesa)}" >
+													 data:mesa="${i.idmesa}" data:total="${mesaService.totalPorMesa(i.idmesa)}" >
 												<i class="large mdi-editor-attach-money right"></i>
 												Finalizar
 											</a> 

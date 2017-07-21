@@ -3,12 +3,12 @@ $('.js-confirma-btn').click(function(evento){
 	event.preventDefault(); 
 	var botaoClicado = $(evento.currentTarget);
 	var url = botaoClicado.data('url');
-	var objeto = botaoClicado.data('objeto');
+	var mesa = botaoClicado.data('mesa');
 	var total = botaoClicado.data('total');
 	var mesas = $('.js-mesas');
 	
 	
-	swal({   title: "Finalizar "+objeto+"?",   
+	swal({   title: "Finalizar Mesa "+mesa+"?",   
         text: "Total: R$ "+total,   
         type: "info",   showCancelButton: true,   
         closeOnConfirm: false,   
@@ -26,15 +26,13 @@ $('.js-confirma-btn').click(function(evento){
         		console.log('Finalizada com sucesso!');
         		
         		setTimeout(function(url){     
-        			swal({title: objeto+" finalizada!"},
+        			swal({title: "mesa "+mesa+" finalizada!"},
         				
         				function() {
         					window.location.reload();
-        				window.open('/mesa/cupom','pop','left=500, top=100, width=300, height=550');
-        				
-        				
+        					window.open('/mesa/imprime/'+mesa,'pop','left=500, top=100, width=300, height=550');
         				});  
-        		}, 5000); 
+        		}, 2000); 
             	
         	};
         	

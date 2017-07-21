@@ -9,86 +9,98 @@
 <table class="printer-ticket">
  	<thead>
 		<tr>
-			<th class="title" colspan="3">Order Food</th>
+			<th class="title" colspan="5">Order Food Restaurantes</th>
 		</tr>
 		<tr>
-			<th colspan="3">11/07/2017 - 11:57:52</th>
-		</tr>
-		<tr>
-			<th colspan="3">
+			<th colspan="5">
 				Consumidor <br />
 			</th>
 		</tr>
 		<tr>
-			<th class="ttu" colspan="3">
-				<b>Cupom não fiscal</b>
+			<th class="ttu" colspan="5">
+				<b>Cupom não fiscal</b></br>
+				[[${#temporals.format(agora, 'dd/MM/yyyy')}]] - [[${#temporals.format(agora, 'HH:mm')}]]
 			</th>
 		</tr>
+		<tr class="sup ttu p--0">
+			<td colspan="5">
+				<b>MESA:  <strong>[[${mesa}]]</strong></b>
+			</td>
+		</tr>
+		<tr class="sup">
+			<td align="left"><b>ped</b></td>
+			<td><b>descrição</b></td>
+			<td align="center"><b>qnt</b></td>
+			<td align="right"><b>unit</b></td>
+			<td align="right"><b>total</b></td>
+		</tr>
+		
 	</thead>
-	<tbody>
-		<tr class="top">
-			<td colspan="3">X-Tudo</td>
+	<tbody th:each="pedido : ${pedidos}">
+		
+		
+		<tr class="top" th:each="item : ${pedidoService.retornaItenPorPedido(pedido.numped)}">
+			<td align="left">[[${pedido.numped}]]</td>
+			<td>[[${item.nome}]]</td>
+			<td align="center">[[${item.quantidade}]]</td>
+			<td align="right">R$[[${item.valorUnitario}]]</td>
+			<td align="right">R$[[${item.valorTotal}]]</td>
 		</tr>
-		<tr>
-			<td>R$7,99</td>
-			<td>2.0</td>
-			<td>R$15,98</td>
-		</tr>
-		<tr>
-			<td colspan="3">Coca Cola lata</td>
-		</tr>
-		<tr>
-			<td>R$0,33</td>
-			<td>2.0</td>
-			<td>R$0,66</td>
-		</tr>
+		
+		
 	</tbody>
 	<tfoot>
+		<tr class="sup">
+			<td colspan="5" align="center">
+				<b>nº pedidos: <strong><span th:each="pedido : ${pedidos}" th:text="|${pedido.numped}${pedidoStat.last ? '' : ', '}|"></span></strong></b>
+			</td>
+		</tr>
 		<tr class="sup ttu p--0">
-			<td colspan="3">
+			<td colspan="5">
 				<b>Totais</b>
 			</td>
 		</tr>
 		<tr class="ttu">
-			<td colspan="2">Sub-total</td>
-			<td align="right">R$43,60</td>
+			<td colspan="4">Sub-total</td>
+			<td align="right">R$[[${#numbers.formatDecimal(total, 0, 'DEFAULT', 2, 'DEFAULT')}]]</td>
 		</tr>
 		<tr class="ttu">
-			<td colspan="2">Taxa de serviço</td>
-			<td align="right">R$4,60</td>
+			<td colspan="4">Taxa de serviço</td>
+			<td align="right">R$0,00</td>
 		</tr>
 		<tr class="ttu">
-			<td colspan="2">Desconto</td>
-			<td align="right">5,00%</td>
+			<td colspan="4">Desconto</td>
+			<td align="right">0,00%</td>
 		</tr>
 		<tr class="ttu">
-			<td colspan="2">Total</td>
-			<td align="right">R$45,56</td>
+			<td colspan="4">Total</td>
+			<td align="right">R$[[${#numbers.formatDecimal(total, 0, 'DEFAULT', 2, 'DEFAULT')}]]</td>
 		</tr>
 		<tr class="sup ttu p--0">
-			<td colspan="3">
+			<td colspan="5">
 				<b>Pagamentos</b>
 			</td>
 		</tr>
 		
 		<tr class="ttu">
-			<td colspan="2">Dinheiro</td>
-			<td align="right">R$0,00</td>
-		</tr>
-		<tr class="ttu">
-			<td colspan="2">Total pago</td>
-			<td align="right">R$0,00</td>
+			<td colspan="4">Dinheiro</td>
+			<td align="right">R$[[${#numbers.formatDecimal(total, 0, 'DEFAULT', 2, 'DEFAULT')}]]</td>
 		</tr>
 		
 		<tr class="sup">
-			<td colspan="3" align="center">
-				<b>Pedido: <strong>0002</strong></b>
+			<td colspan="5" align="center">
+				<b><strong>Obrigado pela Preferência!</strong></b>
 			</td>
 		</tr>
 		<tr class="sup">
-			<td colspan="3" align="center">
+			<th colspan="5" align="center">
 				www.orderfood.com.br
-			</td>
+			</th>
+		</tr>
+		<tr class="sup">
+			<th colspan="5" align="center">
+				<button type="button" onclick="window.print();">Imprimir</button>
+			</th>
 		</tr>
 	</tfoot>
 </table>

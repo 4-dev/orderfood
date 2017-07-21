@@ -1,5 +1,6 @@
 package br.com.fourdev.orderfood.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -96,10 +97,19 @@ public class MesaController {
 		modelAndView.addObject("total", mesaService.totalPorMesa(idmesa));
 		return modelAndView;
 	}
-
-	@GetMapping("/cupom")
-	public String cupom() {
-		return "cupom/cupom";
+	
+	@GetMapping("/imprime/{idmesa}")
+	public ModelAndView imprime(@PathVariable("idmesa") int idmesa){
+		ModelAndView modelAndView = new ModelAndView("cupom/cupom");
+		
+		modelAndView.addObject("pedidos", pedidoService.retornaPedidoPorMesa(idmesa, "FINALIZADO"));
+		modelAndView.addObject("total", mesaService.totalPorMesaFinalizada(idmesa));
+		modelAndView.addObject("mesa", idmesa);
+		modelAndView.addObject(pedidoService);
+		modelAndView.addObject("agora", LocalDateTime.now());
+		return modelAndView;
 	}
+
+	
 
 }

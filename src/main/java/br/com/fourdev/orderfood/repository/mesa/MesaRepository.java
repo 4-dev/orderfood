@@ -24,6 +24,7 @@ public interface MesaRepository  {
 	public int contaMesas();
 	
 	public Double totalPorMesa(int idmesa);
+	public Double totalPorMesaFinalizada(int idmesa);
 	
 	// Cliente
 	public Cliente existeCliente(String imei);

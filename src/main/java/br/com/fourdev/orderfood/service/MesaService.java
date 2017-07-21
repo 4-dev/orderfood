@@ -145,5 +145,10 @@ public class MesaService {
 		}
 
 	}
+	
+	public Double totalPorMesaFinalizada(int idmesa) {
+			return mesaRepository.totalPorMesaFinalizada(idmesa);
+
+	}
 
 }
