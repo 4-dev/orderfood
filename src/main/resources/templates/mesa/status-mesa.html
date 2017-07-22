@@ -92,7 +92,7 @@
 										<div class="modal-footer">
 									
 											<a class="btn waves-effect waves-light cyan left js-confirma-btn modal-action
-											modal-close"
+											modal-close" th:classappend= "${i.status == 'DISPONIVEL'?'hide':''}"
 												 	data:url="@{/mesa/status/finalizarmesa/{idmesa}(idmesa=${i.idmesa})}"
 													 data:mesa="${i.idmesa}" data:total="${mesaService.totalPorMesa(i.idmesa)}" >
 												<i class="large mdi-editor-attach-money right"></i>

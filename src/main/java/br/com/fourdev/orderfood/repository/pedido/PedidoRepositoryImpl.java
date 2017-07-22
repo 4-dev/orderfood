@@ -152,7 +152,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 									pedido.getStatus().getDescricao(), // 8
 									pedido.getCliente().getIdcliente(), // 9
 									pedido.getMesa().getIdmesa(), // 10
-									1});
+									1});//11
 				}
 
 			} catch (Exception e) {
@@ -171,7 +171,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	public void atualizarStatusPedido(Pedido pedido) {
 		try {
 			String query = "update CABPEDIDO set STATUS = ?, idvenda = ? where NUMPED = ? ";
-			jdbcTemplate.update(query, new Object[] { pedido.getStatus().getDescricao(), pedido.getNumped() });
+			jdbcTemplate.update(query, new Object[] { pedido.getStatus().getDescricao(), pedido.getVenda().getId(), pedido.getNumped() });
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
