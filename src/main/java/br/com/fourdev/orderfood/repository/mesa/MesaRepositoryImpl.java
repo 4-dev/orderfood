@@ -3,8 +3,6 @@ package br.com.fourdev.orderfood.repository.mesa;
 import java.sql.Types;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.InvalidResultSetAccessException;
@@ -27,9 +25,6 @@ public class MesaRepositoryImpl implements MesaRepository {
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	private EntityManager manager;
-
-	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	// private static final String INSERT_PRODUTO = "insert into pcprodut (id,
@@ -39,6 +34,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 	// private static final String DELETE_PRODUTO = "delete from pcprodut where
 	// codprod = ?";
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Mesa> selectMesaList() {
 		String query1 = "set search_path to orderfood, public";
 		jdbcTemplate.update(query1, new Object[] {});
@@ -47,6 +43,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 		return jdbcTemplate.query(query, new BeanPropertyRowMapper(Mesa.class));
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Mesa selectMesaPorId(int idmesa) {
 		String query1 = "set search_path to orderfood, public";
 		jdbcTemplate.update(query1, new Object[] {});
@@ -148,6 +145,7 @@ public class MesaRepositoryImpl implements MesaRepository {
 		return total;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Cliente existeCliente(String imei) {
 		String query1 = "set search_path to orderfood, public";

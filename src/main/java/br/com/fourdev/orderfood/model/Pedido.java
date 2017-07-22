@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class Pedido {
 
 	private long numped; // id
@@ -19,6 +24,20 @@ public class Pedido {
 	private Mesa mesa;
 	private Usuario usuario;
 	private List<String> checkedItems;
+	
+	
+	private Venda venda;
+	
+	
+	
+
+	public Venda getVenda() {
+		return venda;
+	}
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
 
 	public List<String> getCheckedItems() {
 		return checkedItems;

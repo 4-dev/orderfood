@@ -17,6 +17,7 @@ import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusMesa;
 import br.com.fourdev.orderfood.model.StatusPedido;
+import br.com.fourdev.orderfood.model.Venda;
 import br.com.fourdev.orderfood.repository.mesa.MesaRepository;
 import br.com.fourdev.orderfood.repository.pedido.PedidoRepository;
 
@@ -125,22 +126,28 @@ public class MesaService {
 		return vbliberouMesa;
 	}
 
-	public boolean finalizarMesa(int idmesa, List<Pedido> pedidos) {
+	public boolean finalizarMesa(int idmesa, List<Pedido> pedidos, Venda venda) {
 		Mesa mesa = new Mesa();
+//		Double total = totalPorMesa(idmesa);
 		mesa.setIdmesa(idmesa);
 		mesa.setStatus(StatusMesa.DISPONIVEL.getDescricao());
 		boolean atualizou = mesaRepository.updateMesa(mesa);
 
+//		vendaService.salvar(idmesa, pedidos, total);
+		
 		// Alterando o Status do Pedido
 		for (Pedido pedido : pedidos) {
+			pedido.setVenda(venda);
 			pedido.setStatus(StatusPedido.FINALIZADO);
 			pedidoRepository.atualizarStatusPedido(pedido);
 		}
+		
 
 		return atualizou;
 
 	}
 
+	@SuppressWarnings("static-access")
 	public StatusMesa reservarMesa(int idmesa) {
 		Mesa mesa = new Mesa();
 		StatusMesa statusMesa = null;

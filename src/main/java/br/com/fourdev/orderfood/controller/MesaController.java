@@ -19,8 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
+import br.com.fourdev.orderfood.model.Venda;
 import br.com.fourdev.orderfood.service.MesaService;
 import br.com.fourdev.orderfood.service.PedidoService;
+import br.com.fourdev.orderfood.service.VendaService;
 
 @Controller
 @RequestMapping("mesa")
@@ -30,7 +32,10 @@ public class MesaController {
 	private MesaService mesaService;
 	@Autowired
 	private PedidoService pedidoService;
-
+	
+	@Autowired
+	private VendaService vendaService;
+	
 	@GetMapping("/status")
 	public ModelAndView status(Mesa mesa) {
 		ModelAndView modelAndView = new ModelAndView("mesa/status-mesa");
@@ -74,10 +79,18 @@ public class MesaController {
 
 	@GetMapping("/status/finalizarmesa/{idmesa}")
 	public ModelAndView finalizarMesa(@PathVariable("idmesa") int idmesa, RedirectAttributes attributes) {
-
+		
 		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa, "ABERTO");
+		Double total = mesaService.totalPorMesa(idmesa);
 //		if (!pedidos.isEmpty()) {
-		mesaService.finalizarMesa(idmesa, pedidos);
+		vendaService.salvar(idmesa, pedidos, total);
+		
+//		List<Venda> listVendas = vendas.findAll();
+//		int index = listVendas.size() - 1;
+//		Venda venda = listVendas.get(index);
+		Venda venda =vendaService.buscaUltimaVenda();
+		
+		mesaService.finalizarMesa(idmesa, pedidos, venda);
 //			if (mesaService.finalizarMesa(idmesa, pedidos)) {
 //				attributes.addFlashAttribute("mensagem", "Mesa Finalizada.");
 //			} else {

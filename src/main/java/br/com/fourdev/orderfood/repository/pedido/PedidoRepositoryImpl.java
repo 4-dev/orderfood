@@ -22,6 +22,7 @@ import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusMesa;
 import br.com.fourdev.orderfood.model.StatusPedido;
+import br.com.fourdev.orderfood.model.Venda;
 
 @Repository("PedidoRepository")
 public class PedidoRepositoryImpl implements PedidoRepository {
@@ -115,6 +116,8 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 						jdbcTemplate.update(query, new Object[] { numped, itemPedido.getProduto(),
 								itemPedido.getQuantidade(), itemPedido.getValorUnitario() });
 					}
+					
+				
 
 					// Cabeçalho do Pedido
 					String query = "INSERT INTO cabpedido" + "( numped," + // 1
@@ -149,7 +152,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 									pedido.getStatus().getDescricao(), // 8
 									pedido.getCliente().getIdcliente(), // 9
 									pedido.getMesa().getIdmesa(), // 10
-									1 }); // 11
+									1});
 				}
 
 			} catch (Exception e) {
@@ -167,7 +170,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void atualizarStatusPedido(Pedido pedido) {
 		try {
-			String query = "update CABPEDIDO set STATUS = ? where NUMPED = ? ";
+			String query = "update CABPEDIDO set STATUS = ?, idvenda = ? where NUMPED = ? ";
 			jdbcTemplate.update(query, new Object[] { pedido.getStatus().getDescricao(), pedido.getNumped() });
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -178,6 +181,18 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		// Pedido.getCategoria().getDescricao() });
 	}
 
+	
+	public void atualizarVenda(Venda venda, Pedido pedido) {
+		try {
+			String query = "update CABPEDIDO set idvenda = ? where NUMPED = ? ";
+			jdbcTemplate.update(query, new Object[] { venda.getId(), pedido.getNumped() });
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+	
+	
 	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
 		PedidoRepositoryImpl d = new PedidoRepositoryImpl();
 		Pedido p = new Pedido();
