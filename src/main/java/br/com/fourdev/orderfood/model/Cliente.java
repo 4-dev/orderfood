@@ -1,17 +1,26 @@
 package br.com.fourdev.orderfood.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity
 public class Cliente {
 
-	private int idcliente;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long idcliente;
 	private String nome;
 	private String sexo;
 	private String imei;
 
-	public int getIdcliente() {
+	public long getIdcliente() {
 		return idcliente;
 	}
 
-	public void setIdcliente(int idcliente) {
+	public void setIdcliente(long idcliente) {
 		this.idcliente = idcliente;
 	}
 
@@ -43,7 +52,7 @@ public class Cliente {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idcliente;
+		result = (int) (prime * result + idcliente);
 		result = prime * result + ((imei == null) ? 0 : imei.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());

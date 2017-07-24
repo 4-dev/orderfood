@@ -1,7 +1,5 @@
 package br.com.fourdev.orderfood.repository.produto;
 
-import java.util.List;
-
 import br.com.fourdev.orderfood.model.Produto;
 
 public interface ProdutosQueries {

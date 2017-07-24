@@ -1,11 +1,8 @@
 package br.com.fourdev.orderfood.repository.pedido;
 
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
-import java.sql.Types;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -18,11 +15,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.fourdev.orderfood.model.Cliente;
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Pedido;
-import br.com.fourdev.orderfood.model.StatusMesa;
 import br.com.fourdev.orderfood.model.StatusPedido;
 import br.com.fourdev.orderfood.model.Venda;
+import br.com.fourdev.orderfood.repository.cliente.Clientes;
 
 @Repository("PedidoRepository")
 public class PedidoRepositoryImpl implements PedidoRepository {
@@ -33,6 +31,9 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+	@Autowired
+	private Clientes clientes;
+	
 	public List<Pedido> selectPedidoList() {
 
 		try {
@@ -81,10 +82,21 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	public List<Pedido> retornaPedidoPorMesa(int idmesa, StatusPedido statusPedido) {
 		String query1 = "set search_path to orderfood, public";
 		jdbcTemplate.update(query1, new Object[] {});
-
+		
+		List<Pedido> pedidos = new ArrayList<Pedido>();
+//		List<Pedido> listaPedidos = new ArrayList<Pedido>();
+		
 		String query = "SELECT cab.* " + "	FROM mesa_pedido mp, cabpedido cab " + "	WHERE mp.numped = cab.numped "
 				+ "	 AND mp.idmesa = ? " + "	 AND cab.status = ? " + " ORDER BY CAB.NUMPED";
-		return jdbcTemplate.query(query, new Object[] { idmesa, statusPedido.getDescricao() }, new PedidoRowMapper());
+		pedidos = jdbcTemplate.query(query, new Object[] { idmesa, statusPedido.getDescricao() }, new PedidoRowMapper());
+		
+//		for (Pedido pedido : listaPedidos) {
+//			Cliente cliente = new Cliente();
+//			cliente = clientes.findOne( pedido.getCliente().getIdcliente());
+//			pedido.setCliente(cliente);
+//			pedidos.add(pedido);
+//		}
+		return pedidos;
 	}
 
 	public List<ItemPedido> retornaItemPorPedido(int numPedido) {
@@ -241,7 +253,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 	}
 
 	@Override
-	public List<Pedido> retornaPedidoPorCliente(int idcliente, StatusPedido statusPedido) {
+	public List<Pedido> retornaPedidoPorCliente(long idcliente, StatusPedido statusPedido) {
 		String query1 = "set search_path to orderfood, public";
 		jdbcTemplate.update(query1, new Object[] {});
 

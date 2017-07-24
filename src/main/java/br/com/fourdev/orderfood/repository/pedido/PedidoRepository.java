@@ -4,8 +4,8 @@ import java.util.List;
 
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Pedido;
-import br.com.fourdev.orderfood.model.StatusMesa;
 import br.com.fourdev.orderfood.model.StatusPedido;
+import br.com.fourdev.orderfood.repository.cliente.Clientes;
 
 public interface PedidoRepository {
 
@@ -27,7 +27,7 @@ public interface PedidoRepository {
 
 	public List<ItemPedido> retornaItemPorPedido(int idPedido);
 	
-	public List<Pedido> retornaPedidoPorCliente(int idcliente, StatusPedido statusPedido);
+	public List<Pedido> retornaPedidoPorCliente(long l, StatusPedido statusPedido);
 	
 	public void atualizarStatusPedido(Pedido pedido);
 	
