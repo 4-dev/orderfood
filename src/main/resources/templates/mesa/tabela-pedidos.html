@@ -9,7 +9,7 @@
 				<th>Observacao</th>
 				<th>Vl. Total</th>
 				<th>Dt. Criação</th>
-				<th class="left">Mesa</th>
+				<th class="left">Cliente</th>
 				<th class="center">Itens</th>
 			</tr>
 		</thead>
@@ -23,7 +23,7 @@
 
 				<td th:text="${#temporals.format(p.dataCriacao, 'dd/MM/yyyy')}"></td>
 
-				<td th:text="|Mesa ${p.mesa.idmesa}|"></td>
+				<td th:text="| ${#strings.toUpperCase(p.cliente.idcliente)}|"></td>
 				<td class="center"><a
 					class="btn-floating waves-effect waves-light center blue-grey light-4 js-itens-btn"
 					data:url="@{/mesa/status/itens/{idpedido}(idpedido=${p.numped})}">

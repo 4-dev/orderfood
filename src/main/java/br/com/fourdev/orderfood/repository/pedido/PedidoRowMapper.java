@@ -11,15 +11,19 @@ import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.StatusPedido;
 import br.com.fourdev.orderfood.model.Usuario;
+import br.com.fourdev.orderfood.repository.cliente.Clientes;
 
-//@Service
 public class PedidoRowMapper implements RowMapper<Pedido> {
-//	@Autowired
-//	ClienteRepository clienteRepository;
-//
+	
+
 //	@Autowired
 //	MesaRepository mesaRepository;
-
+	public PedidoRowMapper() {
+		super();
+	}
+//	public PedidoRowMapper(Clientes clientes) {
+//		this.clientes = clientes;
+//	}
 	@Override
 	public Pedido mapRow(ResultSet rs, int rowNum) throws SQLException {
 
@@ -37,12 +41,9 @@ public class PedidoRowMapper implements RowMapper<Pedido> {
 		// pedido.setStatus();
 		
 		pedido.setStatus(StatusPedido.valueOf(rs.getString("status")));
-		
 		Cliente cliente = new Cliente();
 		cliente.setIdcliente(rs.getInt("idcliente"));
-//		cliente = clienteRepository.selectClientePorId(rs.getInt("idcliente"));
 		pedido.setCliente(cliente);
-
 		Mesa mesa = new Mesa();
 		mesa.setIdmesa(rs.getInt("idmesa"));
 //		mesa = mesaRepository.selectMesaPorId(rs.getInt("idmesa"));

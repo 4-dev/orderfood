@@ -4,11 +4,13 @@ import java.util.List;
 
 import br.com.fourdev.orderfood.model.Cliente;
 
-public interface ClienteRepository {
+public interface ClientesQueries {
 
 	public List<Cliente> selectClienteList();
 
-	public Cliente selectClientePorId(int id);
+	public Cliente selectClientePorId(int idcliente);
+
+	public Cliente selectClientePorImei(String imei);
 
 	public void insertCliente(Cliente Cliente);
 

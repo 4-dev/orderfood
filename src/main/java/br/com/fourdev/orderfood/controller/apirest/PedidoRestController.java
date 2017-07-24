@@ -1,9 +1,5 @@
 package br.com.fourdev.orderfood.controller.apirest;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,15 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
-import br.com.fourdev.orderfood.model.Cliente;
-import br.com.fourdev.orderfood.model.ItemPedido;
-import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
-import br.com.fourdev.orderfood.model.StatusPedido;
 import br.com.fourdev.orderfood.repository.usuario.Usuarios;
 import br.com.fourdev.orderfood.service.PedidoService;
 

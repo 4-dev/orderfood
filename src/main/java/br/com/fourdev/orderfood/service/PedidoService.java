@@ -10,16 +10,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
 import br.com.fourdev.orderfood.model.Cliente;
 import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
-import br.com.fourdev.orderfood.model.StatusMesa;
 import br.com.fourdev.orderfood.model.StatusPedido;
+import br.com.fourdev.orderfood.repository.cliente.ClientesQueries;
+import br.com.fourdev.orderfood.repository.cliente.Clientes;
 import br.com.fourdev.orderfood.repository.pedido.PedidoRepository;
 
 @Service
@@ -29,6 +30,14 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
+
+	@Autowired
+	ClientesQueries clienteRepository;
+
+	
+	@Autowired
+	Clientes clientes;
+
 	
 	public void insertPedido(Pedido pedido) {
 		pedidoRepository.insertPedido(pedido);
@@ -109,14 +118,16 @@ public class PedidoService {
 			pedido.setValorTotal(valorTotalPedido.setScale(2, BigDecimal.ROUND_CEILING));
 			pedido.setStatus(StatusPedido.ABERTO);
 			// pedido.setUsuario(usuarios.findOne((long) 1));
-			
+
+//			cliente.setIdcliente(1);
+//			cliente.setNome("");
+//			cliente.setImei(jsonArr.get(i).getAsJsonObject().get("imei").getAsString());
+
 			//Setando o Cliente
 			Cliente cliente = new Cliente();
-			cliente.setIdcliente(1);
-			cliente.setNome("admin");
+			String imei = jo.get("imei").getAsString();
+			cliente = clienteRepository.selectClientePorImei(imei);
 			pedido.setCliente(cliente);
-			
-			
 			//Setando a Mesa
 			Mesa mesa = new Mesa();
 			mesa.setIdmesa(jsonArr.get(i).getAsJsonObject().get("codMesa").getAsInt());
