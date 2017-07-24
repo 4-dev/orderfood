@@ -24,7 +24,7 @@
 		</tr>
 		<tr class="sup ttu p--0">
 			<td colspan="5">
-				<b>MESA:  <strong>[[${mesa}]]</strong></b>
+				<b>MESA:  <strong>[[${venda.numeroMesa}]]</strong></b>
 			</td>
 		</tr>
 		<tr class="sup">
@@ -34,7 +34,6 @@
 			<td align="right"><b>unit</b></td>
 			<td align="right"><b>total</b></td>
 		</tr>
-		
 	</thead>
 	<tbody th:each="pedido : ${pedidos}">
 		
@@ -62,7 +61,7 @@
 		</tr>
 		<tr class="ttu">
 			<td colspan="4">Sub-total</td>
-			<td align="right">R$[[${#numbers.formatDecimal(total, 0, 'DEFAULT', 2, 'DEFAULT')}]]</td>
+			<td align="right">R$ [[${venda.valor}]]</td>
 		</tr>
 		<tr class="ttu">
 			<td colspan="4">Taxa de serviço</td>
@@ -74,7 +73,7 @@
 		</tr>
 		<tr class="ttu">
 			<td colspan="4">Total</td>
-			<td align="right">R$[[${#numbers.formatDecimal(total, 0, 'DEFAULT', 2, 'DEFAULT')}]]</td>
+			<td align="right">R$ [[${venda.valor}]]</td>
 		</tr>
 		<tr class="sup ttu p--0">
 			<td colspan="5">
@@ -84,7 +83,7 @@
 		
 		<tr class="ttu">
 			<td colspan="4">Dinheiro</td>
-			<td align="right">R$[[${#numbers.formatDecimal(total, 0, 'DEFAULT', 2, 'DEFAULT')}]]</td>
+			<td align="right">R$ [[${venda.valor}]]</td>
 		</tr>
 		
 		<tr class="sup">
@@ -103,6 +102,8 @@
 			</th>
 		</tr>
 	</tfoot>
+	
 </table>
+	
 </body>
 </html>

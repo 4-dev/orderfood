@@ -253,4 +253,16 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 		return jdbcTemplate.query(query, new Object[] { idcliente, statusPedido.getDescricao() }, new PedidoRowMapper());
 	}
 
+	@Override
+	public List<Pedido> retornaPedidoPorVenda(int idvenda) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+
+		String query = "SELECT cab.* " 
+				+ "	FROM  cabpedido cab " 
+				+ "	WHERE cab.idvenda = ?" 
+				+ " ORDER BY CAB.NUMPED";
+		return jdbcTemplate.query(query, new Object[] { idvenda }, new PedidoRowMapper());
+	}
+
 }

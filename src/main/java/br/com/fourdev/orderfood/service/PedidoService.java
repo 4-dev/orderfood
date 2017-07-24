@@ -67,6 +67,10 @@ public class PedidoService {
 		return pedidoRepository.retornaItemPorPedido(idPedido);
 	}
 	
+	public List<Pedido> retornaPedidoPorVenda(int idvenda){
+		return pedidoRepository.retornaPedidoPorVenda(idvenda);
+	}
+	
 	public List<Pedido> transformarJsonPedido(String pedidoJson) {
 
 		// Gson gson = new Gson();

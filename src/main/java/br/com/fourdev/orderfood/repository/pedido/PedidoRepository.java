@@ -28,6 +28,8 @@ public interface PedidoRepository {
 	public List<ItemPedido> retornaItemPorPedido(int idPedido);
 	
 	public List<Pedido> retornaPedidoPorCliente(int idcliente, StatusPedido statusPedido);
+	
 	public void atualizarStatusPedido(Pedido pedido);
 	
+	public List<Pedido> retornaPedidoPorVenda(int idvenda);
 }

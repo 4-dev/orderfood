@@ -19,10 +19,6 @@ public class Venda implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public Venda() {
-		System.out.println("Venda Criada<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-	}
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;

@@ -20,6 +20,7 @@ import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.Venda;
+import br.com.fourdev.orderfood.repository.venda.Vendas;
 import br.com.fourdev.orderfood.service.MesaService;
 import br.com.fourdev.orderfood.service.PedidoService;
 import br.com.fourdev.orderfood.service.VendaService;
@@ -35,6 +36,9 @@ public class MesaController {
 	
 	@Autowired
 	private VendaService vendaService;
+	
+	@Autowired
+	private Vendas vendas;
 	
 	@GetMapping("/status")
 	public ModelAndView status(Mesa mesa) {
@@ -85,9 +89,6 @@ public class MesaController {
 //		if (!pedidos.isEmpty()) {
 		vendaService.salvar(idmesa, pedidos, total);
 		
-//		List<Venda> listVendas = vendas.findAll();
-//		int index = listVendas.size() - 1;
-//		Venda venda = listVendas.get(index);
 		Venda venda =vendaService.buscaUltimaVenda();
 		
 		mesaService.finalizarMesa(idmesa, pedidos, venda);
@@ -111,18 +112,16 @@ public class MesaController {
 		return modelAndView;
 	}
 	
+
 	@GetMapping("/imprime/{idmesa}")
 	public ModelAndView imprime(@PathVariable("idmesa") int idmesa){
 		ModelAndView modelAndView = new ModelAndView("cupom/cupom");
-		
-		modelAndView.addObject("pedidos", pedidoService.retornaPedidoPorMesa(idmesa, "FINALIZADO"));
-		modelAndView.addObject("total", mesaService.totalPorMesaFinalizada(idmesa));
-		modelAndView.addObject("mesa", idmesa);
-		modelAndView.addObject(pedidoService);
+		Venda venda = vendaService.buscaUltimaVenda();
+		modelAndView.addObject("venda", venda );
 		modelAndView.addObject("agora", LocalDateTime.now());
+		modelAndView.addObject("pedidos", pedidoService.retornaPedidoPorVenda(venda.getId()));
+		modelAndView.addObject(pedidoService);
 		return modelAndView;
 	}
-
-	
 
 }
