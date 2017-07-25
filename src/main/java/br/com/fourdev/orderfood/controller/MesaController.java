@@ -20,7 +20,6 @@ import br.com.fourdev.orderfood.model.ItemPedido;
 import br.com.fourdev.orderfood.model.Mesa;
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.Venda;
-import br.com.fourdev.orderfood.repository.venda.Vendas;
 import br.com.fourdev.orderfood.service.MesaService;
 import br.com.fourdev.orderfood.service.PedidoService;
 import br.com.fourdev.orderfood.service.VendaService;
@@ -36,9 +35,6 @@ public class MesaController {
 	
 	@Autowired
 	private VendaService vendaService;
-	
-	@Autowired
-	private Vendas vendas;
 	
 	@GetMapping("/status")
 	public ModelAndView status(Mesa mesa) {

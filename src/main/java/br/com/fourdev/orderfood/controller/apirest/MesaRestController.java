@@ -115,6 +115,7 @@ public class MesaRestController {
 				produtoDTO.setDescricao(produto.getDescricao());
 				produtoDTO.setQtEstoque(produto.getQtestoque());
 				produtoDTO.setValor(produto.getValor().doubleValue());
+				produtoDTO.setFoto("https://orderfood.cfapps.io/foto/temp/"+produto.getFoto());
 				listaProdDTO.add(produtoDTO);
 			}
 
