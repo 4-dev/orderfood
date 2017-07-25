@@ -7,6 +7,7 @@ public class ProdutoDTO {
 	private String descricao;
 	private Double valor;
 	private long qtEstoque;
+	private String foto;
 
 	public long getCodigo() {
 		return codigo;
@@ -48,4 +49,13 @@ public class ProdutoDTO {
 		this.qtEstoque = qtEstoque;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	
 }
