@@ -167,12 +167,12 @@
 				<version>4.0.3</version>
 				<configuration>
 					<driver>org.postgresql.Driver</driver>
-<!-- 					<url>jdbc:postgresql://localhost:5432/4dev</url> -->
-<!-- 					<user>root</user> -->
-<!-- 					<password>root</password> -->
-					<url>jdbc:postgresql://pellefant.db.elephantsql.com:5432/qlfqijvd?searchpath=orderfood</url>
-					<user>qlfqijvd</user>
-					<password>EFPYAsubUYEgMEyFL8xdzWubYq7D0HA6</password>
+					<url>jdbc:postgresql://localhost:5432/4dev</url>
+					<user>root</user>
+					<password>root</password>
+<!-- 					<url>jdbc:postgresql://pellefant.db.elephantsql.com:5432/qlfqijvd?searchpath=orderfood</url> -->
+<!-- 					<user>qlfqijvd</user> -->
+<!-- 					<password>EFPYAsubUYEgMEyFL8xdzWubYq7D0HA6</password> -->
 										
 					<schemas>
 						<schema>orderfood</schema>

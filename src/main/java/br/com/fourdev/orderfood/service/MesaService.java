@@ -34,6 +34,15 @@ public class MesaService {
 
 	private StompSession stompSession;
 
+
+	public boolean mesaComPedidoFinalizada(int idmesa) {
+		return mesaRepository.mesaComPedidoFinalizada(idmesa);
+	}
+	
+	public boolean mesaSemPedidoFinalizada(int idmesa) {
+		return mesaRepository.mesaSemPedidoFinalizada(idmesa);
+	}
+	
 	public List<Mesa> selectMesaList() {
 		return mesaRepository.selectMesaList();
 	}
@@ -85,7 +94,7 @@ public class MesaService {
 			// vincular cliente na mesa
 			mesaRepository.updateClienteNaMesa(cliente, idmesa);
 
-			atualizarPedidoNovaMesa(idmesa, cliente);
+//			atualizarPedidoNovaMesa(idmesa, cliente);
 
 		}
 		// return existe;

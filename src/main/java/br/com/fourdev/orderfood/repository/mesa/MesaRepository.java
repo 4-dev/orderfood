@@ -8,7 +8,8 @@ import br.com.fourdev.orderfood.model.StatusMesa;
 
 public interface MesaRepository  {
 
-
+	public boolean mesaComPedidoFinalizada(int idmesa);
+	
 	public List<Mesa> selectMesaList();
 
 	public Mesa selectMesaPorId(int id);
@@ -36,4 +37,6 @@ public interface MesaRepository  {
 	public void insertClienteNaMesa(Cliente cliente, int idmesa);
 	
 	public void updateClienteNaMesa(Cliente cliente, int idmesa);
+
+	public boolean mesaSemPedidoFinalizada(int idmesa);
 }

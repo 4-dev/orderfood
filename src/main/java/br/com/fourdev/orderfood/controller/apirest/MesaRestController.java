@@ -68,6 +68,25 @@ public class MesaRestController {
 		mesaService.deleteMesa(id);
 	}
 
+	@RequestMapping(value = "/statusmesa/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String statusMesa(@PathVariable("id") int idmesa) throws Exception {
+		// código que faz o trabalho ;-)
+		Gson gson = new Gson();
+		String valor = "";
+		ObjectSync objectSync = new ObjectSync();
+
+		if (mesaService.mesaSemPedidoFinalizada(idmesa)) {
+			objectSync.setMensagem("Mesa_Finalizada");
+//		} else if (mesaService.mesaComPedidoFinalizada(idmesa)) {
+//			objectSync.setMensagem("Mesa_com_Pedido_Finalizada");
+		} else {
+			objectSync.setMensagem("Mesa_Ocupada");
+		}
+		objectSync.setListProdutos(null);
+		valor = gson.toJson(objectSync);
+		return valor;
+	}
+
 	@RequestMapping(value = "/verificarmesa/{id}/{imei}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String verificarStatusMesa(@PathVariable("id") int idmesa, @PathVariable("imei") String imei)
 			throws Exception {
@@ -93,10 +112,9 @@ public class MesaRestController {
 			} else {
 				objectSync.setListProdutos(null);
 				objectSync.setMensagem("Mesa Ocupada");
-				valor += gson.toJson(objectSync);	
+				valor += gson.toJson(objectSync);
 			}
 
-			
 		}
 		// String userJSONString = gson.toJson(valor);
 		//
@@ -116,6 +134,7 @@ public class MesaRestController {
 				produtoDTO.setQtEstoque(produto.getQtestoque());
 				produtoDTO.setValor(produto.getValor().doubleValue());
 				produtoDTO.setFoto("https://orderfood.cfapps.io/foto/temp/"+produto.getFoto());
+				produtoDTO.setFoto("https://orderfood.cfapps.io/foto/temp/" + produto.getFoto());
 				listaProdDTO.add(produtoDTO);
 			}
 
