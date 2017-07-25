@@ -218,4 +218,31 @@ public class MesaRepositoryImpl implements MesaRepository {
 		namedParameterJdbcTemplate.update(query, params);
 
 	}
+
+	@Override
+	public boolean mesaComPedidoFinalizada(int idmesa) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+
+		String query = "SELECT COUNT(cp.idmesa) idmesa " 
+				+ " FROM cabpedido cp, mesa m  "
+				+ " WHERE cp.idmesa = m.idmesa " 
+				+ "   AND m.idmesa = ?"  //" + "   AND cm.idmesa = ?"
+				+ "   AND cp.status = 'ABERTO'";
+		int contPedMesa = this.jdbcTemplate.queryForObject(query, new Object[] { idmesa }, Integer.class);
+		return contPedMesa == 0;
+	}
+	
+	@Override
+	public boolean mesaSemPedidoFinalizada(int idmesa) {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+
+		String query = "SELECT COUNT(m.idmesa) idmesa " 
+				+ " FROM mesa m "
+				+ " WHERE m.idmesa = ?"
+				+ " AND m.status = 'DISPONIVEL'";
+		int contPedMesa = this.jdbcTemplate.queryForObject(query, new Object[] { idmesa }, Integer.class);
+		return contPedMesa > 0;
+	}
 }
