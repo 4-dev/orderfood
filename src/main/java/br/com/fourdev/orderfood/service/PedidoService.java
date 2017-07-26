@@ -33,7 +33,10 @@ public class PedidoService {
 
 	@Autowired
 	ClientesQueries clienteRepository;
-
+	
+	@Autowired
+	private MesaService mesaService;
+	
 	
 	@Autowired
 	Clientes clientes;
@@ -43,8 +46,16 @@ public class PedidoService {
 		pedidoRepository.insertPedido(pedido);
 	}
 
-	public void insertPedido(List<Pedido> pedidos) {
-		pedidoRepository.insertPedido(pedidos);
+	public String insertPedido(List<Pedido> pedidos) {
+		String retorno = "";
+		if (!mesaService.mesaSemPedidoFinalizada(pedidos.get(0).getMesa().getIdmesa())) {
+			pedidoRepository.insertPedido(pedidos);
+			retorno = "OK";
+		} else {
+			retorno = "Mesa_Finalizada";
+		}
+		return retorno;
+		
 	}	
 
 	public List<Pedido> pedidosAbertos() {
