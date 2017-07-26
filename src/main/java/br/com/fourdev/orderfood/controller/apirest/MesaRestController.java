@@ -90,7 +90,7 @@ public class MesaRestController {
 	@RequestMapping(value = "/verificarmesa/{id}/{imei}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String verificarStatusMesa(@PathVariable("id") int idmesa, @PathVariable("imei") String imei)
 			throws Exception {
-		// código que faz o trabalho ;-)
+		//  código que faz o trabalho ;-)
 		Gson gson = new Gson();
 		String valor = "";
 		ObjectSync objectSync = new ObjectSync();
