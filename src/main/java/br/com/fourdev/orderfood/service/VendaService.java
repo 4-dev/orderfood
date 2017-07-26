@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.model.Venda;
-import br.com.fourdev.orderfood.repository.pedido.PedidoRepositoryImpl;
 import br.com.fourdev.orderfood.repository.venda.Vendas;
 
 @Service
@@ -18,16 +17,13 @@ public class VendaService {
 	@Autowired
 	private Vendas vendas;
 	
-	@Autowired
-	private PedidoRepositoryImpl pedidoRepositoryImpl;
-
 	public void salvar(int idmesa, List<Pedido> pedidos, Double total) {
 		
 		Venda venda = new Venda();
 		venda.setNumeroMesa(idmesa);
 		venda.setValor(new BigDecimal(total));
 		venda.setData(Calendar.getInstance());
-		vendas.save(venda);
+			vendas.save(venda);
 		
 	}
 

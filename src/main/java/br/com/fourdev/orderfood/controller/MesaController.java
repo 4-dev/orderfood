@@ -82,20 +82,12 @@ public class MesaController {
 		
 		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa, "ABERTO");
 		Double total = mesaService.totalPorMesa(idmesa);
-//		if (!pedidos.isEmpty()) {
+		
 		vendaService.salvar(idmesa, pedidos, total);
 		
 		Venda venda =vendaService.buscaUltimaVenda();
 		
 		mesaService.finalizarMesa(idmesa, pedidos, venda);
-//			if (mesaService.finalizarMesa(idmesa, pedidos)) {
-//				attributes.addFlashAttribute("mensagem", "Mesa Finalizada.");
-//			} else {
-//				attributes.addFlashAttribute("mensagem", "Mesa Não atualizada.");
-//			}
-//		} else {
-//			attributes.addFlashAttribute("mensagem", "Não existem pedidos na mesa selecionada.");
-//		}
 
 		return new ModelAndView("redirect:../../status");
 	}
