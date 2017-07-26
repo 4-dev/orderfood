@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import br.com.fourdev.orderfood.model.Pedido;
 import br.com.fourdev.orderfood.repository.usuario.Usuarios;
+import br.com.fourdev.orderfood.service.MesaService;
 import br.com.fourdev.orderfood.service.PedidoService;
 
 @RestController
@@ -25,6 +26,7 @@ public class PedidoRestController {
 	@Autowired
 	private PedidoService pedidoService;
 
+	
 	@Autowired
 	private Usuarios usuarios;
 
@@ -44,8 +46,8 @@ public class PedidoRestController {
 		List<Pedido> pedidos = pedidoService.transformarJsonPedido(pedidoJson); 
 		if (!pedidos.isEmpty()) {
 			try {
-				pedidoService.insertPedido(pedidos);
-				return new Gson().toJson("OK");
+				String retorno = pedidoService.insertPedido(pedidos);
+				return new Gson().toJson(retorno);
 			} catch (Exception e) {
 				return new Gson().toJson("ERRO: "+e.getMessage());
 			}
