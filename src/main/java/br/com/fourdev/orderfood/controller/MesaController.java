@@ -82,7 +82,6 @@ public class MesaController {
 		
 		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa, "ABERTO");
 		Double total = mesaService.totalPorMesa(idmesa);
-		
 		vendaService.salvar(idmesa, pedidos, total);
 		
 		Venda venda =vendaService.buscaUltimaVenda();
