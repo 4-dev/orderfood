@@ -16,5 +16,7 @@ public interface VendasQueries {
 	public Integer totalDeItens();
 	
 	public List<VendaMesDTO> totalPorMes();
+	
+	public BigDecimal valorCincoMeses();
 
 }

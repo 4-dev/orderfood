@@ -57,11 +57,21 @@ public class VendasImpl implements VendasQueries{
 
 		String query = "SELECT TO_CHAR(data, 'YYYY/MM') mes, "
 				+ "COUNT(*) total FROM orderfood.venda "
-				+ "WHERE data > (NOW() - INTERVAL '6 MONTH') "
+				+ "WHERE data > (NOW() - INTERVAL '5 MONTH') "
 				+ "GROUP BY mes "
-				+ "ORDER BY mes";
+				+ "ORDER BY mes desc";
 		return jdbcTemplate.query(query, new Object[] {}, new VendaMesRowMapper());
 		
+	}
+
+	@Override
+	public BigDecimal valorCincoMeses() {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[]{});
+		
+		String query = "SELECT sum(valor) total FROM orderfood.venda WHERE data > (NOW() - INTERVAL '5 MONTH')";
+		BigDecimal total = this.jdbcTemplate.queryForObject(query, new Object[] {}, BigDecimal.class);
+		return total;
 	}
 
 }

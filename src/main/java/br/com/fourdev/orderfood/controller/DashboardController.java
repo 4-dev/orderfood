@@ -29,6 +29,7 @@ public class DashboardController {
 		modelAndView.addObject("agora", LocalDateTime.now());
 		modelAndView.addObject("totalPedidos", vendas.totalDePedidos());
 		modelAndView.addObject("totalItens", vendas.totalDeItens());
+		modelAndView.addObject("totalCincoMeses", vendas.valorCincoMeses());
 		
 		return modelAndView ;
 	}

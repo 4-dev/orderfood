@@ -195,6 +195,7 @@ var lineChartData = {
 			pointStrokeColor : "#fff",
 			pointHighlightFill : "#fff",
 			pointHighlightStroke : "rgba(220,220,220,1)",
+			scaleShowGridLines : true,
 			data: [65, 45, 50, 30, 63, 45]
 		}
 	]
