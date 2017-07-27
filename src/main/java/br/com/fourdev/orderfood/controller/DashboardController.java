@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.fourdev.orderfood.dto.VendaMesDTO;
+import br.com.fourdev.orderfood.dto.VendaMesaDTO;
 import br.com.fourdev.orderfood.repository.venda.Vendas;
 
 @Controller
@@ -37,6 +38,11 @@ public class DashboardController {
 	@GetMapping("/pormes")
 	public @ResponseBody List<VendaMesDTO> totalPorMes(){
 		return vendas.totalPorMes();
+	}
+	
+	@GetMapping("/pormesa")
+	public @ResponseBody List<VendaMesaDTO> totalPorMesa(){
+		return vendas.totalPorMesa();
 	}
 	
 	@GetMapping("/sobre")

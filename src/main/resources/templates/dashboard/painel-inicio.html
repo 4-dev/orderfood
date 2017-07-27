@@ -13,7 +13,7 @@
 		<div class="container">
 
 			<div class="row">
-				<div class="col s10 m10 l10">
+				<div class="col s10 m10 l10"  style="margin-bottom: 30px;">
 					<h5 class="breadcrumbs-title">Dashboard</h5>
 				</div>
 
@@ -28,10 +28,10 @@
 	<div class="container">
 		<!--card stats start-->
 		<div class="divider"></div>
-		<div id="card-stats">
+		<div id="card-stats" style="margin-top: 50px;">
 			<div class="row">
 				<div class="col s12 m6 l3">
-					<div class="card">
+					<div class="card hoverable">
 						<div class="blue-grey white-text">
 							<div class="row">
 								<div class="col l4 blue-grey darken-2 center-align" style="padding-right: 0px;">
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 				<div class="col s12 m6 l3">
-					<div class="card">
+					<div class="card hoverable">
 						<div class="teal white-text">
 							<div class="row">
 								<div class="col l4 teal darken-2 center-align" style="padding-right: 0px;">
@@ -81,7 +81,7 @@
 					</div>
 				</div>
 				<div class="col s12 m6 l3">
-					<div class="card">
+					<div class="card hoverable">
 						<div class="deep-orange white-text">
 							<div class="row">
 								<div class="col l4 deep-orange darken-2 center-align" style="padding-right: 0px;">
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<div class="col s12 m6 l3">
-					<div class="card">
+					<div class="card hoverable">
 						<div class="cyan white-text">
 							<div class="row">
 								<div class="col l4 cyan darken-2 center-align" style="padding-right: 0px;">
@@ -133,11 +133,11 @@
 			</div>
 		</div>
 		<!--card stats end-->
-		<div class="row">
+		<div class="row" style="margin-top: 50px;">
               <div class="col s12 m8 l8">
-                  <div class="card">
+                  <div class="card hoverable">
                       <div class="card-move-up waves-effect waves-block waves-light">
-                          <div class="move-up cyan darken-1">
+                          <div class="move-up blue lighten-3">
                               <div>
                                   <span class="chart-title white-text">Ultimos Cinco Meses</span>
                                   <div class="chart-revenue cyan darken-2 white-text">
@@ -156,7 +156,12 @@
               
 
               <div class="col s12 m4 l4">
-                  <div class="card">
+                  <div class="card hoverable">
+                  	<div class="card-move-up waves-effect waves-block waves-light">
+                  		<div class="move-up cyan lighten-3">
+                  			<canvas id="graficoPorMesa" height="170"></canvas>
+                  		</div>
+                  	</div>
                   </div>
               </div>
           </div>
@@ -169,6 +174,7 @@
 	 <!-- chartjs -->
 	 <script type="text/javascript" th:src="@{/js/Chart.min.js}"></script>
 	 <script type="text/javascript" th:src="@{/js/dashboard.js}"></script>
+	 <script type="text/javascript" th:src="@{/js/dashboard.mesa.js}"></script>
 </th:block>
 
 <body>

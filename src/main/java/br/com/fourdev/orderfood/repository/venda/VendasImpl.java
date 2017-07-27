@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import br.com.fourdev.orderfood.dto.VendaMesDTO;
-import br.com.fourdev.orderfood.repository.pedido.ItemPedidoRowMapper;
+import br.com.fourdev.orderfood.dto.VendaMesaDTO;
 
 public class VendasImpl implements VendasQueries{
 
@@ -72,6 +72,15 @@ public class VendasImpl implements VendasQueries{
 		String query = "SELECT sum(valor) total FROM orderfood.venda WHERE data > (NOW() - INTERVAL '5 MONTH')";
 		BigDecimal total = this.jdbcTemplate.queryForObject(query, new Object[] {}, BigDecimal.class);
 		return total;
+	}
+
+	@Override
+	public List<VendaMesaDTO> totalPorMesa() {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[] {});
+
+		String query = "SELECT numero_mesa id, sum(valor) total FROM orderfood.venda GROUP BY numero_mesa ORDER BY total";
+		return jdbcTemplate.query(query, new Object[] {}, new VendaMesaRowMapper());
 	}
 
 }
