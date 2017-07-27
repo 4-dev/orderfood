@@ -83,4 +83,14 @@ public class VendasImpl implements VendasQueries{
 		return jdbcTemplate.query(query, new Object[] {}, new VendaMesaRowMapper());
 	}
 
+	@Override
+	public BigDecimal vendaDoDia() {
+		String query1 = "set search_path to orderfood, public";
+		jdbcTemplate.update(query1, new Object[]{});
+		
+		String query = "SELECT sum(valor) total FROM orderfood.venda WHERE data = current_date";
+		BigDecimal total = this.jdbcTemplate.queryForObject(query, new Object[] {}, BigDecimal.class);
+		return total;
+	}
+
 }

@@ -21,5 +21,7 @@ public interface VendasQueries {
 	public BigDecimal valorCincoMeses();
 	
 	public List<VendaMesaDTO> totalPorMesa();
+	
+	public BigDecimal vendaDoDia();
 
 }

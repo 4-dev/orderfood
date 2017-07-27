@@ -1,5 +1,6 @@
 package br.com.fourdev.orderfood.controller;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,6 +34,11 @@ public class DashboardController {
 		modelAndView.addObject("totalCincoMeses", vendas.valorCincoMeses());
 		
 		return modelAndView ;
+	}
+	
+	@GetMapping("/pordia")
+	public @ResponseBody BigDecimal totalPorDia(){
+		return vendas.vendaDoDia();
 	}
 	
 	@GetMapping("/pormes")

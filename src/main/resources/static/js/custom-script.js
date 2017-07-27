@@ -75,10 +75,47 @@ $("#formValidate").validate({
       }
     }
  });
+//$(window).load(function() {
+//	$.ajax({
+//		url: '/dashboard/pormes',
+//		method: 'GET', 
+//		success: function(vendaMes) {
+//			var meses = [];
+//			var valores = [];
+//			console.log(vendaMes);
+//			vendaMes.forEach(function(obj) {
+//				meses.unshift(obj.mes);
+//				valores.unshift(obj.total);
+//			});
+//
+//			var data = {
+//					  labels: meses,
+//					  series: [
+//					    valores
+//					  ]
+//					};
+//
+//			new Chartist.Bar('.meu-chart', data);
+//		}
+//	});
+//	
+//});
 
-
-
-
+$(window).load(function() {
+	var totalDia = $(".js-totalDia");
+	$.ajax({
+		url: '/dashboard/pordia',
+		method: 'GET', 
+		success: function(venda) {
+			if (venda != null) {
+				totalDia.text('R$ '+venda);
+			}else{
+				totalDia.text('R$ 0,00');
+			}
+		}
+	});
+	
+});
 
 
 
