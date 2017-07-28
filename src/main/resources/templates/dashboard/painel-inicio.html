@@ -41,7 +41,8 @@
 									<p class="card-stats-title">
 										Vendas no Ano
 									</p>
-									<h4 class="card-stats-number">R$ [[${{totalNoAno}}]]</h4>
+									<h4 class="card-stats-number"
+										th:text="|R$ ${#numbers.formatDecimal(totalNoAno, 0, 'DEFAULT', 2, 'DEFAULT')}|"></h4>
 									<p class="card-stats-title">
 									<i class="mdi-editor-insert-invitation"></i>
 										[[${#temporals.format(agora, 'yyyy')}]]
@@ -66,7 +67,7 @@
 									<p class="card-stats-title">
 										Vendas no Mês
 									</p>
-									<h4 class="card-stats-number">R$ [[${{totalNoMes}}]]</h4>
+									<h4 class="card-stats-number"th:text="|R$ ${#numbers.formatDecimal(totalNoMes, 0, 'DEFAULT', 2, 'DEFAULT')}|"></h4>
 									<p class="card-stats-title">
 									<i class="mdi-editor-insert-invitation"></i>
 										[[${#temporals.monthName(agora)}]]
@@ -141,7 +142,9 @@
                               <div>
                                   <span class="chart-title white-text">Ultimos Cinco Meses</span>
                                   <div class="chart-revenue teal darken-2 white-text">
-                                      <p class="chart-revenue-total">R$ [[${totalCincoMeses}]]</p>
+                                      <p class="chart-revenue-total"
+                                      	th:text="|R$ ${#numbers.formatDecimal(totalCincoMeses, 0, 'DEFAULT', 2, 'DEFAULT')}|">
+                                      	</p>
                                   </div>
                               </div>
                               <div class="trending-line-chart-wrapper">

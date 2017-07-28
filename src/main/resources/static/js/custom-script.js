@@ -103,12 +103,19 @@ $("#formValidate").validate({
 
 $(window).load(function() {
 	var totalDia = $(".js-totalDia");
+	function format (num) {
+	    return num
+	       .toFixed(2)
+	       .replace(".", ",")
+	       .replace(/(\d)(?=(\d{3})+(?!\d))/g, "1.")
+	}
 	$.ajax({
 		url: '/dashboard/pordia',
 		method: 'GET', 
 		success: function(venda) {
+			var vendaFormatada = format(venda);
 			if (venda != null) {
-				totalDia.text('R$ '+venda);
+				totalDia.text('R$ '+vendaFormatada);
 			}else{
 				totalDia.text('R$ 0,00');
 			}
