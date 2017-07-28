@@ -82,10 +82,14 @@ public class MesaController {
 		
 		List<Pedido> pedidos = pedidoService.retornaPedidoPorMesa(idmesa, "ABERTO");
 		Double total = mesaService.totalPorMesa(idmesa);
-		vendaService.salvar(idmesa, pedidos, total);
-		
-		Venda venda =vendaService.buscaUltimaVenda();
-		
+		Venda venda;
+		if (!pedidos.isEmpty()) {
+			vendaService.salvar(idmesa, pedidos, total);
+			
+			venda =vendaService.buscaUltimaVenda();
+		} else{
+			venda = null;
+		}
 		mesaService.finalizarMesa(idmesa, pedidos, venda);
 
 		return new ModelAndView("redirect:../../status");

@@ -90,7 +90,12 @@ public class VendasImpl implements VendasQueries{
 		
 		String query = "SELECT sum(valor) total FROM orderfood.venda WHERE data = current_date";
 		BigDecimal total = this.jdbcTemplate.queryForObject(query, new Object[] {}, BigDecimal.class);
-		return total;
+		if (total == null) {
+			return BigDecimal.ZERO;
+		}else {
+			
+			return total;
+		}
 	}
 
 }

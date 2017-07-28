@@ -143,12 +143,13 @@ public class MesaService {
 		boolean atualizou = mesaRepository.updateMesa(mesa);
 
 //		vendaService.salvar(idmesa, pedidos, total);
-		
-		// Alterando o Status do Pedido
-		for (Pedido pedido : pedidos) {
-			pedido.setVenda(venda);
-			pedido.setStatus(StatusPedido.FINALIZADO);
-			pedidoRepository.atualizarStatusPedido(pedido);
+		System.out.println(pedidos.size());
+		if (venda != null) {
+			for (Pedido pedido : pedidos) {
+				pedido.setVenda(venda);
+				pedido.setStatus(StatusPedido.FINALIZADO);
+				pedidoRepository.atualizarStatusPedido(pedido);
+			}
 		}
 		
 
